@@ -19,16 +19,16 @@ Installing things can involve alot of reading/writing of files and therefore can
 so ideally we want to do this on the cluster. lets sign into the head node (e.g. deva, klyn or cgath1) 
 and log into a compute node on the cluster using. 
 
-1) log into cluster using ssh 
+**1) log into cluster using ssh 
 
     ``` $ ssh -X <username>@<headnode.address.ox.ac.uk>```  
     (replace <username> and <headnode.address.ox.ac.uk> with appripropriate items)
 
-2) lets move onto a compute node on the cluster 
+**2) lets move onto a compute node on the cluster 
 
     ```$ qrsh```
 
-3) Now go to your working directory (e.g. /t1-data/user/{USER}/  if you are working on cbrg systems or /ifs/obds-training/{USER} if you are on cgat system ) and lets set up a directory for your conda installation:
+**3) Now go to your working directory (e.g. /t1-data/user/{USER}/  if you are working on cbrg systems or /ifs/obds-training/{USER} if you are on cgat system ) and lets set up a directory for your conda installation:
 
     ``` 
     $ cd /t1-data/user/{USER}/ 
@@ -36,15 +36,15 @@ and log into a compute node on the cluster using.
     $ cd conda
     ```
 
-4) Now we've made a directory for it lets get a copy of the conda install script: 
+**4) Now we've made a directory for it lets get a copy of the conda install script: 
 
-    **For Linux (the cluster) use:**
+    *For Linux (the cluster) use:*
 
     ```
     $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
     ```
 
-    **OS X (your macbook) use:** 
+    *OS X (your macbook) use:*
 
     ```
     $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
@@ -59,13 +59,13 @@ and log into a compute node on the cluster using.
 
     We always recommend downloading the latest version of the conda install script unless there are known issues with it 
 
-5) Now lets run the install script to install conda:
+**5) Now lets run the install script to install conda:
 
     ```
     $ bash Miniconda.sh -b -p obds_conda_install
     ```
 
-6) So our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it:
+**6) So our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it:
 
 ```
 # Activate conda installation
@@ -75,7 +75,7 @@ $ source /full/file/path/to/where/you/have/installed/obds_conda_install/etc/prof
 $ conda activate base
 
 ```
-7) test your source command has worked by trying 
+**7) test your source command has worked by trying 
 
 ```
 $ conda help
@@ -88,19 +88,19 @@ We'll see what conda environments are in a moment. The important bit to grasp he
 ## Section 2: Using conda
 
 
-1) To get help for conda, type:
+**1) To get help for conda, type:
 
 ```
 $ conda --help
 ``` 
 
-2) To get information about your current install, type:
+**2) To get information about your current install, type:
 
 ```
 $ conda info
 ``` 
 
-3) We can use conda to search for software packages to install, however inorder to find the packages, conda needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate conda channels to get all software we need (and trust). The order that these channels are specified is important! 
+**3) We can use conda to search for software packages to install, however inorder to find the packages, conda needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate conda channels to get all software we need (and trust). The order that these channels are specified is important! 
 
 ```
 conda config --add channels defaults
@@ -109,31 +109,31 @@ conda config --add channels bioconda
 ```
 **Note: Mac users may have problems copying and pasting the config commands above, with strange error messages. If that's the case, please enter these commands manually and try again. ** 
 
-We have added 3 channels here: 
+**We have added 3 channels here: 
   - default channel: this contains major common software that has been packaged for conda by people at conda and anaconda themselves
-  - conda-forge: this contains lots of general programming packages that have been packaged for conda by people in the programming/computational community
+  **- conda-forge: this contains lots of general programming packages that have been packaged for conda by people in the programming/computational community
   - bioconda: this contains biology specific programmes that have been packaged for conda by people in the computational biology community. 
   
-4) Check that these channels have been added to your conda installation with:
+**4) Check that these channels have been added to your conda installation with:
 
 ```$ conda info``` 
 
-5) List currently installed packages:
+**5) List currently installed packages:
 
 ``` $ conda list ``` 
 
-6)  Check whether your packages are up-to-date:
+**6)  Check whether your packages are up-to-date:
 
 ``` conda update --all``` 
 
 As you have added new channels it is likely that several packages will be both up and down graded at this stage, and some new packages may be added. Please accept the changes by typing y at the prompt.
 
-7) Now, let us search and install a package. Our example here is Connor, a command-line tool to deduplicate bam files based on custom, inline barcoding:
+**7) Now, let us search and install a package. Our example here is Connor, a command-line tool to deduplicate bam files based on custom, inline barcoding:
 https://github.com/umich-brcf-bioinf/Connor
 
 ``` $conda search connor``` 
 
-8) Check whether or not you have it installed:
+**8) Check whether or not you have it installed:
 
 ```
 # use conda
@@ -142,7 +142,7 @@ $ conda list connor
 $ which connor
 
 ```
-9) Once you have found the package you are after, just need to install it by doing:
+**9) Once you have found the package you are after, just need to install it by doing:
 
 ```
 conda install connor
@@ -153,7 +153,7 @@ If you don't specify a version, the latest available one will be installed. Howe
 conda install connor=0.5.1
 ```
 
-10) Now double-check that the package is available:
+**10) Now double-check that the package is available:
 
 ```
 # use conda
@@ -164,22 +164,22 @@ which connor
 connor --help
 ```
 
-11) Now that we've checked its installed and usable (i.e. you can access the help) you can remove it:
+**11) Now that we've checked its installed and usable (i.e. you can access the help) you can remove it:
 
   ```
   $ conda remove connor
   ``` 
 
-12) It is also possible to see what could happen when you install something  without actually performing any changes (also known as dry run):
+**12) It is also possible to see what could happen when you install something  without actually performing any changes (also known as dry run):
 
 ```conda install pysam --dry-run``` 
 
 The above command will execute all the steps to install pysam, but finally it does not do it. This is useful to check beforehand what installing a package is going to do.
 
-13) In addition to the conda search <name> command, you can also visit the following websites to check for available conda packages:
+**13) In addition to the conda search <name> command, you can also visit the following websites to check for available conda packages:
 
-http://bioconda.github.io/recipes.html
-https://conda-forge.org/feedstocks/
+        - [http://bioconda.github.io/recipes.html]
+        - [https://conda-forge.org/feedstocks/]
 
 ## Section 3: Conda environments
 
@@ -187,72 +187,75 @@ https://conda-forge.org/feedstocks/
 
 So far we have been working with the (default) base environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with anybody else (reproducible science). We are going to make 2 new enviroments - one with macs2 and python2.7 and the other will be python 3.6 and we will have all our main software. 
 
-- In order to get help about conda environments, do:
+**- In order to get help about conda environments, do:
 
 ```$ conda env -h ``` 
-- To get a list of existing environments, type:
+**- To get a list of existing environments, type:
 
 ```$ conda env list``` 
 
-- It is also possible to get specific help and examples of a subcommand:
+**- It is also possible to get specific help and examples of a subcommand:
 ```$ conda env list -h```
 
-- Let's now create a new environment to test the latest MACS2:
+**- Let's now create a new environment to test the latest MACS2:
 
-1) search package
+**1) search package
 ```$ conda search macs2```
 
-2) create a new conda environment with the desired packages
+**2) create a new conda environment with the desired packages
 ```$ conda create -n macs2-env macs2```
 
-3)  activate new conda environment
+**3)  activate new conda environment
 ```$ conda activate macs2-env```
 
-4)  check the current active conda environment
+**4)  check the current active conda environment
 ```$ conda env list```
 
-5) check out your software has installed properly
+**5) check out your software has installed properly
 ```$  macs2 -h```
 
-6) check which version of python you have in this enviroment
+**6) check which version of python you have in this enviroment
 ```$ python --version```
 
-Now, everything you install go into the active environment (e.g. macs2-env):
+**Now, everything you install go into the active environment (e.g. macs2-env):
 ```$ conda list```
 
 We will use this macs2 environment later in the course in a peakcalling exercise. If you had other software that depended on python 2.7 you might want to install it in this environment too. However at the moment we do not. 
 
-7) For now you can go back to the base environment by doing:
+**7) For now you can go back to the base environment by doing:
 
 ```$ conda activate base```
 
-8) you can get a list of the different enviroments you have created by doing:
+**8) you can get a list of the different enviroments you have created by doing:
 
 ``` $ conda env list``` 
 
-9) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export and likewise import conda environments:
+**9) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export and likewise import conda environments:
 
 ```
 # export
 $ conda env export -n macs2-env
 ```
-10) you can actually redirect the output to a file that you can share
+**10) you can actually redirect the output to a file that you can share
+
 ```$ conda env export -n macs2-env > env.yml```
 
-11) see what's inside
+**11) see what's inside
+
 ```$ cat env.yml```
 
-12) the conda environment can now be re-created in another conda installation
+**12) the conda environment can now be re-created in another conda installation
+
 ```$ conda env create -n macs2-env-copy2 -f env.yml ```
 
-13) Lets activate the macs2-env-copy2 environment and start adding some other packages to practise how to install packages one by one.  
+**13) Lets activate the macs2-env-copy2 environment and start adding some other packages to practise how to install packages one by one.  
 
 ```
 # activate environment
 $ conda activate macs2-env-copy2
 ```
 
-14) lets install some more bioinformatics into the environment one by one. Using conda install add pandas (a python package), bedtools and samtools to the macs2-env-copy2 environment
+**14) lets install some more bioinformatics into the environment one by one. Using conda install add pandas (a python package), bedtools and samtools to the macs2-env-copy2 environment
 
 
 
@@ -307,20 +310,20 @@ goseq - r bioconductor package for gene ontology analysis
 gsea - r package for gene set enrichment analysis
 You can use the macs2-env-copy2.yml as a template. Note that you do not have to specify the versions of all the software packages - if you leave them blank then conda will work this out for you. 
 
-1) **In the obds/week1/ directory there should be a file called `obds_env_full.yml` copy this to your conda directory and use this file to create a new conda enviroment** 
+**1)In the obds/week1/ directory there should be a file called `obds_env_full.yml` copy this to your conda directory and use this file to create a new conda enviroment** 
 
-2) Once you have created the yaml file you might want to modify your `.bashrc` file to do the following
+**2) Once you have created the yaml file you might want to modify your `.bashrc` file to do the following
 
 - Point to your conda installation by adding the source command we did right at the begining to your `.bashrc`
 - Use an alias to load your conda environments *Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path -  this is useful later on in pipelines
 
 There is probably already some code in your obds .bashrc that you copied earlier in the week - it just might need some tweeking to make sure the naming of the conda enviroments and the file paths are correct 
 
-**Now if you come across extra software in the course that wasn't installed via the yaml file you can use the `conda install` command to add the software to your exisiting environment - or if you would like to test some new software out you can create a new minimal environment to test it in.** 
+***Now if you come across extra software in the course that wasn't installed via the yaml file you can use the `conda install` command to add the software to your exisiting environment - or if you would like to test some new software out you can create a new minimal environment to test it in.** 
 
-3) After you have made your conda environment we can check it against a hard record of the environment we want for the course using ``diff```. 
+**3) After you have made your conda environment we can check it against a hard record of the environment we want for the course using `diff`. 
 
-4) Finally lets clear up a bit - we don't actually need our macs2-env-copy2 environment so we will delete this 
+**4) Finally lets clear up a bit - we don't actually need our macs2-env-copy2 environment so we will delete this 
 
 ```
 # remove macs2-env-copy2
@@ -330,4 +333,4 @@ conda env remove --name macs2-env-copy2
 conda env list
 ```
 
-YAY! You now have a fully set up software enviroment that you can modify!! 
+### YAY! You now have a fully set up software enviroment that you can modify!! 
