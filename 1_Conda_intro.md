@@ -9,9 +9,7 @@ This workshop has been split into two parts:
 
 - part 2: building packages with conda (Section 4).
 
-For more help about using conda, please see:
-
-https://conda.io/docs/
+For more help about using conda, please see: [https://conda.io/docs/]
 
 ## Section 1: Install conda
 
