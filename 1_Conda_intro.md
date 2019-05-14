@@ -5,8 +5,10 @@ This workshop material was created by *Sebastian Luna Valero* with moifications 
 
 This workshop has been split into two parts:
 
-part 1: introduction to conda (Sections 1, 2 and 3), and
-part 2: building packages with conda (Section 4).
+- part 1: introduction to conda (Sections 1, 2 and 3), and
+
+- part 2: building packages with conda (Section 4).
+
 For more help about using conda, please see:
 
 https://conda.io/docs/
