@@ -65,22 +65,22 @@ and log into a compute node on the cluster using.
 
 **6) So our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it:**
 
-```
-# Activate conda installation
-$ source /full/file/path/to/where/you/have/installed/obds_conda_install/etc/profile.d/conda.sh
+    ```
+    # Activate conda installation
+    $ source /full/file/path/to/where/you/have/installed/obds_conda_install/etc/profile.d/conda.sh
 
-# Activate base environment to move into the default conda software enviroment
-$ conda activate base
+    # Activate base environment to move into the default conda software enviroment
+    $ conda activate base
 
-```
+    ```
 **7) test your source command has worked by trying**
 
-```
-$ conda help
-$ which conda
-``` 
+    ```
+    $ conda help
+    $ which conda
+    ``` 
 
-We'll see what conda environments are in a moment. The important bit to grasp here here is that 'base' is the name of the the default conda environment every time you install conda, it contains the very latest version of python and a few basic python packages.
+    We'll see what conda environments are in a moment. The important bit to grasp here here is that 'base' is the name of the the default conda environment every time you install conda, it contains the very latest version of python and a few basic python packages.
 
 
 ## Section 2: Using conda
@@ -88,23 +88,23 @@ We'll see what conda environments are in a moment. The important bit to grasp he
 
 **1) To get help for conda, type:**
 
-```
-$ conda --help
-``` 
+    ```
+    $ conda --help
+    ``` 
 
 **2) To get information about your current install, type:**
 
-```
-$ conda info
-``` 
+    ```
+    $ conda info
+    ``` 
 
 **3) We can use conda to search for software packages to install, however inorder to find the packages, conda needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate conda channels to get all software we need (and trust). The order that these channels are specified is important!**
 
-```
-conda config --add channels defaults
-conda config --add channels conda-forge
-conda config --add channels bioconda
-```
+    ```
+    conda config --add channels defaults
+    conda config --add channels conda-forge
+    conda config --add channels bioconda
+    ```
 **Note: Mac users may have problems copying and pasting the config commands above, with strange error messages. If that's the case, please enter these commands manually and try again.** 
 
 **We have added 3 channels here:**
@@ -114,52 +114,54 @@ conda config --add channels bioconda
   
 **4) Check that these channels have been added to your conda installation with:**
 
-```$ conda info``` 
+    ```$ conda info``` 
 
 **5) List currently installed packages:**
 
-``` $ conda list ``` 
+    ``` $ conda list ``` 
 
 **6)  Check whether your packages are up-to-date:**
 
-``` conda update --all``` 
+    ```$ conda update --all``` 
 
 As you have added new channels it is likely that several packages will be both up and down graded at this stage, and some new packages may be added. Please accept the changes by typing y at the prompt.
 
 **7) Now, let us search and install a package. Our example here is Connor, a command-line tool to deduplicate bam files based on custom, inline barcoding:** [https://github.com/umich-brcf-bioinf/Connor]
 
-``` $conda search connor``` 
+    ``` $ conda search connor``` 
 
 **8) Check whether or not you have it installed:**
 
-```
-# use conda
-$ conda list connor
-# or:
-$ which connor
+    ```
+    # use conda
+    $ conda list connor
+    # or:
+    $ which connor
 
-```
+    ```
+    
 **9) Once you have found the package you are after, just need to install it by doing:**
 
-```
-conda install connor
-```
-If you don't specify a version, the latest available one will be installed. However, you can also ask for a specific version of a package with
+    ```
+    $ conda install connor
+    ```
+    
+    If you don't specify a version, the latest available one will be installed. However, you can also ask for a specific version of a package with
 
-```
-conda install connor=0.5.1
-```
+    ```
+    $ conda install connor=0.5.1
+    ```
 
 **10) Now double-check that the package is available:**
 
-```
-# use conda
-conda list connor
-# or:
-which connor
-# or use your software:
-connor --help
-```
+    ```
+    # use conda
+    $ conda list connor
+    # or:
+    $ which connor
+    # or use your software:
+    $ connor --help
+    ```
 
 **11) Now that we've checked its installed and usable (i.e. you can access the help) you can remove it:**
 
@@ -169,11 +171,11 @@ connor --help
 
 **12) It is also possible to see what could happen when you install something  without actually performing any changes (also known as dry run):**
 
-```conda install pysam --dry-run``` 
+    ```$ conda install pysam --dry-run``` 
 
 The above command will execute all the steps to install pysam, but finally it does not do it. This is useful to check beforehand what installing a package is going to do.
 
-**13) In addition to the `conda search <name>` command, you can also visit the following websites to check for available conda packages:**
+**13) In addition to the ```conda search <name>``` command, you can also visit the following websites to check for available conda packages:**
 
         - [http://bioconda.github.io/recipes.html]
         - [https://conda-forge.org/feedstocks/]
@@ -186,71 +188,80 @@ So far we have been working with the (default) base environment. However, conda 
 
 **- In order to get help about conda environments, do:**
 
-```$ conda env -h ``` 
+    ```$ conda env -h ``` 
+
 **- To get a list of existing environments, type:**
 
-```$ conda env list``` 
+    ```$ conda env list``` 
 
 **- It is also possible to get specific help and examples of a subcommand:**
-```$ conda env list -h```
+
+    ```$ conda env list -h```
 
 **- Let's now create a new environment to test the latest MACS2:**
 
 **1) search package**
-```$ conda search macs2```
+
+    ```$ conda search macs2```
 
 **2) create a new conda environment with the desired packages**
-```$ conda create -n macs2-env macs2```
+    
+    ```$ conda create -n macs2-env macs2```
 
 **3)  activate new conda environment**
-```$ conda activate macs2-env```
+
+    ```$ conda activate macs2-env```
 
 **4)  check the current active conda environment**
-```$ conda env list```
+    
+    ```$ conda env list```
 
 **5) check out your software has installed properly**
-```$  macs2 -h```
+
+    ```$  macs2 -h```
 
 **6) check which version of python you have in this enviroment**
-```$ python --version```
+
+    ```$ python --version```
 
 **Now, everything you install go into the active environment (e.g. macs2-env):**
-```$ conda list```
+
+    ```$ conda list```
 
 We will use this macs2 environment later in the course in a peakcalling exercise. If you had other software that depended on python 2.7 you might want to install it in this environment too. However at the moment we do not. 
 
 **7) For now you can go back to the base environment by doing:**
 
-```$ conda activate base```
+    ```$ conda activate base```
 
 **8) you can get a list of the different enviroments you have created by doing:**
 
-``` $ conda env list``` 
+    ``` $ conda env list``` 
 
 **9) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export and likewise import conda environments:**
 
-```
-# export
-$ conda env export -n macs2-env
-```
+    ```
+    # export
+    $ conda env export -n macs2-env
+    ```
 **10) you can actually redirect the output to a file that you can share**
 
-```$ conda env export -n macs2-env > env.yml```
+    ```$ conda env export -n macs2-env > env.yml```
 
 **11) see what's inside**
 
-```$ cat env.yml```
+    ```$ cat env.yml```
 
 **12) the conda environment can now be re-created in another conda installation**
 
-```$ conda env create -n macs2-env-copy2 -f env.yml ```
+    ```$ conda env create -n macs2-env-copy2 -f env.yml ```
 
 **13) Lets activate the macs2-env-copy2 environment and start adding some other packages to practise how to install packages one by one**.  
 
-```
-# activate environment
-$ conda activate macs2-env-copy2
-```
+    ```
+    # activate environment
+    $ conda activate macs2-env-copy2
+    ```
 
 **14) lets install some more bioinformatics into the environment one by one. Using conda install add pandas (a python package), bedtools and samtools to the macs2-env-copy2 environment**
 
@@ -270,42 +281,42 @@ We want to create a new enviroment called obds_env to do this we will create a o
 
 #### Python & associated libraries
 
-Python - version 3.6 (you should specify version number in the yaml file)
-numpy  - (a python package for doing fast mathematical calculations and manipulations)
-pandas - (a python package for making/using dataframes)
-matplotlib - (a python package for plotting)
-seaborn -  (a much prettier python package for plotting)
-scipy - (a collection of python packages for data analysis, includes ipython, pandas etc)
-spyder - an interactive development environment (IDE) for python similar to Rstudio 
-ruffus - a python pipelining program that we will use to write pipelines
-cgatcore - a library from cgat to make pipelines usable with a computer cluster
-pysam - a python package for working with bam/sam alignment files 
-pybedtools - a python wrapper for bedtools meaning you can use bedtools functionality in python scripts
-drmaa - for the management of submitting jobs to the cluster
-ggplot  - python version of ggplot
-jupyter - interactive notebooks for python 
+        - Python - version 3.6 (you should specify version number in the yaml file)
+        - numpy  - (a python package for doing fast mathematical calculations and manipulations)
+        - pandas - (a python package for making/using dataframes)
+        - matplotlib - (a python package for plotting)
+        - seaborn -  (a much prettier python package for plotting)
+        - scipy - (a collection of python packages for data analysis, includes ipython, pandas etc)
+        - spyder - an interactive development environment (IDE) for python similar to Rstudio 
+        - ruffus - a python pipelining program that we will use to write pipelines
+        - cgatcore - a library from cgat to make pipelines usable with a computer cluster
+        - pysam - a python package for working with bam/sam alignment files 
+        - pybedtools - a python wrapper for bedtools meaning you can use bedtools functionality in python scripts
+        - drmaa - for the management of submitting jobs to the cluster
+        - ggplot  - python version of ggplot
+        - jupyter - interactive notebooks for python 
 
 #### bioinformatics software
 
-fastqc - QC of fastq raw sequence files
-multiqc - collects summary statistics from other bioinformatic programs
-hisat2 - super quick read aligner (mapper) for spliced sequencing reads
-bowtie2 - slower read aligner for unspliced sequencing reads
-samtools - manipulate bam/sam alignment files 
-picard - QC of alignment files 
-subread - counting of reads in features
+        - fastqc - QC of fastq raw sequence files
+        - multiqc - collects summary statistics from other bioinfor- matic programs
+        - hisat2 - super quick read aligner (mapper) for spliced sequencing reads
+        - bowtie2 - slower read aligner for unspliced sequencing reads
+        - samtools - manipulate bam/sam alignment files 
+        - picard - QC of alignment files 
+        - subread - counting of reads in features
 
 #### R & associated packages - you might have to search some of these in conda or on the bioconda website (google it) to get the correct conda package names.
 
-R  - note that r is called `r-base` in conda - search it and check you can find it 
-rstudio - IDE for R 
-tidyverse library - family of r packages that have usefull data processing functionality
-deseq2 - r bioconductor statistical package for differential expression
-edger - r bioconductor statistical package for differential expression
-seurat - r Cran package for single cell analysis 
-goseq - r bioconductor package for gene ontology analysis
-gsea - r package for gene set enrichment analysis
-You can use the macs2-env-copy2.yml as a template. Note that you do not have to specify the versions of all the software packages - if you leave them blank then conda will work this out for you. 
+        - R  - note that r is called `r-base` in conda - search it and check you can find it 
+        - rstudio - IDE for R 
+        - tidyverse library - family of r packages that have usefull data processing functionality
+        - deseq2 - r bioconductor statistical package for differential expression
+        - edger - r bioconductor statistical package for differential expression
+        - seurat - r Cran package for single cell analysis 
+        - goseq - r bioconductor package for gene ontology analysis
+        - gsea - r package for gene set enrichment analysis
+        - You can use the macs2-env-copy2.yml as a template. Note that you do not have to specify the versions of all the software - packages - if you leave them blank then conda will work this out for you. 
 
 **1)In the obds/week1/ directory there should be a file called `obds_env_full.yml` copy this to your conda directory and use this file to create a new conda enviroment** 
 
@@ -322,12 +333,12 @@ There is probably already some code in your obds .bashrc that you copied earlier
 
 **4) Finally lets clear up a bit - we don't actually need our macs2-env-copy2 environment so we will delete this**
 
-```
-# remove macs2-env-copy2
-conda env remove --name macs2-env-copy2
+    ```
+    # remove macs2-env-copy2
+    conda env remove --name macs2-env-copy2
 
-# check enviroment has been removed
-conda env list
-```
+    # check enviroment has been removed
+    conda env list
+    ```
 
 ### YAY! You now have a fully set up software enviroment that you can modify!! 
