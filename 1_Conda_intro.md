@@ -34,7 +34,7 @@ and log into a compute node on the cluster using.
     $ cd conda
     ```
 
-**4) Now we've made a directory for it lets get a copy of the conda install script: **
+**4) Now we've made a directory for it lets get a copy of the conda install script:**
 
     *For Linux (the cluster) use:*
 
@@ -73,7 +73,7 @@ $ source /full/file/path/to/where/you/have/installed/obds_conda_install/etc/prof
 $ conda activate base
 
 ```
-**7) test your source command has worked by trying **
+**7) test your source command has worked by trying**
 
 ```
 $ conda help
@@ -98,19 +98,19 @@ $ conda --help
 $ conda info
 ``` 
 
-**3) We can use conda to search for software packages to install, however inorder to find the packages, conda needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate conda channels to get all software we need (and trust). The order that these channels are specified is important! **
+**3) We can use conda to search for software packages to install, however inorder to find the packages, conda needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate conda channels to get all software we need (and trust). The order that these channels are specified is important!**
 
 ```
 conda config --add channels defaults
 conda config --add channels conda-forge
 conda config --add channels bioconda
 ```
-**Note: Mac users may have problems copying and pasting the config commands above, with strange error messages. If that's the case, please enter these commands manually and try again. ** 
+**Note: Mac users may have problems copying and pasting the config commands above, with strange error messages. If that's the case, please enter these commands manually and try again.** 
 
-**We have added 3 channels here: **
+**We have added 3 channels here:**
   **- default channel: this contains major common software that has been packaged for conda by people at conda and anaconda themselves**
   **- conda-forge: this contains lots of general programming packages that have been packaged for conda by people in the programming/computational community**
-  **- bioconda: this contains biology specific programmes that have been packaged for conda by people in the computational biology community. **
+  **- bioconda: this contains biology specific programmes that have been packaged for conda by people in the computational biology community.**
   
 **4) Check that these channels have been added to your conda installation with:**
 
@@ -318,9 +318,9 @@ There is probably already some code in your obds .bashrc that you copied earlier
 
 ***Now if you come across extra software in the course that wasn't installed via the yaml file you can use the `conda install` command to add the software to your exisiting environment - or if you would like to test some new software out you can create a new minimal environment to test it in.** 
 
-**3) After you have made your conda environment we can check it against a hard record of the environment we want for the course using `diff`. **
+**3) After you have made your conda environment we can check it against a hard record of the environment we want for the course using `diff`.**
 
-**4) Finally lets clear up a bit - we don't actually need our macs2-env-copy2 environment so we will delete this **
+**4) Finally lets clear up a bit - we don't actually need our macs2-env-copy2 environment so we will delete this**
 
 ```
 # remove macs2-env-copy2
