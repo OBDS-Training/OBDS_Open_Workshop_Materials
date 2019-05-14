@@ -25,44 +25,44 @@ and log into a compute node on the cluster using.
 
 **2) lets move onto a compute node on the cluster**
 
-    ```$ qrsh```
+    $ qrsh
 
 **3) Now go to your working directory (e.g. /t1-data/user/{USER}/  if you are working on cbrg systems or /ifs/obds-training/{USER} if you are on cgat system ) and lets set up a directory for your conda installation:****
 
-    ``` 
+    
     $ cd /t1-data/user/{USER}/ 
     $ mkdir conda
     $ cd conda
-    ```
-
+    
+    
 **4) Now we've made a directory for it lets get a copy of the conda install script:**
 
-    *For Linux (the cluster) use:*
+    #*For Linux (the cluster) use:*
 
-    ```
+    
     $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    ```
+    
 
-    *OS X (your macbook) use:*
+    # *OS X (your macbook) use:*
 
-    ```
+    
     $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-    ```
+   
 
     Please note if you want you can get specific versions of the conda installer from
     [https://repo.continuum.io/miniconda] and to find a specific version and download like this:  
 
-    ```
+    
     $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.3.31-Linux-x86_64.sh
-    ```
+    
 
     We always recommend downloading the latest version of the conda install script unless there are known issues with it 
 
 **5) Now lets run the install script to install conda:**
 
-    ```
+   
     $ bash Miniconda.sh -b -p obds_conda_install
-    ```
+    
 
 **6) So our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it:**
 
@@ -115,15 +115,21 @@ and log into a compute node on the cluster using.
   
 **4) Check that these channels have been added to your conda installation with:**
 
-    ```$ conda info``` 
+    ```
+    $ conda info
+    ``` 
 
 **5) List currently installed packages:**
 
-    ``` $ conda list ``` 
+    ``` 
+    $ conda list
+    ``` 
 
 **6)  Check whether your packages are up-to-date:**
 
-    ```$ conda update --all``` 
+    ```
+    $ conda update --all
+    ``` 
 
 As you have added new channels it is likely that several packages will be both up and down graded at this stage, and some new packages may be added. Please accept the changes by typing y at the prompt.
 
@@ -172,7 +178,9 @@ As you have added new channels it is likely that several packages will be both u
 
 **12) It is also possible to see what could happen when you install something  without actually performing any changes (also known as dry run):**
 
-    ```$ conda install pysam --dry-run``` 
+    ```
+    $ conda install pysam --dry-run
+    ``` 
 
 The above command will execute all the steps to install pysam, but finally it does not do it. This is useful to check beforehand what installing a package is going to do.
 
@@ -189,25 +197,35 @@ So far we have been working with the (default) base environment. However, conda 
 
 **- In order to get help about conda environments, do:**
 
-    ```$ conda env -h ``` 
+    ```
+    $ conda env -h 
+    ``` 
 
 **- To get a list of existing environments, type:**
 
-    ```$ conda env list``` 
+    ```
+    $ conda env list
+    ```
 
 **- It is also possible to get specific help and examples of a subcommand:**
 
-    ```$ conda env list -h```
+    ```
+    $ conda env list -h
+    ```
 
 **- Let's now create a new environment to test the latest MACS2:**
 
 **1) search package**
 
-    ```$ conda search macs2```
+    ```
+    $ conda search macs2
+    ```
 
 **2) create a new conda environment with the desired packages**
     
-    ```$ conda create -n macs2-env macs2```
+    ```
+    $ conda create -n macs2-env macs2
+    ```
 
 **3)  activate new conda environment**
 
@@ -215,29 +233,41 @@ So far we have been working with the (default) base environment. However, conda 
 
 **4)  check the current active conda environment**
     
-    ```$ conda env list```
+    ```
+    $ conda env list
+    ```
 
 **5) check out your software has installed properly**
 
-    ```$  macs2 -h```
+    ```
+    $  macs2 -h
+    ```
 
 **6) check which version of python you have in this enviroment**
 
-    ```$ python --version```
+    ```
+    $ python --version
+    ```
 
 **Now, everything you install go into the active environment (e.g. macs2-env):**
 
-    ```$ conda list```
+    ```
+    $ conda list
+    ```
 
 We will use this macs2 environment later in the course in a peakcalling exercise. If you had other software that depended on python 2.7 you might want to install it in this environment too. However at the moment we do not. 
 
 **7) For now you can go back to the base environment by doing:**
 
-    ```$ conda activate base```
+    ```
+    $ conda activate base
+    ```
 
 **8) you can get a list of the different enviroments you have created by doing:**
 
-    ``` $ conda env list``` 
+    ``` 
+    $ conda env list
+    ``` 
 
 **9) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export and likewise import conda environments:**
 
@@ -247,15 +277,21 @@ We will use this macs2 environment later in the course in a peakcalling exercise
     ```
 **10) you can actually redirect the output to a file that you can share**
 
-    ```$ conda env export -n macs2-env > env.yml```
+    ```
+    $ conda env export -n macs2-env > env.yml
+    ```
 
 **11) see what's inside**
 
-    ```$ cat env.yml```
+    ```
+    $ cat env.yml
+    ```
 
 **12) the conda environment can now be re-created in another conda installation**
 
-    ```$ conda env create -n macs2-env-copy2 -f env.yml ```
+    ```
+    $ conda env create -n macs2-env-copy2 -f env.yml 
+    ```
 
 **13) Lets activate the macs2-env-copy2 environment and start adding some other packages to practise how to install packages one by one**.  
 
