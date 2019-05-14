@@ -17,12 +17,12 @@ Installing things can involve alot of reading/writing of files and therefore can
 so ideally we want to do this on the cluster. lets sign into the head node (e.g. deva, klyn or cgath1) 
 and log into a compute node on the cluster using. 
 
-**1) log into cluster using ssh 
+**1) log into cluster using ssh**
 
     ``` $ ssh -X <username>@<headnode.address.ox.ac.uk>```  
     (replace <username> and <headnode.address.ox.ac.uk> with appripropriate items)
 
-**2) lets move onto a compute node on the cluster 
+**2) lets move onto a compute node on the cluster**
 
     ```$ qrsh```
 
