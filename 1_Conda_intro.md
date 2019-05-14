@@ -21,49 +21,49 @@ and log into a compute node on the cluster using.
 
 1) log into cluster using ssh 
 
-``` $ ssh -X <username>@<headnode.address.ox.ac.uk>```  
-(replace <username> and <headnode.address.ox.ac.uk> with appripropriate items)
+    ``` $ ssh -X <username>@<headnode.address.ox.ac.uk>```  
+    (replace <username> and <headnode.address.ox.ac.uk> with appripropriate items)
 
 2) lets move onto a compute node on the cluster 
 
-```$ qrsh```
+    ```$ qrsh```
 
 3) Now go to your working directory (e.g. /t1-data/user/{USER}/  if you are working on cbrg systems or /ifs/obds-training/{USER} if you are on cgat system ) and lets set up a directory for your conda installation:
 
-``` 
-$ cd /t1-data/user/{USER}/ 
-$ mkdir conda
-$ cd conda
-```
+    ``` 
+    $ cd /t1-data/user/{USER}/ 
+    $ mkdir conda
+    $ cd conda
+    ```
 
 4) Now we've made a directory for it lets get a copy of the conda install script: 
 
-# For Linux (the cluster) use:
+    **For Linux (the cluster) use:**
 
-```
-$ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-```
+    ```
+    $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    ```
 
-# OS X (your macbook) use: 
+    **OS X (your macbook) use:** 
 
-```
-$ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-```
+    ```
+    $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+    ```
 
-Please note if you want you can get specific versions of the conda installer from
-[https://repo.continuum.io/miniconda] and to find a specific version and download like this:  
+    Please note if you want you can get specific versions of the conda installer from
+    [https://repo.continuum.io/miniconda] and to find a specific version and download like this:  
 
-```
-$ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.3.31-Linux-x86_64.sh
-```
+    ```
+    $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.3.31-Linux-x86_64.sh
+    ```
 
-We always recommend downloading the latest version of the conda install script unless there are known issues with it 
+    We always recommend downloading the latest version of the conda install script unless there are known issues with it 
 
 5) Now lets run the install script to install conda:
 
-```
-$ bash Miniconda.sh -b -p obds_conda_install
-```
+    ```
+    $ bash Miniconda.sh -b -p obds_conda_install
+    ```
 
 6) So our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it:
 
