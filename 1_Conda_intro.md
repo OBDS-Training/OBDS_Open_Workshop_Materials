@@ -21,9 +21,11 @@ and log into a compute node on the cluster using.
 
 1) log into cluster using ssh 
 
-``` $ ssh -X <username>@<headnode.address.ox.ac.uk>```  (replace <username> and <headnode.address.ox.ac.uk> with appripropriate items)
+``` $ ssh -X <username>@<headnode.address.ox.ac.uk>```  
+(replace <username> and <headnode.address.ox.ac.uk> with appripropriate items)
 
 2) lets move onto a compute node on the cluster 
+
 ```$ qrsh```
 
 3) Now go to your working directory (e.g. /t1-data/user/{USER}/  if you are working on cbrg systems or /ifs/obds-training/{USER} if you are on cgat system ) and lets set up a directory for your conda installation:
@@ -43,6 +45,7 @@ $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Lin
 ```
 
 # OS X (your macbook) use: 
+
 ```
 $ curl -o Miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 ```
@@ -92,6 +95,7 @@ $ conda --help
 ``` 
 
 2) To get information about your current install, type:
+
 ```
 $ conda info
 ``` 
@@ -119,6 +123,7 @@ We have added 3 channels here:
 ``` $ conda list ``` 
 
 6)  Check whether your packages are up-to-date:
+
 ``` conda update --all``` 
 
 As you have added new channels it is likely that several packages will be both up and down graded at this stage, and some new packages may be added. Please accept the changes by typing y at the prompt.
@@ -138,6 +143,7 @@ $ which connor
 
 ```
 9) Once you have found the package you are after, just need to install it by doing:
+
 ```
 conda install connor
 ```
@@ -148,6 +154,7 @@ conda install connor=0.5.1
 ```
 
 10) Now double-check that the package is available:
+
 ```
 # use conda
 conda list connor
@@ -158,9 +165,10 @@ connor --help
 ```
 
 11) Now that we've checked its installed and usable (i.e. you can access the help) you can remove it:
-```
-$ conda remove connor
-``` 
+
+  ```
+  $ conda remove connor
+  ``` 
 
 12) It is also possible to see what could happen when you install something  without actually performing any changes (also known as dry run):
 
