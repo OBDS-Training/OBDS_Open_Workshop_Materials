@@ -19,7 +19,8 @@ and log into a compute node on the cluster using.
 
 **1) log into cluster using ssh**
 
-    ``` $ ssh -X <username>@<headnode.address.ox.ac.uk>```  
+    $ ssh -X <username>@<headnode.address.ox.ac.uk>
+    
     (replace <username> and <headnode.address.ox.ac.uk> with appripropriate items)
 
 **2) lets move onto a compute node on the cluster**
