@@ -77,7 +77,7 @@ and log into a compute node on the cluster using.
 **7) test your source command has worked by trying**
 
     ```
-    $ conda help
+    $ conda --help
     $ which conda
     ``` 
 
