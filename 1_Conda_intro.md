@@ -135,45 +135,45 @@ As you have added new channels it is likely that several packages will be both u
 
 **7) Now, let us search and install a package. Our example here is Connor, a command-line tool to deduplicate bam files based on custom, inline barcoding:** [https://github.com/umich-brcf-bioinf/Connor]
 
-    ``` $ conda search connor``` 
+    ``` $ conda search fastqc``` 
 
 **8) Check whether or not you have it installed:**
 
     ```
-    # use conda
-    $ conda list connor
+    # use fastqc
+    $ conda list fastqc
     # or:
-    $ which connor
+    $ which fastqc
 
     ```
     
 **9) Once you have found the package you are after, just need to install it by doing:**
 
     ```
-    $ conda install connor
+    $ conda install fastqc
     ```
     
     If you don't specify a version, the latest available one will be installed. However, you can also ask for a specific version of a package with
 
     ```
-    $ conda install connor=0.5.1
+    $ conda install fastqc=0.11.7
     ```
 
 **10) Now double-check that the package is available:**
 
     ```
     # use conda
-    $ conda list connor
+    $ conda list fastqc
     # or:
-    $ which connor
+    $ which fastqc
     # or use your software:
-    $ connor --help
+    $ fastqc --help
     ```
 
 **11) Now that we've checked its installed and usable (i.e. you can access the help) you can remove it:**
 
   ```
-  $ conda remove connor
+  $ conda remove fastqc
   ``` 
 
 **12) It is also possible to see what could happen when you install something  without actually performing any changes (also known as dry run):**
@@ -355,7 +355,7 @@ We want to create a new enviroment called obds_env to do this we will create a o
         - gsea - r package for gene set enrichment analysis
         - You can use the macs2-env-copy2.yml as a template. Note that you do not have to specify the versions of all the software - packages - if you leave them blank then conda will work this out for you. 
 
-**1)In the obds/week1/ directory there should be a file called `obds_env_full.yml` copy this to your conda directory and use this file to create a new conda enviroment** 
+**1)In the obds/week1/ directory there should be a file called `obds_full_env.yml` copy this to your conda directory and use this file to create a new conda enviroment** 
 
 **2) Once you have created the yaml file you might want to modify your `.bashrc` file to do the following**
 
