@@ -30,7 +30,7 @@ and log into a compute node on the cluster using.
 **3) Now go to your working directory (e.g. /t1-data/user/{USER}/  if you are working on cbrg systems or /ifs/obds-training/{USER} if you are on cgat system ) and lets set up a directory for your conda installation:****
 
     
-    $ cd /t1-data/user/{USER}/ 
+    $ cd /ifs/obds-training/jan20/{USER}/ 
     $ mkdir conda
     $ cd conda
     
@@ -61,14 +61,14 @@ and log into a compute node on the cluster using.
 **5) Now lets run the install script to install conda:**
 
    
-    $ bash Miniconda.sh -b -p obds_conda_install
+    $ bash Miniconda.sh -b -p obds_conda
     
 
 **6) So our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it:**
 
     ```
     # Activate conda installation
-    $ source /full/file/path/to/where/you/have/installed/obds_conda_install/etc/profile.d/conda.sh
+    $ source /full/file/path/to/where/you/have/installed/obds_conda/etc/profile.d/conda.sh
 
     # Activate base environment to move into the default conda software enviroment
     $ conda activate base
@@ -133,14 +133,14 @@ and log into a compute node on the cluster using.
 
 As you have added new channels it is likely that several packages will be both up and down graded at this stage, and some new packages may be added. Please accept the changes by typing y at the prompt.
 
-**7) Now, let us search and install a package. Our example here is Connor, a command-line tool to deduplicate bam files based on custom, inline barcoding:** [https://github.com/umich-brcf-bioinf/Connor]
+**7) Now, let us search and install a package. Our example here is FastQC, a command-line tool to profile quality scores in a fastq file:** 
 
     ``` $ conda search fastqc``` 
 
 **8) Check whether or not you have it installed:**
 
     ```
-    # use fastqc
+    # find fastqc
     $ conda list fastqc
     # or:
     $ which fastqc
@@ -193,7 +193,7 @@ The above command will execute all the steps to install pysam, but finally it do
 
 ### A) Setting up a new enviroment for a single program or small number of programs
 
-So far we have been working with the (default) base environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with anybody else (reproducible science). We are going to make 2 new enviroments - one with macs2 and python2.7 and the other will be python 3.6 and we will have all our main software. 
+So far we have been working with the (default) base environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with anybody else (reproducible science). We are going to make 3 new enviroments - one with MACS2 and Python 2.7, one with python 3 and  our genomics software and a third with R / Bioconductor. 
 
 **- In order to get help about conda environments, do:**
 
@@ -278,7 +278,7 @@ We will use this macs2 environment later in the course in a peakcalling exercise
 **10) you can actually redirect the output to a file that you can share**
 
     ```
-    $ conda env export -n macs2-env > env.yml
+    $ conda env export -n macs2-env > mac2-env.yml
     ```
 
 **11) see what's inside**
@@ -290,14 +290,14 @@ We will use this macs2 environment later in the course in a peakcalling exercise
 **12) the conda environment can now be re-created in another conda installation**
 
     ```
-    $ conda env create -n macs2-env-copy2 -f env.yml 
+    $ conda env create -n macs2-env-copy -f macs2-env.yml 
     ```
 
-**13) Lets activate the macs2-env-copy2 environment and start adding some other packages to practise how to install packages one by one**.  
+**13) Lets activate the macs2-env-copy environment and start adding some other packages to practise how to install packages one by one**.  
 
     ```
     # activate environment
-    $ conda activate macs2-env-copy2
+    $ conda activate macs2-env-copy
     ```
 
 **14) lets install some more bioinformatics into the environment one by one. Using conda install add pandas (a python package), bedtools and samtools to the macs2-env-copy2 environment**
@@ -306,15 +306,15 @@ We will use this macs2 environment later in the course in a peakcalling exercise
 
 
 
-### Section 3b: Setting up the OBDS Training course environment
+### Section 3b: Setting up the OBDS Training course environments
 
-Now we've had some practise setting up conda environments we want to create a python 3.6 environment for the OBDS training course that will contain the software that we will use in the taught lectures/workshops over the next 6 weeks.
+Now we've had some practise setting up conda environments we want to create a Python 3 environment and an R environment for the OBDS training course that will contain the software that we will use in the taught lectures/workshops over the next few weeks.
 
 Whilst its possible and really handy to add conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
 
-If you are setting up new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an  environment.yml file (like we used above to create the macs2-env-copy2 environment) as this makes it easier for conda to workout what dependencies will be best for most of the major software right from the start. 
+If you are setting up new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an  environment.yml file (like we used above to create the macs2-env-copy environment) as this makes it easier for conda to workout what dependencies will be best for most of the major software right from the start. 
 
-We want to create a new enviroment called obds_env to do this we will create a obds_main_environment.yml file and edit the dependencies list to include the following packages as well as a few others:
+We want to create a new enviroment called obds_py3 to do this we can create a obds_py3.yml file and edit the dependencies list to include the following packages as well as a few others. You can use the macs2-env-copy.yml as a template. Note that you do not have to specify the versions of all the software packages - if you leave them blank then conda will work this out for you. 
 
 #### Python & associated libraries
 
@@ -343,6 +343,8 @@ We want to create a new enviroment called obds_env to do this we will create a o
         - picard - QC of alignment files 
         - subread - counting of reads in features
 
+We also want to create a new enviroment called obds_r to do this we need an obds_r.yml file listing the following packages as well as a few others:
+
 #### R & associated packages - you might have to search some of these in conda or on the bioconda website (google it) to get the correct conda package names.
 
         - R  - note that r is called `r-base` in conda - search it and check you can find it 
@@ -353,26 +355,23 @@ We want to create a new enviroment called obds_env to do this we will create a o
         - seurat - r Cran package for single cell analysis 
         - goseq - r bioconductor package for gene ontology analysis
         - gsea - r package for gene set enrichment analysis
-        - You can use the macs2-env-copy2.yml as a template. Note that you do not have to specify the versions of all the software - packages - if you leave them blank then conda will work this out for you. 
 
-**1)In the obds/week1/ directory there should be a file called `obds_full_env.yml` copy this to your conda directory and use this file to create a new conda enviroment** 
+**1) In the week1/conda directory there should be 2 files called `obds_py3.yml` and `obds_r.yml` copy these to your conda directory and use these file to create two new conda enviroments** 
 
-**2) Once you have created the yaml file you might want to modify your `.bashrc` file to do the following**
+**2) Once you have created the environments you might want to modify your `.bashrc` file to do the following**
 
 - Point to your conda installation by adding the source command we did right at the begining to your `.bashrc`
 - Use an alias to load your conda environments *Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path -  this is useful later on in pipelines
-
-There is probably already some code in your obds .bashrc that you copied earlier in the week - it just might need some tweeking to make sure the naming of the conda enviroments and the file paths are correct 
 
 ***Now if you come across extra software in the course that wasn't installed via the yaml file you can use the `conda install` command to add the software to your exisiting environment - or if you would like to test some new software out you can create a new minimal environment to test it in.** 
 
 **3) After you have made your conda environment we can check it against a hard record of the environment we want for the course using `diff`.**
 
-**4) Finally lets clear up a bit - we don't actually need our macs2-env-copy2 environment so we will delete this**
+**4) Finally lets clear up a bit - we don't actually need our macs2-env-copy environment so we will delete this**
 
     ```
-    # remove macs2-env-copy2
-    conda env remove --name macs2-env-copy2
+    # remove macs2-env-copy
+    conda env remove --name macs2-env-copy
 
     # check enviroment has been removed
     conda env list
