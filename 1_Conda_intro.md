@@ -278,13 +278,13 @@ We will use this macs2 environment later in the course in a peakcalling exercise
 **10) you can actually redirect the output to a file that you can share**
 
     ```
-    $ conda env export -n macs2-env > mac2-env.yml
+    $ conda env export -n macs2-env > macs2-env.yml
     ```
 
 **11) see what's inside**
 
     ```
-    $ cat env.yml
+    $ cat macs2-env.yml
     ```
 
 **12) the conda environment can now be re-created in another conda installation**
