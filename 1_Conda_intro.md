@@ -19,15 +19,15 @@ and log into a compute node on the cluster using.
 
 **1) log into cluster using ssh**
 
-    $ ssh -X <username>@<headnode.address.ox.ac.uk>
+    $ ssh <username>@cgatui.imm.ox.ac.uk
     
-    (replace <username> and <headnode.address.ox.ac.uk> with appripropriate items)
+    (replace <username> with your username)
 
 **2) lets move onto a compute node on the cluster**
 
     $ qrsh
 
-**3) Now go to your working directory (e.g. /t1-data/user/{USER}/  if you are working on cbrg systems or /ifs/obds-training/{USER} if you are on cgat system ) and lets set up a directory for your conda installation:****
+**3) Now go to your working directory (e.g. /t1-data/user/{USER}/  if you are working on cbrg systems or /ifs/obds-training/{cohort}/{USER} if you are on cgat system) and lets set up a directory for your conda installation:****
 
     
     $ cd /ifs/obds-training/jan20/{USER}/ 
@@ -314,7 +314,7 @@ Whilst its possible and really handy to add conda packages one by one to build u
 
 If you are setting up new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an  environment.yml file (like we used above to create the macs2-env-copy environment) as this makes it easier for conda to workout what dependencies will be best for most of the major software right from the start. 
 
-We want to create a new enviroment called obds_py3 to do this we can create a obds_py3.yml file and edit the dependencies list to include the following packages as well as a few others. You can use the macs2-env-copy.yml as a template. Note that you do not have to specify the versions of all the software packages - if you leave them blank then conda will work this out for you. 
+We want to create a new enviroment for the course. To do this we can use the obds_py3.yml file. However, you could also use the macs2-env-copy.yml as a template and edit the dependencies list to include the following packages. Note that you do not have to specify the versions of all the software packages - if you leave them blank then conda will work this out for you. 
 
 #### Python & associated libraries
 
@@ -343,7 +343,7 @@ We want to create a new enviroment called obds_py3 to do this we can create a ob
         - picard - QC of alignment files 
         - subread - counting of reads in features
 
-We also want to create a new enviroment called obds_r to do this we need an obds_r.yml file listing the following packages as well as a few others:
+We also want to create a new enviroment for R and Bioconductor. Again this has been provided for you using the use following packages as well as a few others. 
 
 #### R & associated packages - you might have to search some of these in conda or on the bioconda website (google it) to get the correct conda package names.
 
