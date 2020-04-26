@@ -287,9 +287,11 @@ If you come across extra software in the course that wasn't installed via the YA
 
 ## Section 4: Install conda and create a new conda environment on your local machine
 
-**1) Navigate to a directory of your choice on your local machine (e.g. home directory) and make a new directory called conda. Move into the conda directory**
+**1) Check for and remove any previous installations of Anaconda (if not needed). Alternatively, you can skip the Miniconda installation step and create a new environment in Anaconda for the course.**
 
-**2) Download a copy of the conda install script to your local machine**
+**2) Navigate to a directory of your choice on your local machine (e.g. home directory) and make a new directory called conda. Move into the conda directory.**
+
+**3) Download a copy of the conda install script to your local machine**
 
 For macOS use:
 
@@ -299,11 +301,11 @@ For Windows, click on the link below:
 
 https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
     
-**2) Run the install script to install conda**
+**4) Run the install script to install conda**
 
     $ bash Miniconda.sh -b -p obds_conda
     
-**3) So that our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it**
+**5) So that our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it**
 
     # Activate conda installation
     $ source /full/file/path/to/where/you/have/installed/obds_conda/etc/profile.d/conda.sh
@@ -311,29 +313,27 @@ https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
     # Activate base environment to move into the default conda software environment
     $ conda activate base
 
-**4) Test your source command has worked by trying:**
+**6) Test your source command has worked by trying:**
 
     $ conda --help
     
     $ which conda
 
-**5) Configure your conda channels**
+**7) Configure your conda channels**
 
     conda config --add channels defaults
     conda config --add channels conda-forge
     conda config --add channels bioconda
     
-**6) Copy `obds_py_mac.yml` (Mac users) or `obds_py_windows.yml` (Windows users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice.**
-    
-For macOS:
+**8) For Mac users, copy `obds_py_mac.yml` (Mac users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice.**
 
     conda env create -f obds_py_mac.yml
     
-For Windows:
+**9) For Windows users, create a new conda environment containing the spyder package.**
+    
+    conda create -n <name_of_choice> spyder
 
-    conda env create -f obds_py_windows.yml
-
-**7) Modify your .bashrc as in Section 3C.**
+**10) Modify your .bashrc as in Section 3C.**
 \
 \
 \
