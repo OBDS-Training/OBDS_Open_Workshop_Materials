@@ -73,7 +73,7 @@ We will see what conda environments are in a moment. The important bit to grasp 
 
 *Note: Mac users may have problems copying and pasting the config commands above, with strange error messages. If that's the case, please enter these commands manually and try again.*
 
-We have added 3 channels here:\
+We have added 3 channels here:  
 - defaults channel: this contains major common software that has been packaged for conda by people at conda and anaconda themselves  
 - conda-forge: this contains lots of general programming packages that have been packaged for conda by people in the programming/computational community  
 - bioconda: this contains biology-specific programmes that have been packaged for conda by people in the computational biology community  
