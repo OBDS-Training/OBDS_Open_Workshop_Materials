@@ -204,7 +204,7 @@ Check it your environment list again:
     
     $ deeptools --help 
     
-**5) Instead of creating a environment and installing the packages in seperate steps you can combine theses steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2` we will also specify that we want our python version to be greater than 3.6 because we want the newer version of `macs2`**
+**5) Instead of creating an environment and installing the packages in separate steps you can combine these steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2`. We will also specify that we want our python version to be greater than 3.6 because we want the newer version of `macs2`.**
     
     $ mamba create -n peaktools_env_2 deeptools macs2>3.6
     
@@ -216,8 +216,7 @@ Check it your environment list again:
     # check macs2 works
     $ macs2 --help
     
-**7) lets pretend we've tested our tools in our `peaktools_env_2` and decided we have decided not to use them in our analyis. Conda makes it really easy to delete environments cleanly**
-
+**7) Lets pretend we've tested our tools in our `peaktools_env_2` and we have decided not to use them in our analysis. Conda makes it really easy to delete environments cleanly**
 
     # First move out of the environment by `deactiviating it` 
     $ conda deactivate
@@ -228,12 +227,11 @@ Check it your environment list again:
     # Check your environments list    
     $ conda env list
     
-
 Now that we have had some practice setting up conda environments, we want to create a Python 3 environment for the OBDS Training Programme that will contain the software that we will use in the taught lectures/workshops over the next few weeks.
 
 Whilst it is possible and really handy to add conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
 
-If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an  environment.yml file, as this makes it easier for conda to workout what dependencies will be best for most of the software right from the start. 
+If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an environment.yml file, as this makes it easier for conda to workout what dependencies will be best for most of the software right from the start. 
 
 ### A) Setting up your Python 3 environment for the course
 
@@ -269,10 +267,7 @@ If you are setting up a new software environment for a project it is advisable t
 - picard (QC of alignment files)
 - subread (counting of reads in features)
 
-
-    
 **1) In the /shared/week1/conda directory there is a file called `obds_py3.yml`. Copy this file to your week1/conda directory, we will use this file to create a new conda environment**
-
 
 **2) Have a look inside the obds_py3.yml file**
 
@@ -280,7 +275,7 @@ If you are setting up a new software environment for a project it is advisable t
     
 *Have a look at the formating of the packages and the channels. Note that you do not have to specify the versions of all the software packages - if you leave them blank, conda will work this out for you*
 
-we have 2 packages we need to add `hdbscan` and `umap-learn` add these to the yml file using `nano` making sure the formatting is the same as the other packages
+We have 2 packages we need to add, `hdbscan` and `umap-learn`. Add these to the yml file using `nano`, making sure the formatting is the same as the other packages.
     
 **3) Create a new conda environment using the obds_py3.yml file - again we will use `mamba` instead of `conda` here for speed**
     
@@ -310,8 +305,6 @@ If you want, you can give your environment a name of your choice (e.g. python_en
 **8) You can redirect the output to a file that you can share and recreate your environment from**
 
     $ conda env export -n obds-py3 > my_environment.yml
-    
-    
 
 ### C) Final steps
 
@@ -338,10 +331,9 @@ If you want, you can give your environment a name of your choice (e.g. python_en
 
 2) Use an alias to load your conda environments. *Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later on in pipelines*
 
-Step 1 and 2 can be done in an individual step by adding an alias that sources and activates conda.  e.g.
+Step 1 and 2 can be done in an individual step by adding an alias that sources and activates conda e.g.
     
     alias obds_py3='source <conda path> && conda activate base && conda activate obds-py3'
-    
 
 #### YAY! You now have a fully set up software environment that you can modify!! 
 
