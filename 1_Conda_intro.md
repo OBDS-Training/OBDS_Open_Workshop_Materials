@@ -271,7 +271,7 @@ If you are setting up a new software environment for a project it is advisable t
 
 
     
-**1) In the week1/conda directory there is a file called `obds_py3.yml`. Copy this file to your conda directory, we will use this file to create a new conda environment**
+**1) In the /shared/week1/conda directory there is a file called `obds_py3.yml`. Copy this file to your week1/conda directory, we will use this file to create a new conda environment**
 
 
 **2) Have a look inside the obds_py3.yml file**
@@ -279,6 +279,8 @@ If you are setting up a new software environment for a project it is advisable t
     $ less obds_py3.yml
     
 *Have a look at the formating of the packages and the channels. Note that you do not have to specify the versions of all the software packages - if you leave them blank, conda will work this out for you*
+
+we have 2 packages we need to add `hdbscan` and `umap-learn` add these to the yml file using `nano` making sure the formatting is the same as the other packages
     
 **3) Create a new conda environment using the obds_py3.yml file - again we will use `mamba` instead of `conda` here for speed**
     
@@ -397,5 +399,5 @@ For Windows, click on the link below:
     
     $ mamba env create -f obds-py3-windows.yml
 
-**11) Modify your .bashrc as in Section 3C**
+**11) Modify your `.bashrc` file as in Section 3C**
 
