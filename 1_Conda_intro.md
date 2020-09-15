@@ -215,7 +215,7 @@ Check it has been removed from your enviroments list
 
 Now that we have had some practice setting up conda environments, we want to create a Python 3 environment for the OBDS Training Programme that will contain the software that we will use in the taught lectures/workshops over the next few weeks.
 
-Whilst it is possible and really handy to add conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
+Whilst it is possible and really handy to add conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
 
 If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an  environment.yml file, as this makes it easier for conda to workout what dependencies will be best for most of the software right from the start. 
 
@@ -302,28 +302,6 @@ If you want, you can give your environment a name of your choice (e.g. python_en
 **11) You can redirect the output to a file that you can share**
 
     $ conda env export -n obds_py3 > my_environment.yml
-
-### B) Setting up your R environment for the course
-
-We also want to create a new enviroment for R and Bioconductor. Again this has been provided for you and includes the following packages (and others).
-
-#### R & associated packages
-
-- R - note that r is called `r-base` in conda - search it and check you can find it 
-- rstudio (IDE for R) 
-- tidyverse library (family of R packages that have useful data processing functionality)
-- deseq2 (R Bioconductor statistical package for differential expression analysis)
-- edger (R Bioconductor statistical package for differential expression analysis)
-- seurat (R CRAN package for single cell analysis)
-- goseq (R Bioconductor package for gene ontology analysis)
-- fgsea (R package for gene set enrichment analysis)
-
-**1) As you did for `obds_py3.yml`, generate the R/Bioconductor environment using `obds_r.yml`**
-
-**2) Move into the conda environment and list the packages**
-
-    conda activate obds_r
-    conda list
 
 ### C) Final steps
 
