@@ -157,7 +157,7 @@ You can see that the mamba commands are identical to the conda commands
 
 So far we have been working with the (default) base environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with others (reproducible science). 
 
-We will first create a environment specifically for some pieces of bioinformatic software that we want to test later in the course, we install them in thier own enviroment so that we can test them out without the risk of disrupting our other packages/tools in our main software environment by forcing them to change version or use different versions of python. 
+We will first create a environment specifically for some pieces of bioinformatic software that we want to test later in the course, we install them in their own enviroment so that we can test them out without the risk of disrupting our other packages/tools in our main software environment by forcing them to change version or use different versions of python. 
 
 **1) In order to get help about conda environments, do:**
     
