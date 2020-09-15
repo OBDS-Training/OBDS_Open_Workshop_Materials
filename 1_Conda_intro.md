@@ -159,7 +159,19 @@ So far we have been working with the (default) base environment. However, conda 
 
 We will first create a enviroment specifically for one piece of bioinformatic software that we want to test later in the course, we install it in it's own enviroment so that we can test it out without the risk of disrupting our other packages/tools by forcing them to change version 
 
-**1) We are going to create an enviroment we will call `peaktools` for some chipseq & atacseq tools including the peakcaller `macs2` and the package `deeptools` this is a set of bioinformatic tools that come in handy for creating genome browser tracks and also looking at peak data from ChIP-seq and ATAC-seq files**
+**1) In order to get help about conda environments, do:**
+    
+    $ conda env -h 
+    
+**2) To get a list of existing environments, type:**
+    
+    $ conda env list
+    
+**3) It is also possible to get specific help and examples of a subcommand:**
+    
+    $ conda env list -h
+
+**4) We are going to create an enviroment we will call `peaktools` for some chipseq & atacseq tools including the peakcaller `macs2` and the package `deeptools` this is a set of bioinformatic tools that come in handy for creating genome browser tracks and also looking at peak data from ChIP-seq and ATAC-seq files**
 
 First lets check what environments we have 
 
@@ -169,22 +181,23 @@ Now lets create a our new enviroment
 
     $ mamba create -n peaktools_env
     
-Check list of environments we have 
+*Note that you could do `conda create -n deeptools_env` here to do exactly the same thing - but we are going to use mamba to do 'search', 'install' and 'create' commands as it is much quicker* 
+    
+Check it your environment list again
     
     $ conda env list
     
-*Note that you could do 'conda create -n deeptools_env' here to do exactly the same thing - but we are going to use mamba to do 'search', 'install' and 'create' commands as it is much quicker* 
     
-**2) To move into the `peaktools_env` environment and use the tools you need to 'activate' it**
+**5) To move into the `peaktools_env` environment and use the tools you need to 'activate' it**
 
     $ conda activate peaktools_env
     
-**3) Now you are in the peaktools_env you can install deeptools & macs2 **
+**6) Now you are in the peaktools_env you can install deeptools & macs2 **
 
     $ mamba install deeptools
     $ mamba install macs2
     
-**4) Check these tools work by accessing thier --help functions **
+**7) Check these tools work by accessing thier --help functions **
 
     $ macs2 --help
     $ deeptools --help 
@@ -198,7 +211,7 @@ Check list of environments we have
     $ conda activate peaktools_env_2
     $ macs2 --help
     
-**7) lets pretend we've tested our tools in our `peaktools_env_2` and decided we no longer want them. Conda makes it really easy to delete environments cleanly. **
+**7) lets pretend we've tested our tools in our `peaktools_env_2` and decided we have decided not to use them in our analyis. Conda makes it really easy to delete environments cleanly. **
 
 First you need to move out of the environment by `deactiviating it` 
 
@@ -253,68 +266,54 @@ If you are setting up a new software environment for a project it is advisable t
 - picard (QC of alignment files)
 - subread (counting of reads in features)
 
-**1) In order to get help about conda environments, do:**
-    
-    $ conda env -h 
-    
-**2) To get a list of existing environments, type:**
-    
-    $ conda env list
-    
-**3) It is also possible to get specific help and examples of a subcommand:**
-    
-    $ conda env list -h
-    
-**4) In the week1/conda directory there are two files called `obds_py3.yml` and `obds_r.yml`. Copy these to your conda directory and use these files to create two new conda enviroments - we will start with the python environment.**
 
-**5) Have a look inside the obds_py3.yml file**
+    
+**1) In the week1/conda directory there is a file called `obds_py3.yml`. Copy this file to your conda directory, we will use this file to create a new conda enviroment**
+
+
+**2) Have a look inside the obds_py3.yml file**
 
     $ less obds_py3.yml
     
-*Note that you do not have to specify the versions of all the software packages - if you leave them blank, conda will work this out for you*
+*Have a look at the formating of the packages and the channels. Note that you do not have to specify the versions of all the software packages - if you leave them blank, conda will work this out for you*
     
-**6) Create a new conda environment using the obds_py3.yml file**
+**3) Create a new conda environment using the obds_py3.yml file - again we will use `mamba` instead of `conda` here for speed**
     
-    $ conda env create -f obds_py3.yml 
+    $ mamba env create -f obds_py3.yml 
     
-If you want, you can give your environment a name of your choice (e.g. python_env) using the -n option:
+If you want, you can give your environment a name of your choice (e.g. python_env) using the -n option (by default it will use the name specified at the top of the yml file):
 
-    $ conda env create -n python_env -f obds_py3.yml
+    $ mamba env create -n python_env -f obds_py3.yml
     
-**7) Activate your new conda environment**
-
+**4) Activate your new conda environment**
     $ conda activate obds_py3
 
     (or replace obds_py3 with the name of your python environment)
     
-**8) Check which version of python you have in this enviroment**
+**5) Check which version of python you have in this enviroment**
 
     $ python --version
     
-**9) List all the packages in this environment**
+**6) List all the packages in this environment**
 
     $ conda list
    
-**10) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export conda environments:**
+**7) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export conda environments:**
 
     $ conda env export -n obds_py3
     
-**11) You can redirect the output to a file that you can share**
+**8) You can redirect the output to a file that you can share and recreate your environment from**
 
     $ conda env export -n obds_py3 > my_environment.yml
+    
+    
 
 ### C) Final steps
 
-**Once you have created the two environments, you might want to modify your `.bashrc` file to do the following:**
+**Once you have created your environment, you might want to modify your `.bashrc` file to do the following:**
 
 1) Point to your conda installation by adding the source command we did right at the beginning to your `.bashrc`
 
-2) Use an alias to load your conda environments. *Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later on in pipelines*
-
-Step 1 and 2 can be done in an individual step by adding an alias that sources and activates conda.  e.g.
-    
-    alias obds_py3='source <conda path> && conda activate base && conda activate obds_py3'
-    
 *Note - sourcing conda is not necessary if you have the following in your .bashrc. This may be added automatically during the Miniconda install.*
 
     # >>> conda initialize >>>
@@ -332,13 +331,20 @@ Step 1 and 2 can be done in an individual step by adding an alias that sources a
     unset __conda_setup
     # <<< conda initialize <<<
 
+2) Use an alias to load your conda environments. *Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later on in pipelines*
+
+Step 1 and 2 can be done in an individual step by adding an alias that sources and activates conda.  e.g.
+    
+    alias obds_py3='source <conda path> && conda activate base && conda activate obds_py3'
+    
+
 #### YAY! You now have a fully set up software environment that you can modify!! 
 
-If you come across extra software in the course that wasn't installed via the YAML file you can use the `conda install` command to add the software to your existing environment - or if you would like to test some new software out you can create a new minimal environment to test it in.
+If you come across extra software in the course that wasn't installed via the YAML file you can use the `mamba install` command to add the software to your existing environment - or if you would like to test some new software out you can create a new minimal environment to test it in.
 
 ## Section 4: Install conda and create a new conda environment on your local machine
 
-**1) Check for and remove any previous installations of Anaconda (if not needed). Alternatively, you can skip the Miniconda installation step and create a new environment in Anaconda for the course.**
+**1) Check for and remove any previous installations of Anaconda (if not needed). Alternatively, if you already have an anaconda or miniconda install on your laptop you can skip the Miniconda installation step, go to step 6 and just create a new environment for the course.**
 
 **2) Navigate to a directory of your choice on your local machine (e.g. home directory) and make a new directory called conda. Move into the conda directory.**
 
@@ -375,14 +381,18 @@ For Windows, click on the link below:
     conda config --add channels defaults
     conda config --add channels conda-forge
     conda config --add channels bioconda
-    
-**8) For Mac users, copy `obds_py_mac.yml` (Mac users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice.**
 
-    conda env create -f obds_py_mac.yml
-    
-**9) For Windows users, create a new conda environment containing the spyder package.**
-    
-    conda create -n <name_of_choice> spyder
+**8) Install mamba in your base environment**
 
-**10) Modify your .bashrc as in Section 3C.**
+    $ conda install mamba
+
+**9) For Mac users, copy `obds_py_mac.yml` (Mac users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice.**
+
+    $ mamba env create -f obds_py_mac.yml
+    
+**10) For Windows users, create a new conda environment containing the spyder package.**
+    
+    $ mamba create -n <name_of_choice> spyder
+
+**11) Modify your .bashrc as in Section 3C.**
 
