@@ -157,7 +157,7 @@ You can see that the mamba commands are identical to the conda commands
 
 So far we have been working with the (default) base environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with others (reproducible science). 
 
-We will first create a enviroment specifically for one piece of bioinformatic software that we want to test later in the course, we install it in it's own enviroment so that we can test it out without the risk of disrupting our other packages/tools by forcing them to change version 
+We will first create a environment specifically for some pieces of bioinformatic software that we want to test later in the course, we install them in thier own enviroment so that we can test them out without the risk of disrupting our other packages/tools in our main software environment by forcing them to change version or use different versions of python. 
 
 **1) In order to get help about conda environments, do:**
     
@@ -173,17 +173,17 @@ We will first create a enviroment specifically for one piece of bioinformatic so
 
 **4) We are going to create an enviroment we will call `peaktools` for some chipseq & atacseq tools including the peakcaller `macs2` and the package `deeptools` this is a set of bioinformatic tools that come in handy for creating genome browser tracks and also looking at peak data from ChIP-seq and ATAC-seq files**
 
-First lets check what environments we have 
+First lets check what environments we have: 
 
     $ conda env list
 
-Now lets create a our new enviroment 
+Now lets create a our new enviroment: 
 
     $ mamba create -n peaktools_env
     
 *Note that you could do `conda create -n deeptools_env` here to do exactly the same thing - but we are going to use mamba to do 'search', 'install' and 'create' commands as it is much quicker* 
     
-Check it your environment list again
+Check it your environment list again:
     
     $ conda env list
     
@@ -195,11 +195,13 @@ Check it your environment list again
 **6) Now you are in the peaktools_env you can install `deeptools` & `macs2`**
 
     $ mamba install deeptools
+    
     $ mamba install macs2
     
 **7) Check these tools work by accessing thier --help functions**
 
     $ macs2 --help
+    
     $ deeptools --help 
     
 **5) Instead of creating a environment and installing the packages in seperate steps you can combine theses steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2` we will also specify that we want our python version to be greater than 3.6 because we want the newer version of `macs2`**
@@ -377,23 +379,23 @@ For Windows, click on the link below:
     
     $ which conda
 
-**7) Configure your conda channels**
+**7) Configure your conda channels:**
 
     conda config --add channels defaults
     conda config --add channels conda-forge
     conda config --add channels bioconda
 
-**8) Install mamba in your base environment**
+**8) Install mamba in your base environment:**
 
     $ conda install mamba
 
-**9) For Mac users, copy `obds_py_mac.yml` (Mac users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice.**
+**9) For Mac users, copy `obds_py_mac.yml` (Mac users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
 
     $ mamba env create -f obds_py_mac.yml
     
-**10) For Windows users, create a new conda environment containing the spyder package.**
+**10) For Windows users, create a new conda environment containing the spyder package**
     
     $ mamba create -n <name_of_choice> spyder
 
-**11) Modify your .bashrc as in Section 3C.**
+**11) Modify your .bashrc as in Section 3C**
 
