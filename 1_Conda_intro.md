@@ -21,7 +21,8 @@ so ideally we want to do this on the cluster. Lets sign into the head node (e.g.
     $ qrsh
 
 **3) Now go to your working directory (e.g. /ifs/obds-training/{cohort}/{USER} if you are on the CGAT system or /t1-data/user/{USER} if you are on the CBRG system) and lets set up a directory for your conda installation**
-
+    
+    $ cd /ifs/obds-training/{cohort}/{USER} 
     $ mkdir conda
     $ cd conda
     
@@ -31,7 +32,7 @@ For Linux (the cluster) use:
 
     $ curl -o Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 
    
-Please note you can get specific versions of the conda installer from [https://repo.continuum.io/miniconda] and download as follows:
+Please note if you ever need a specific versions of the conda installer (e.g. you know the latest one is not compatible with your system, or has a bug) you can get specific versions of conda from [https://repo.continuum.io/miniconda] and download as follows:
     
     $ curl -o Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-4.3.31-Linux-x86_64.sh 
     
@@ -41,10 +42,14 @@ We always recommend downloading the latest version of the conda install script u
 
     $ bash Miniconda.sh -b -p obds_conda
     
+`-b` tells the installation script not to modify your `.bashrc` or `.bash_profile` file 
+
+`-p` sets where you want conda to be installed
+    
 **6) So that our terminal knows where to find the conda software, we need to add this location to our $PATH variable so that we can use it**
 
     # Activate conda installation
-    $ source /full/path/to/obds_conda/etc/profile.d/conda.sh
+    $ source /full/path/to/your/obds_conda/etc/profile.d/conda.sh
     
     # Activate base environment to move into the default conda software environment
     $ conda activate base
@@ -136,11 +141,79 @@ If you don't specify a version, the latest available one will be installed. Howe
 - https://anaconda.org/bioconda/repo/
 - https://conda-forge.org/feedstocks/
 
+**14) As more and more packages have been added to conda it's ability to find the packages that match your enviroment has become slower - to speed this process up we will use conda to install a package called 'mamba' that speeds up the enviroment solving when you are installing packages. 
+
+    $ conda install mamba
+    $ mamba --help 
+    
+You can see that the mamba commands are identical to the conda commands 
+
+**15) Instead of using `conda` in our create install and remove commands we can now use `mamba` to do the same thing but much more quickly
+
+    $ mamba install fastqc
+    $ mamba remove fastqc
+    
 ## Section 3: Conda environments
 
 So far we have been working with the (default) base environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with others (reproducible science). 
 
-Now that we have had some practice setting up conda environments, we want to create a Python 3 environment and an R environment for the OBDS Training Programme that will contain the software that we will use in the taught lectures/workshops over the next few weeks.
+We will first create a enviroment specifically for one piece of bioinformatic software that we want to test later in the course, we install it in it's own enviroment so that we can test it out without the risk of disrupting our other packages/tools by forcing them to change version 
+
+**1) We are going to create an enviroment we will call `peaktools` for some chipseq & atacseq tools including the peakcaller `macs2` and the package `deeptools` this is a set of bioinformatic tools that come in handy for creating genome browser tracks and also looking at peak data from ChIP-seq and ATAC-seq files**
+
+First lets check what environments we have 
+
+    $ conda env list
+
+Now lets create a our new enviroment 
+
+    $ mamba create -n peaktools_env
+    
+Check list of environments we have 
+    
+    $ conda env list
+    
+*Note that you could do 'conda create -n deeptools_env' here to do exactly the same thing - but we are going to use mamba to do 'search', 'install' and 'create' commands as it is much quicker* 
+    
+**2) To move into the `peaktools_env` environment and use the tools you need to 'activate' it 
+
+    $ conda activate peaktools_env
+    
+**3) Now you are in the peaktools_env you can install deeptools & macs2 
+
+    $ mamba install deeptools
+    $ mamba install macs2
+    
+**4) Check these tools work by accessing thier --help functions 
+
+    $ macs2 --help
+    $ deeptools --help 
+    
+**5) Instead of creating a environment and installing the packages in seperate steps you can combine theses steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2` we will also specify that we want our python verison to be greater than 3.6 because we want the newer version of macs2
+    
+    $ mamba create -n peaktools_env_2 deeptools macs2>3.6
+    
+**6) Again to use the tools in this environment you need to go into it by 'activing' it 
+
+    $ conda activate peaktools_env_2
+    $ macs2 --help
+    
+**7) lets pretend we've tested our tools in our `peaktools_env_2` and decided we no longer want them. Conda makes it really easy to delete environments cleanly. 
+
+First you need to move out of the environment by `deactiviating it` 
+
+    $ conda deactivate
+    
+Then you can remove the enviroment 
+
+    $ conda remove --name peaktools_env_2 --all 
+    
+Check it has been removed from your enviroments list    
+
+    $ conda env list
+    
+
+Now that we have had some practice setting up conda environments, we want to create a Python 3 environment for the OBDS Training Programme that will contain the software that we will use in the taught lectures/workshops over the next few weeks.
 
 Whilst it is possible and really handy to add conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
 
@@ -196,7 +269,7 @@ If you are setting up a new software environment for a project it is advisable t
 
 **5) Have a look inside the obds_py3.yml file**
 
-    cat obds_py3.yml
+    $ less obds_py3.yml
     
 *Note that you do not have to specify the versions of all the software packages - if you leave them blank, conda will work this out for you*
     
@@ -299,7 +372,7 @@ For macOS use:
 
 For Windows, click on the link below:
 
-https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
     
 **4) Run the install script to install conda**
 
