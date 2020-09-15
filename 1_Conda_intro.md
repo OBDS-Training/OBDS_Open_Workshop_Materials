@@ -188,41 +188,42 @@ Check it your environment list again
     $ conda env list
     
     
-**5) To move into the `peaktools_env` environment and use the tools you need to 'activate' it**
+**5) To move into the `peaktools_env` environment and use the tools, you need to 'activate' it**
 
     $ conda activate peaktools_env
     
-**6) Now you are in the peaktools_env you can install deeptools & macs2 **
+**6) Now you are in the peaktools_env you can install `deeptools` & `macs2`**
 
     $ mamba install deeptools
     $ mamba install macs2
     
-**7) Check these tools work by accessing thier --help functions **
+**7) Check these tools work by accessing thier --help functions**
 
     $ macs2 --help
     $ deeptools --help 
     
-**5) Instead of creating a environment and installing the packages in seperate steps you can combine theses steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2` we will also specify that we want our python verison to be greater than 3.6 because we want the newer version of macs2 **
+**5) Instead of creating a environment and installing the packages in seperate steps you can combine theses steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2` we will also specify that we want our python version to be greater than 3.6 because we want the newer version of `macs2`**
     
     $ mamba create -n peaktools_env_2 deeptools macs2>3.6
     
-**6) Again to use the tools in this environment you need to go into it by 'activing' it **
-
+**6) Again to use the tools in this environment you need to go into it by 'activating' it**
+    
+    # activate environment
     $ conda activate peaktools_env_2
+    
+    # check macs2 works
     $ macs2 --help
     
-**7) lets pretend we've tested our tools in our `peaktools_env_2` and decided we have decided not to use them in our analyis. Conda makes it really easy to delete environments cleanly. **
+**7) lets pretend we've tested our tools in our `peaktools_env_2` and decided we have decided not to use them in our analyis. Conda makes it really easy to delete environments cleanly**
 
-First you need to move out of the environment by `deactiviating it` 
 
+    # First move out of the environment by `deactiviating it` 
     $ conda deactivate
     
-Then you can remove the enviroment 
-
+    # remove the environment 
     $ conda remove --name peaktools_env_2 --all 
     
-Check it has been removed from your enviroments list    
-
+    # Check your environments list    
     $ conda env list
     
 
@@ -268,7 +269,7 @@ If you are setting up a new software environment for a project it is advisable t
 
 
     
-**1) In the week1/conda directory there is a file called `obds_py3.yml`. Copy this file to your conda directory, we will use this file to create a new conda enviroment**
+**1) In the week1/conda directory there is a file called `obds_py3.yml`. Copy this file to your conda directory, we will use this file to create a new conda environment**
 
 
 **2) Have a look inside the obds_py3.yml file**
@@ -290,7 +291,7 @@ If you want, you can give your environment a name of your choice (e.g. python_en
 
     (or replace obds_py3 with the name of your python environment)
     
-**5) Check which version of python you have in this enviroment**
+**5) Check which version of python you have in this environment**
 
     $ python --version
     
