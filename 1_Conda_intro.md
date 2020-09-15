@@ -141,14 +141,14 @@ If you don't specify a version, the latest available one will be installed. Howe
 - https://anaconda.org/bioconda/repo/
 - https://conda-forge.org/feedstocks/
 
-**14) As more and more packages have been added to conda it's ability to find the packages that match your enviroment has become slower - to speed this process up we will use conda to install a package called 'mamba' that speeds up the enviroment solving when you are installing packages. 
+**14) As more and more packages have been added to conda it's ability to find the packages that match your enviroment has become slower - to speed this process up we will use conda to install a package called 'mamba' that speeds up the enviroment solving when you are installing packages.** 
 
     $ conda install mamba
     $ mamba --help 
     
 You can see that the mamba commands are identical to the conda commands 
 
-**15) Instead of using `conda` in our create install and remove commands we can now use `mamba` to do the same thing but much more quickly
+**15) Instead of using `conda` in our create install and remove commands we can now use `mamba` to do the same thing but much more quickly**
 
     $ mamba install fastqc
     $ mamba remove fastqc
