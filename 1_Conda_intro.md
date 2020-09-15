@@ -303,11 +303,11 @@ If you want, you can give your environment a name of your choice (e.g. python_en
    
 **7) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export conda environments:**
 
-    $ conda env export -n obds_py3
+    $ conda env export -n obds-py3
     
 **8) You can redirect the output to a file that you can share and recreate your environment from**
 
-    $ conda env export -n obds_py3 > my_environment.yml
+    $ conda env export -n obds-py3 > my_environment.yml
     
     
 
@@ -338,7 +338,7 @@ If you want, you can give your environment a name of your choice (e.g. python_en
 
 Step 1 and 2 can be done in an individual step by adding an alias that sources and activates conda.  e.g.
     
-    alias obds_py3='source <conda path> && conda activate base && conda activate obds_py3'
+    alias obds_py3='source <conda path> && conda activate base && conda activate obds-py3'
     
 
 #### YAY! You now have a fully set up software environment that you can modify!! 
@@ -389,13 +389,13 @@ For Windows, click on the link below:
 
     $ conda install mamba
 
-**9) For Mac users, copy `obds_py_mac.yml` (Mac users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
+**9) For Mac users, copy `obds-py3-mac.yml` (Mac users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
 
-    $ mamba env create -f obds_py_mac.yml
+    $ mamba env create -f obds-py3-mac.yml
     
-**10) For Windows users, create a new conda environment containing the spyder package**
+**10) For Windows users, copy `obds_py3_windows.yml` from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
     
-    $ mamba create -n <name_of_choice> spyder
+    $ mamba env create -f obds-py3-windows.yml
 
 **11) Modify your .bashrc as in Section 3C**
 
