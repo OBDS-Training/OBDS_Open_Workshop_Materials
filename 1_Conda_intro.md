@@ -387,7 +387,7 @@ For Windows, click on the link below:
 
     $ mamba env create -f obds-py3-mac.yml
     
-**10) For Windows users, copy `obds_py3_windows.yml` from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
+**10) For Windows users, copy `obds-py3-windows.yml` from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
     
     $ mamba env create -f obds-py3-windows.yml
 
