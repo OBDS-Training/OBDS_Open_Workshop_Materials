@@ -175,30 +175,30 @@ Check list of environments we have
     
 *Note that you could do 'conda create -n deeptools_env' here to do exactly the same thing - but we are going to use mamba to do 'search', 'install' and 'create' commands as it is much quicker* 
     
-**2) To move into the `peaktools_env` environment and use the tools you need to 'activate' it 
+**2) To move into the `peaktools_env` environment and use the tools you need to 'activate' it**
 
     $ conda activate peaktools_env
     
-**3) Now you are in the peaktools_env you can install deeptools & macs2 
+**3) Now you are in the peaktools_env you can install deeptools & macs2 **
 
     $ mamba install deeptools
     $ mamba install macs2
     
-**4) Check these tools work by accessing thier --help functions 
+**4) Check these tools work by accessing thier --help functions **
 
     $ macs2 --help
     $ deeptools --help 
     
-**5) Instead of creating a environment and installing the packages in seperate steps you can combine theses steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2` we will also specify that we want our python verison to be greater than 3.6 because we want the newer version of macs2
+**5) Instead of creating a environment and installing the packages in seperate steps you can combine theses steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2` we will also specify that we want our python verison to be greater than 3.6 because we want the newer version of macs2 **
     
     $ mamba create -n peaktools_env_2 deeptools macs2>3.6
     
-**6) Again to use the tools in this environment you need to go into it by 'activing' it 
+**6) Again to use the tools in this environment you need to go into it by 'activing' it **
 
     $ conda activate peaktools_env_2
     $ macs2 --help
     
-**7) lets pretend we've tested our tools in our `peaktools_env_2` and decided we no longer want them. Conda makes it really easy to delete environments cleanly. 
+**7) lets pretend we've tested our tools in our `peaktools_env_2` and decided we no longer want them. Conda makes it really easy to delete environments cleanly. **
 
 First you need to move out of the environment by `deactiviating it` 
 
