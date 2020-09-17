@@ -391,7 +391,7 @@ For Windows, click on the link below:
     
     $ mamba env create -f obds-py3-windows.yml
 
-**11) Now we can add our `source` and `conda activate` comands to our `.bashrc` file (or equivalent - see below) so that it is automatically loaded when we open a new terminal as per section 3C on your local machine. 
+**11) Now we can add our `source` and `conda activate` comands to our `.bashrc` file (or equivalent - see below) so that it is automatically loaded when we open a new terminal as per section 3C on your local machine.**
 
 We want to add these 3 lines to our `.bashrc` or equivalent file (see below) - replace `/blah/blah/blah` with the path to your conda installation: 
 
