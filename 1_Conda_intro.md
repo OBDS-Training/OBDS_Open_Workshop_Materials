@@ -391,5 +391,23 @@ For Windows, click on the link below:
     
     $ mamba env create -f obds-py3-windows.yml
 
-**11) Modify your `.bashrc` file (NOTE: for MAC you have a `.bash_profile` rather than a `.bash_rc` so edit your `.bash_profile` here instead)  as in Section 3C**
+**11) Now we can add our `source` and `conda activate` comands to our `.bashrc` file (or equivalent - see below) so that it is automatically loaded when we open a new terminal as per section 3C on your local machine. 
 
+We want to add these 3 lines to our `.bashrc` or equivalent file (see below) - replace `/blah/blah/blah` with the path to your conda installation: 
+
+    source /blah/blah/blah/obda_conda/etc/profile.d/conda.sh
+    conda activate base
+    conda activate obds-py3
+    
+
+Note that you only need to add the `source` line if you have just installed conda - do not add this line if you already had conda on your local machine (i.e. you didnt do step 1-5 of section 4) 
+
+The file that you need to place these lines in will depend on what terminal you are using on your local machine. To check this open a new terminal on your local machine and look in the bar at the top of the terminal
+
+- for Mac 
+    - if it says `zsh` the file you need to edit is your `~/.zshrc` file 
+    - if it says `bash` the file you need to edit is your `~/.bash_profile` file 
+    - if you use both `zsh` and `bash` you can create a `~/.profile` file that should be able to be read by both `zsh` and `bash` 
+
+- Windows  
+    - you are using the windows subsystem for linux you need to edit the `~/.bashrc`
