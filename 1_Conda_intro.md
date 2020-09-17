@@ -391,5 +391,5 @@ For Windows, click on the link below:
     
     $ mamba env create -f obds-py3-windows.yml
 
-**11) Modify your `.bashrc` file as in Section 3C**
+**11) Modify your `.bashrc` file (NOTE: for MAC you have a `.bash_profile` rather than a `.bash_rc` so edit your `.bash_profile` here instead)  as in Section 3C**
 
