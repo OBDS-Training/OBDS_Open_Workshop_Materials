@@ -20,7 +20,7 @@ so ideally we want to do this on the cluster. Lets sign into the head node (e.g.
 
     $ qrsh
 
-**3) Now go to your working directory (e.g. /ifs/obds-training/{cohort}/{USER} if you are on the CGAT system or /t1-data/user/{USER} if you are on the CBRG system) and lets set up a directory for your conda installation**
+**3) Now go to your working directory (e.g. /ifs/obds-training/{cohort}/{USER} if you are on the CGAT system) and lets set up a directory for your conda installation**
     
     $ cd /ifs/obds-training/{cohort}/{USER} 
     $ mkdir conda
