@@ -8,7 +8,7 @@ For more help using conda, please see: [https://conda.io/docs/]
 ## Section 1: Install conda
 
 Installing things can involve a lot of reading/writing of files and therefore can be memory intensive
-so ideally we want to do this on the cluster. Lets sign into the head node (e.g. cgath1, deva or klyn) and log into a compute node on the cluster.
+so ideally we want to do this on the cluster. Lets sign into the head node (e.g. cgath2) and log into a compute node on the cluster.
 
 **1) Log into the cluster using ssh**
 
