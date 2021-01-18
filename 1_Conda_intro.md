@@ -48,7 +48,10 @@ We always recommend downloading the latest version of the conda install script u
     
 **6) So that our terminal knows where to find the conda software, we need to add this location to our $PATH variable so that we can use it**
 
-    # Activate conda installation
+    # lets check where we have installed it to help us with the next command
+    $ pwd 
+    
+    # Activate conda installation - replace /full/path/to/your/obds_conda with the oath to your installation - tabbing will help avoid errors
     $ source /full/path/to/your/obds_conda/etc/profile.d/conda.sh
     
     # Activate base environment to move into the default conda software environment
@@ -59,6 +62,18 @@ We always recommend downloading the latest version of the conda install script u
     $ which conda
 
 We will see what conda environments are in a moment. The important bit to grasp here is that 'base' is the name of the the default conda environment every time you install conda. It contains the very latest version of python and a few basic python packages.
+
+**8) Lets add the 'source' and  'conda activate commands to our .bashrc so that conda is automatically activated every time we open a terminal 
+    
+    # copy your source commands somewhere so that we can copy them again in a minute
+    
+    # open your .bashrc in nano 
+    $ nano ~/.bashrc 
+    
+    # On the line after `if [[ $PS1 ]]; then` 
+    # copy the 'source' command (from step 6) then on the next line add 'conda activate base' command 
+    # close and save your .bashrc
+
 
 ## Section 2: Using conda
 
@@ -97,61 +112,61 @@ We have added 3 channels here:
 
 As you have added new channels it is likely that several packages will be upgraded or downgraded at this stage, and some new packages may be added. Please accept the changes by typing `y` at the prompt.
 
-**7) Now let us search and install a package. Our example here is FastQC, a command-line tool to profile quality scores in a fastq file.** 
+**7) Now let us search and install a package. As more and more packages have been added to conda it's ability to find the packages that match your enviroment has become slower - to speed this process up we will use conda to install a package called ['mamba'](https://github.com/mamba-org/mamba) that speeds up the enviroment solving when you are installing packages. This will allow us to to install our packages more quickly in the rest of the tutorial. First lets check what versions are available** 
 
-    $ conda search fastqc 
+    $ conda search mamba 
 
 **8) Check whether or not you already have it installed**
 
-    # find fastqc
-    $ conda list fastqc
+    # find mamba if its in our current environment
+    $ conda list mamba
     
     # or:
-    $ which fastqc
+    $ which mamba
     
 **9) Once you have found the package you are after, you just need to install it by doing:**
 
-    $ conda install fastqc
+    $ conda install mamba
     
-If you don't specify a version, the latest available one will be installed. However, you can also ask for a specific version of a package with:
+If you don't specify a version, the latest available one will be installed. However, you can also ask for a specific version of a by specifying the version number:
 
-    $ conda install fastqc=0.11.7
+    $ conda install mamba=0.7.8 
 
 **10) Now double-check that the package has been installed**
 
     # use conda
-    $ conda list fastqc
+    $ conda list mamba
     
     # or:
-    $ which fastqc
+    $ which mamba
     
     # or use your software:
-    $ fastqc --help
+    $ mamba --help
+    
+**11) Have a look at the `--help` menu for both `conda` and `mamba` - you'll see they are both very similar! This is because `mamba` is special speeded up version of conda and you can use the `mamba` command interchangably with the `conda` command to get the same result. `mamba` can find packages and dependencies much more quickly then `conda` but the documentation of how to use the commands is all detailed on the conda site - hence we want to make you aware of both and that all the commands below can be either `mamba` or `conda` and although we refer to `conda` throughout the course in practise we are going to use the `mamba` command because its much quicker. 
 
-**11) Now that we have checked it is installed and usable (i.e. you can access the help), you can remove it:**
-
-    $ conda remove fastqc
+**12) lets have a quick demo of using `mamba` inplace of `conda` to install `samtools` a program that lets you manipulate alignment files:**
+    
+    # instead of using 'conda install samtools' use 'mamba install samtools'
+    $ mamba install samtools 
 
 **12) It is also possible to see what would happen when you install a package without actually installing it (also known as a dry run)**
 
-    $ conda install pysam --dry-run
+    $ mamba install pysam --dry-run
 
-**13) In addition to the `conda search <name>` command, you can also visit the following websites to check for available conda packages:**
+**13) In addition to the `conda search <name>` or `mamba search <name>` command, you can also visit the following websites to check for available conda packages - this is a much easier way of finding packages if you are unsure how they might be named in conda:**
 
 - https://anaconda.org/bioconda/repo/
 - https://conda-forge.org/feedstocks/
 
-**14) As more and more packages have been added to conda it's ability to find the packages that match your enviroment has become slower - to speed this process up we will use conda to install a package called 'mamba' that speeds up the enviroment solving when you are installing packages.** 
+**14) Conda also makes it easy to remove packages and thier dependencies - lets remove the samtools package**
 
-    $ conda install mamba
-    $ mamba --help 
+    $ mamba remove samtools 
     
-You can see that the mamba commands are identical to the conda commands 
-
-**15) Instead of using `conda` in our create install and remove commands we can now use `mamba` to do the same thing but much more quickly**
-
-    $ mamba install fastqc
-    $ mamba remove fastqc
+    # you could also use
+    $ conda remove samtools 
+    
+    
     
 ## Section 3: Conda environments
 
@@ -181,7 +196,7 @@ Now lets create a our new enviroment:
 
     $ mamba create -n peaktools_env
     
-*Note that you could do `conda create -n deeptools_env` here to do exactly the same thing - but we are going to use mamba to do 'search', 'install' and 'create' commands as it is much quicker* 
+*Note that you could do `conda create -n peaktools_env` here to do exactly the same thing - but we are going to use mamba to do 'search', 'install' and 'create' commands as it is much quicker* 
     
 Check it your environment list again:
     
@@ -194,9 +209,12 @@ Check it your environment list again:
     
 **6) Now you are in the peaktools_env you can install `deeptools` & `macs2`**
 
+    # you can install things individually 
     $ mamba install deeptools
-    
     $ mamba install macs2
+    
+    # or in a single command 
+    $ mamba install deeptools macs2
     
 **7) Check these tools work by accessing thier --help functions**
 
@@ -216,6 +234,9 @@ Check it your environment list again:
     # check macs2 works
     $ macs2 --help
     
+    # check the version
+    $ macs2 --version
+    
 **7) Lets pretend we've tested our tools in our `peaktools_env_2` and we have decided not to use them in our analysis. Conda makes it really easy to delete environments cleanly**
 
     # First move out of the environment by `deactiviating it` 
@@ -229,7 +250,7 @@ Check it your environment list again:
     
 Now that we have had some practice setting up conda environments, we want to create a Python 3 environment for the OBDS Training Programme that will contain the software that we will use in the taught lectures/workshops over the next few weeks.
 
-Whilst it is possible and really handy to add conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
+Whilst it is possible and really handy to add conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda/mamba) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
 
 If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an environment.yml file, as this makes it easier for conda to workout what dependencies will be best for most of the software right from the start. 
 
@@ -286,8 +307,8 @@ If you want, you can give your environment a name of your choice (e.g. python_en
     $ mamba env create -n python_env -f obds_py3.yml
     
 **4) Activate your new conda environment**
+    
     $ conda activate obds_py3
-
     (or replace obds_py3 with the name of your python environment)
     
 **5) Check which version of python you have in this environment**
@@ -383,7 +404,7 @@ For Windows, click on the link below:
 
     $ conda install mamba
 
-**9) For Mac users, copy `obds-py3-mac.yml` (Mac users) from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
+**9) For Mac AND Linux users, copy `obds-py3-mac.yml` from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
 
     $ mamba env create -f obds-py3-mac.yml
     
@@ -393,7 +414,7 @@ For Windows, click on the link below:
 
 **11) Now we can add our `source` and `conda activate` comands to our `.bashrc` file (or equivalent - see below) so that it is automatically loaded when we open a new terminal as per section 3C on your local machine.**
 
-We want to add these 3 lines to our `.bashrc` or equivalent file (see below) - replace `/blah/blah/blah` with the path to your conda installation: 
+We want to add these 3 lines to our `.bashrc` or equivalent file (mac users see below) - replace `/blah/blah/blah` with the path to your conda installation: 
 
     source /blah/blah/blah/obda_conda/etc/profile.d/conda.sh
     conda activate base
