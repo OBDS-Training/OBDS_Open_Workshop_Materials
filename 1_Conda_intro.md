@@ -51,7 +51,7 @@ We always recommend downloading the latest version of the conda install script u
     # lets check where we have installed it to help us with the next command
     $ pwd 
     
-    # Activate conda installation - replace /full/path/to/your/obds_conda with the oath to your installation - tabbing will help avoid errors
+    # Activate conda installation - replace /full/path/to/your/obds_conda with the path to your installation - tabbing will help avoid errors
     $ source /full/path/to/your/obds_conda/etc/profile.d/conda.sh
     
     # Activate base environment to move into the default conda software environment
@@ -63,17 +63,59 @@ We always recommend downloading the latest version of the conda install script u
 
 We will see what conda environments are in a moment. The important bit to grasp here is that 'base' is the name of the the default conda environment every time you install conda. It contains the very latest version of python and a few basic python packages.
 
-**8) Lets add the 'source' and  'conda activate commands to our .bashrc so that conda is automatically activated every time we open a terminal 
+**8) Lets add the 'source' and  'conda activate commands to our .bashrc so that conda is automatically activated every time we open a terminal on the cluster**
     
-    # copy your source commands somewhere so that we can copy them again in a minute
+ copy your source commands somewhere so that we can use them again in a minute
     
     # open your .bashrc in nano 
     $ nano ~/.bashrc 
     
-    # On the line after `if [[ $PS1 ]]; then` 
-    # copy the 'source' command (from step 6) then on the next line add 'conda activate base' command 
-    # close and save your .bashrc
+    (your .bashrc is u=in your home directory - the shortcut for this path is '~' hence we can open our .bashrc from anywhere using ~/.bashrc)
+    
+In the code block below `if [[ $PS1 ]]; then` copy the 'source' command (from step 6) then on the next line add 'conda activate base' command to get something like the following - Its good practise to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
 
+    # Non-interactive shells inherit the path and other variables
+    # from the calling shell, so this setup is not needed.
+    if [[ $PS1 ]]; then
+
+       # redefine the module function to work properly in the cluster
+       unset -f module
+       module() {  eval `/usr/bin/modulecmd bash $*`; }
+
+       # Set DRMAA path
+       export DRMAA_LIBRARY_PATH=/ifs/apps/system/sge-6.2/lib/lx24-amd64/libdrmaa.so
+       
+       # Source conda so its loaded on logging into cluster
+       source /full/path/to/your/obds_conda/etc/profile.d/conda.sh
+       # activate base enviroment 
+       conda activate base 
+       
+       # Define aliases here
+
+    fi # if PS1
+
+
+close and save your .bashrc
+
+
+*Note - sourcing conda is not necessary if you have the following in your .bashrc. This may be added automatically during the Miniconda install.*
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/full/path/to/obds_conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/full/path/to/obds_conda/etc/profile.d/conda.sh" ]; then
+            . "/full/path/to/obds_conda/etc/profile.d/conda.sh"
+        else
+            export PATH="/full/path/to/obds_conda/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+    
+    
 
 ## Section 2: Using conda
 
@@ -143,23 +185,23 @@ If you don't specify a version, the latest available one will be installed. Howe
     # or use your software:
     $ mamba --help
     
-**11) Have a look at the `--help` menu for both `conda` and `mamba` - you'll see they are both very similar! This is because `mamba` is special speeded up version of conda and you can use the `mamba` command interchangably with the `conda` command to get the same result. `mamba` can find packages and dependencies much more quickly then `conda` but the documentation of how to use the commands is all detailed on the conda site - hence we want to make you aware of both and that all the commands below can be either `mamba` or `conda` and although we refer to `conda` throughout the course in practise we are going to use the `mamba` command because its much quicker. 
+**11) Have a look at the `--help` menu for both `conda` and `mamba` - you'll see they are both very similar! This is because `mamba` is a special speeded up version of conda and you can use the `mamba` command interchangably with the `conda` command to do the same operations. `mamba` can find packages and dependencies much more quickly then `conda` but the documentation of how to use the commands is all detailed on the conda site - hence we want to make you aware of both and that all the commands below can be either `mamba` or `conda` and although we refer to `conda` throughout the course in practise we are going to use the `mamba` command for searching, installing and creating environments because its much quicker. 
 
 **12) lets have a quick demo of using `mamba` inplace of `conda` to install `samtools` a program that lets you manipulate alignment files:**
     
     # instead of using 'conda install samtools' use 'mamba install samtools'
     $ mamba install samtools 
 
-**12) It is also possible to see what would happen when you install a package without actually installing it (also known as a dry run)**
+**13) It is also possible to see what would happen when you install a package without actually installing it (also known as a dry run)**
 
     $ mamba install pysam --dry-run
 
-**13) In addition to the `conda search <name>` or `mamba search <name>` command, you can also visit the following websites to check for available conda packages - this is a much easier way of finding packages if you are unsure how they might be named in conda:**
+**14) In addition to the `conda search <name>` or `mamba search <name>` command, you can also visit the following websites to check for available conda packages - this is a much easier way of finding packages if you are unsure how they might be named in conda:**
 
 - https://anaconda.org/bioconda/repo/
 - https://conda-forge.org/feedstocks/
 
-**14) Conda also makes it easy to remove packages and thier dependencies - lets remove the samtools package**
+**15) Conda also makes it easy to remove packages and thier dependencies - lets remove the samtools package**
 
     $ mamba remove samtools 
     
@@ -209,11 +251,11 @@ Check it your environment list again:
     
 **6) Now you are in the peaktools_env you can install `deeptools` & `macs2`**
 
-    # you can install things individually 
+    # you can install things individually (don't run this its just an example)
     $ mamba install deeptools
     $ mamba install macs2
     
-    # or in a single command 
+    # or in a single command (run this instead)
     $ mamba install deeptools macs2
     
 **7) Check these tools work by accessing thier --help functions**
@@ -222,28 +264,25 @@ Check it your environment list again:
     
     $ deeptools --help 
     
-**5) Instead of creating an environment and installing the packages in separate steps you can combine these steps by specifying the packages in your `create` command. We will do this to create a `peaktools_env_2`. We will also specify that we want our python version to be greater than 3.6 because we want the newer version of `macs2`.**
+**8) Instead of creating an environment and installing the packages in separate steps you can combine these steps by specifying the packages in your `create` command. We will do this to create a `test_tools_env` were we will install two programs used to manipulate genomic files `samtools` and `bedtools` as an example**
     
-    $ mamba create -n peaktools_env_2 deeptools macs2>3.6
+    $ mamba create -n test_tools_env samtools bedtools
     
-**6) Again to use the tools in this environment you need to go into it by 'activating' it**
+**9) Again to use the tools in this environment you need to go into it by 'activating' it**
     
     # activate environment
-    $ conda activate peaktools_env_2
+    $ conda activate test_tools_env
     
     # check macs2 works
-    $ macs2 --help
+    $ samtools --help
     
-    # check the version
-    $ macs2 --version
-    
-**7) Lets pretend we've tested our tools in our `peaktools_env_2` and we have decided not to use them in our analysis. Conda makes it really easy to delete environments cleanly**
+**10) Lets pretend we've tested our tools in our `test_tools_env` and we have decided not to use them in our analysis. Conda makes it really easy to delete environments cleanly**
 
     # First move out of the environment by `deactiviating it` 
     $ conda deactivate
     
     # remove the environment 
-    $ conda remove --name peaktools_env_2 --all 
+    $ conda remove --name test_tools_env --all 
     
     # Check your environments list    
     $ conda env list
@@ -252,7 +291,7 @@ Now that we have had some practice setting up conda environments, we want to cre
 
 Whilst it is possible and really handy to add conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda/mamba) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
 
-If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an environment.yml file, as this makes it easier for conda to workout what dependencies will be best for most of the software right from the start. 
+If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an `environment.yml` file, as this makes it easier for conda to workout what dependencies will be best for most of the software right from the start. 
 
 ### A) Setting up your Python 3 environment for the course
 
@@ -288,7 +327,7 @@ If you are setting up a new software environment for a project it is advisable t
 - picard (QC of alignment files)
 - subread (counting of reads in features)
 
-**1) In the /shared/week1/conda directory there is a file called `obds_py3.yml`. Copy this file to your week1/conda directory, we will use this file to create a new conda environment**
+**1) In the /shared/linux/conda directory there is a file called `obds_py3.yml`. Copy this file to your /ifs/obds-training/{cohort}/{user}/conda directory, we will use this file to create a new conda environment**
 
 **2) Have a look inside the obds_py3.yml file**
 
@@ -296,15 +335,15 @@ If you are setting up a new software environment for a project it is advisable t
     
 *Have a look at the formating of the packages and the channels. Note that you do not have to specify the versions of all the software packages - if you leave them blank, conda will work this out for you*
 
-We have 2 packages we need to add, `hdbscan` and `umap-learn`. Add these to the yml file using `nano`, making sure the formatting is the same as the other packages.
+*Note that if there were additional packages you wanted to install you would just add these to the yml file using `nano`, making sure the formatting is the same as the other packages.*
     
 **3) Create a new conda environment using the obds_py3.yml file - again we will use `mamba` instead of `conda` here for speed**
     
     $ mamba env create -f obds_py3.yml 
     
-If you want, you can give your environment a name of your choice (e.g. python_env) using the -n option (by default it will use the name specified at the top of the yml file):
+If you want, you can give your environment a name of your choice (e.g. obds_env) using the -n option (by default it will use the name specified at the top of the yml file which is obds_py3):
 
-    $ mamba env create -n python_env -f obds_py3.yml
+    $ mamba env create -n obds_env -f obds_py3.yml
     
 **4) Activate your new conda environment**
     
@@ -321,44 +360,31 @@ If you want, you can give your environment a name of your choice (e.g. python_en
    
 **7) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export conda environments:**
 
-    $ conda env export -n obds-py3
+    $ conda env export -n obds_py3
     
 **8) You can redirect the output to a file that you can share and recreate your environment from**
 
-    $ conda env export -n obds-py3 > my_environment.yml
+    $ conda env export -n obds_py3 > my_obds_environment.yml
+    
+### C) Final steps - update your .bashrc to activate your obds enviroment
 
-### C) Final steps
+    $ nano ~/.bashrc
+    
 
-**Once you have created your environment, you might want to modify your `.bashrc` file to do the following:**
+Then on the line below `conda activate base` that we added at the beginning of this tutorial (step 8) add a line to activate your obds environment (replace obds_py3 with whatever you called your obds env in step 3 above) 
 
-1) Point to your conda installation by adding the source command we did right at the beginning to your `.bashrc`
+    conda activate obds_py3 
 
-*Note - sourcing conda is not necessary if you have the following in your .bashrc. This may be added automatically during the Miniconda install.*
+*Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later on in pipelines*
 
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/full/path/to/obds_conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "/full/path/to/obds_conda/etc/profile.d/conda.sh" ]; then
-            . "/full/path/to/obds_conda/etc/profile.d/conda.sh"
-        else
-            export PATH="/full/path/to/obds_conda/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-    # <<< conda initialize <<<
-
-2) Use an alias to load your conda environments. *Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later on in pipelines*
-
-Step 1 and 2 can be done in an individual step by adding an alias that sources and activates conda e.g.
+If you don't want your conda environment to load by default everytime your on the cluster you can add an alias to your .bashrc that sources and activates conda so that you can just type the alias when you want them to load.
     
     alias obds_py3='source <conda path> && conda activate base && conda activate obds-py3'
 
 #### YAY! You now have a fully set up software environment that you can modify!! 
 
 If you come across extra software in the course that wasn't installed via the YAML file you can use the `mamba install` command to add the software to your existing environment - or if you would like to test some new software out you can create a new minimal environment to test it in.
+
 
 ## Section 4: Install conda and create a new conda environment on your local machine
 
@@ -375,6 +401,10 @@ For macOS use:
 For Windows, click on the link below:
 
     https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
+    
+For linux machines (e.g. Ubuntu) use: 
+
+    $ curl -o Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 
     
 **4) Run the install script to install conda**
 
@@ -412,7 +442,7 @@ For Windows, click on the link below:
     
     $ mamba env create -f obds-py3-windows.yml
 
-**11) Now we can add our `source` and `conda activate` comands to our `.bashrc` file (or equivalent - see below) so that it is automatically loaded when we open a new terminal as per section 3C on your local machine.**
+**11) Now we can add our `source` and `conda activate` comands to our `.bashrc` file (or equivalent - see below) so that it is automatically loaded when we open a new terminal**
 
 We want to add these 3 lines to our `.bashrc` or equivalent file (mac users see below) - replace `/blah/blah/blah` with the path to your conda installation: 
 
@@ -423,6 +453,23 @@ We want to add these 3 lines to our `.bashrc` or equivalent file (mac users see 
 
 Note that you only need to add the `source` line if you have just installed conda - do not add this line if you already had conda on your local machine (i.e. you didnt do step 1-5 of section 4) 
 
+Sourcing conda is also not necessary if you have the following in your .bashrc. This may be added automatically during the Miniconda install. However you still might want to add the `conda activate` lines 
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/full/path/to/obds_conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/full/path/to/obds_conda/etc/profile.d/conda.sh" ]; then
+            . "/full/path/to/obds_conda/etc/profile.d/conda.sh"
+        else
+            export PATH="/full/path/to/obds_conda/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+
 The file that you need to place these lines in will depend on what terminal you are using on your local machine. To check this open a new terminal on your local machine and look in the bar at the top of the terminal
 
 - for Mac 
@@ -432,3 +479,19 @@ The file that you need to place these lines in will depend on what terminal you 
 
 - Windows  
     - you are using the windows subsystem for linux you need to edit the `~/.bashrc`
+    
+- Linux e.g. Ubuntu  
+    - you need to edit the `~/.bashrc`
+    
+**12) Once you have modified your .bashrc for relevent file, open a new terminal and test that conda and your obds environment are working.**
+
+    $ which conda
+    $ conda env list  #there should be an asterix by the obds_env if you've activated it in your .bashrc
+    
+    # if you havent set up your bashrc to automatically activate your obds_env activate it (replace obds_py3 with whatever you have called it) 
+    $ conda activate obds_py3
+    
+    # test jupyter is installed
+    $ jupyter --help
+
+
