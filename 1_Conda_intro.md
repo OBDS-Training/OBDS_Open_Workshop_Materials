@@ -185,7 +185,9 @@ If you don't specify a version, the latest available one will be installed. Howe
     # or use your software:
     $ mamba --help
     
-**11) Have a look at the `--help` menu for both `conda` and `mamba` - you'll see they are both very similar! This is because `mamba` is a special speeded up version of conda and you can use the `mamba` command interchangably with the `conda` command to do the same operations. `mamba` can find packages and dependencies much more quickly then `conda` but the documentation of how to use the commands is all detailed on the conda site - hence we want to make you aware of both and that all the commands below can be either `mamba` or `conda` and although we refer to `conda` throughout the course in practise we are going to use the `mamba` command for searching, installing and creating environments because its much quicker. 
+**11) Have a look at the `--help` menu for both `conda` and `mamba` - you'll see they are both very similar!**
+
+This is because `mamba` is a special speeded up version of conda and you can use the `mamba` command interchangably with the `conda` command to do the same operations. `mamba` can find packages and dependencies much more quickly then `conda` but the documentation of how to use the commands is all detailed on the conda site - hence we want to make you aware of both and that all the commands below can be either `mamba` or `conda` and although we refer to `conda` throughout the course in practise we are going to use the `mamba` command for searching, installing and creating environments because its much quicker. 
 
 **12) lets have a quick demo of using `mamba` inplace of `conda` to install `samtools` a program that lets you manipulate alignment files:**
     
@@ -366,8 +368,9 @@ If you want, you can give your environment a name of your choice (e.g. obds_env)
 
     $ conda env export -n obds_py3 > my_obds_environment.yml
     
-### C) Final steps - update your .bashrc to activate your obds enviroment
+### C) Final steps - update your .bashrc to activate your obds enviroment automatically when you load a terminal
 
+    # open your .bashrc
     $ nano ~/.bashrc
     
 
@@ -495,3 +498,4 @@ The file that you need to place these lines in will depend on what terminal you 
     $ jupyter --help
 
 
+**Congratulations! You have now sucessfully installed conda on the cluster and on your local machine - this will make installing bioinformatics and datascience packages a million times easier and make sure that you can easilly check and reproduce your software environment which is vital for reproducible research** 
