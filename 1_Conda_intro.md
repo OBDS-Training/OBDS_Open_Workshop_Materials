@@ -395,68 +395,83 @@ If you come across extra software in the course that wasn't installed via the YA
 
 **2) Navigate to a directory of your choice on your local machine (e.g. home directory) and make a new directory called conda. Move into the conda directory.**
 
-**3) Download a copy of the conda install script to your local machine**
+**3) Download a copy of the conda install script to your local machine and install it**
 
 For macOS use:
 
+    # download Miniconda.sh script
     $ curl -o Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh 
+    
+    # run the installation script - this will create a sudirectory called obds_conda that will contain all the conda installation files
+    $ bash Miniconda.sh -b -p obds_conda
 
 For Windows, click on the link below:
 
     https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
     
+    # This will download a file called Miniconda3-latest-Windows-x86_64.exe from your browser
+    # click on the file and follow the on screen instructions - do not change any of the default settings 
+    # by default it will create a `miniconda3` directory containing all the conda installation files in your home directory
+    
 For linux machines (e.g. Ubuntu) use: 
 
+    # download Miniconda.sh script
     $ curl -o Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 
     
-**4) Run the install script to install conda**
-
+    # run the installation script - this will create a sudirectory called obds_conda that will contain all the conda installation files
     $ bash Miniconda.sh -b -p obds_conda
     
-**5) So that our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it**
+    
+**4) So that our terminal knows where to find the conda software we need to add this location to our $PATH variable so that we can use it**
 
-    # Activate conda installation
+    # Activate conda installation 
     $ source /full/file/path/to/where/you/have/installed/obds_conda/etc/profile.d/conda.sh
+    
+    # remember to replace '/full/file/path/to/where/you/have/installed/obds_conda/' with where your conda installation files are
+    # if your stuck here are some examples of where your installation might be if you followed the instructions above
+    # the mac/linux command might be 'source ~/obds_conda/etc/profile.d/conda.sh' if you downloaded the miniconda.sh to your home directory
+    # the windows command might be ~/miniconda3/etc/profile.d/conda.sh if you followed the default installation instructions
+
     
     # Activate base environment to move into the default conda software environment
     $ conda activate base
 
-**6) Test your source command has worked by trying:**
+**5) Test your source command has worked by trying:**
 
     $ conda --help
     
     $ which conda
 
-**7) Configure your conda channels:**
+**6) Configure your conda channels:**
 
     conda config --add channels defaults
     conda config --add channels conda-forge
     conda config --add channels bioconda
 
-**8) Install mamba in your base environment:**
+**7) Install mamba in your base environment:**
 
     $ conda install mamba
 
-**9) For Mac AND Linux users, copy `obds-py3-mac.yml` from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
+**8) For Mac AND Linux users, copy `obds-py3-mac.yml` from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice (it will be called `obds_py` by default)**
 
     $ mamba env create -f obds-py3-mac.yml
     
-**10) For Windows users, copy `obds-py3-windows.yml` from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice**
+**9) For Windows users, copy `obds-py3-windows.yml` from the week1/conda directory on the server to your local computer. Use this to create a new conda environment. Remember you can use the -n option to give the environment a name of your choice (it will be called `obds_py` by default)**
     
     $ mamba env create -f obds-py3-windows.yml
 
-**11) Now we can add our `source` and `conda activate` comands to our `.bashrc` file (or equivalent - see below) so that it is automatically loaded when we open a new terminal**
+**10) Now we can add our `source` and `conda activate` comands to our `.bashrc` file (or equivalent - see below) so that it is automatically loaded when we open a new terminal**
 
-We want to add these 3 lines to our `.bashrc` or equivalent file (mac users see below) - replace `/blah/blah/blah` with the path to your conda installation: 
+We want to add these 3 lines to our `.bashrc` or equivalent file (mac users see below) - replace `/blah/blah/blah` with the path to your conda installation (in step 4): 
 
-    source /blah/blah/blah/obda_conda/etc/profile.d/conda.sh
+    source /blah/blah/blah/obds_conda/etc/profile.d/conda.sh 
     conda activate base
-    conda activate obds-py3
+    conda activate obds_py3
     
 
 Note that you only need to add the `source` line if you have just installed conda - do not add this line if you already had conda on your local machine (i.e. you didnt do step 1-5 of section 4) 
 
-Sourcing conda is also not necessary if you have the following in your .bashrc. This may be added automatically during the Miniconda install. However you still might want to add the `conda activate` lines 
+Sourcing conda is also not necessary if you already have the following in your .bashrc. This may be added automatically during the Miniconda install. However you still might want to add the `conda activate` lines below it
 
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
@@ -488,7 +503,6 @@ The file that you need to place these lines in will depend on what terminal you 
     
 **12) Once you have modified your .bashrc for relevent file, open a new terminal and test that conda and your obds environment are working.**
 
-    $ which conda
     $ conda env list  #there should be an asterix by the obds_env if you've activated it in your .bashrc
     
     # if you havent set up your bashrc to automatically activate your obds_env activate it (replace obds_py3 with whatever you have called it) 
