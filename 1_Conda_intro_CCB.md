@@ -31,9 +31,9 @@ Or for microsoft remote desktop:
     - Open a terminal (click on terminal symbol on bar at the very top of the screen) 
 
 
-**2) Now go to your working directory in the obds folder (e.g. /t1-data/project/obds/{USERNAME}) and lets set up a directory for your conda installation**
+**2) Now go to your home directory and lets set up a directory for your conda installation**
     
-    $ /t1-data/project/obds/{USERNAME}    # replace USERNAME with your username
+    $ cd
     $ mkdir conda
     $ cd conda
     
@@ -66,7 +66,7 @@ If you are installing software on Windows or Mac machines your will need to down
     
     # Activate conda installation - by sourcing the conda.sh script 
     # we will need the full path to be correct - tabbing will help avoid errors
-    $ source /t1-data/project/obds/{USERNAME}/conda/obds_conda/etc/profile.d/conda.sh
+    $ source /ADD/THE/PATH/FROM/PWD/ABOVE/conda/obds_conda/etc/profile.d/conda.sh
     
     # Activate base environment to move into the default conda software environment
     $ conda activate base
@@ -100,7 +100,7 @@ then at the end we will add an alias shortcut for 'conda activate base' command 
     module load git/2.31.1
     
     ### Source conda
-    source  source /t1-data/project/obds/cgeorge/conda/obds_conda/etc/profile.d/conda.sh
+    source /YOUR/PATH/TO/INSTALL/LOCATION/conda/obds_conda/etc/profile.d/conda.sh
 
     ### Set environment variables
 
@@ -412,7 +412,7 @@ The CCB cluster terminal and Microsoft remote desktop sometimes have issues becu
 If your working on your home computers or another cluster you can add the following commands after your `source` command.*
 
     ### Source conda
-    source  source /t1-data/project/obds/cgeorge/conda/obds_conda/etc/profile.d/conda.sh
+    source /YOUR/PATH/TO/CONDAINSTALL/conda/obds_conda/etc/profile.d/conda.sh
     # activate base
     conda activate base
     # activate your favorite conda env (e.g. obds-py3)
