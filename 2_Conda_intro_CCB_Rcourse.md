@@ -124,8 +124,8 @@ then at the end we will add an alias shortcut for 'conda activate base' command 
         # change to OBDS course folder
         alias obds='cd /t1-data/project/obds/shared && pwd && ls'
        
-       # activate conda environment
-       alias obdsenv='conda activate base' 
+        # activate conda environment
+        alias obdsenv='conda activate base' 
 
 Its good practise to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
 
@@ -149,6 +149,70 @@ Close and save your .bashrc
     unset __conda_setup
     # <<< conda initialize <<<
     
+### Annoying Nuances of the CCB cluster! IMPORTANT!! 
+
+So Above is how conda/mamba set up should work on a perfect system - unfortunately the CCB Cluster has a unusual global version on conda installed that means your conda installation can sometimes have some unexpected behavior and won't change environments properly or picks up the wrong software PATH - we need to add a couple of extra lines to correct this. 
+
+This is really annoying and specific to the CCB cluster or other clusters where you have a 'global' version of conda installed or several versions of conda installed in different places. 
+We are trying to get it resolved... but in the mean time we can do this fix to remove the global version of conda from our PATH (i.e. the place our terminal searches for software) 
+
+We have to add 3 things: 
+  1) A line to remove the `usr/condabin` from our PATH so we no longer look in this location for conda 
+     
+    PATH=$(echo "$PATH" | sed -e 's/\/usr\/condabin://')
+     
+  2) A line to stop conda using the CCB cluster version of python - it has its own and this other version will confuse it 
+    
+    unset PYTHONPATH
+    
+  3) After activating our base environment we need to deactivate it and then activate it again before activating our obds-rnaseq environment in our alias (As suggested by this troubleshooting page https://github.com/conda/conda/issues/9392 - again its due to conda picking up the wrong version of python which is used by many bioinformatics tools underneath) 
+
+    conda activate base && conda deactivate 
+    
+The first two lines (1 & 2) are added before we source conda in our .bashrc, whilst the final line (3) is added to our `alias` step where we activate our obds-rnaseq environment
+
+    # Source global definitions from system bashrc file
+    if [ -f /etc/bashrc ]; then
+     . /etc/bashrc
+    fi
+
+    # Non-interactive shells inherit the path and other variables
+    # from the calling shell, so this setup is not needed.
+    if [[ $PS1 ]]; then
+
+        # Set umask for default file permissions
+        umask 002
+
+        ### Load environment modules
+        # Load the latest version of Git (system version is old)
+        module load git/2.31.1
+
+        ### Remove CCB global conda install from PATH and the cluster python libraries 
+        # remove usr/condabin from path
+        PATH=$(echo "$PATH" | sed -e 's/\/usr\/condabin://')
+        # unset python path
+        unset PYTHONPATH
+
+        ### source your conda
+        #source  /t1-data/user/cgeorge/2_conda/centos7/etc/profile.d/conda.sh
+        source ~/conda/obds_conda/etc/profile.d/conda.sh
+
+        ### Set environment variables
+
+        # Set DRMAA path for Ruffus / cgatcore pipelines to talk to slurm
+        export DRMAA_LIBRARY_PATH=/usr/lib64/libdrmaa.so
+
+        # Set temporary folders for Ruffus / cgatcore pipelines
+        export TMPDIR=/tmp
+        export SHARED_TMPDIR=/t1-data/user/${USER}/tmp
+        
+        # change to OBDS course folder
+        alias obds='cd /t1-data/project/obds/shared && pwd && ls'
+       
+        # activate conda environment
+        alias obdsenv='conda activate base && conda deactivate && conda activate base'
+        
+    fi # if PS1
     
 
 ## Section 2: Using conda
@@ -390,13 +454,13 @@ If you want, you can give your environment a name of your choice (e.g. obds_env)
     $ nano ~/.bashrc
     
 
-Then on the line where we added `alias obdsenv='conda activate base'` at the beginning of this tutorial (step 7) add a second command to activate your obds environment (replace obds-rnaseq with whatever you called your obds env in step 3 above) 
+Then on the line where we added `alias obdsenv='conda activate base && conda deactivate && conda activate base'` at the beginning of this tutorial (step 7) add a second command to activate your obds environment (replace obds-rnaseq with whatever you called your obds env in step 3 above) 
 *Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later on in pipelines*
 
-    alias obdsenv='conda activate base && conda activate obds-rnaseq'
+    alias obdsenv='conda activate base && conda deactivate && conda activate base && conda activate obds-rnaseq'
 
-*Note: If you are on a differnt cluster or your own laptop you can set your .bashrc to automatically activate the base (and any other environment) without having to type your alias shortcut. 
-The CCB cluster terminal and Microsoft remote desktop sometimes have issues becuase the environments can take a little while to activate sometimes, so to avoid wierd error messages and behavoir we activate our conda enviromentments after we open a terminal and log onto the system. 
+*Note: If you are on a different cluster or your own laptop you can set your .bashrc to automatically activate the base (and any other environment) without having to type your alias shortcut. 
+The CCB cluster terminal and Microsoft remote desktop sometimes have issues because the environments can take a little while to activate sometimes, so to avoid wierd error messages and behavoir we activate our conda enviromentments after we open a terminal and log onto the system. 
 If your working on your home computers or another cluster you can add the following commands after your `source` command.*
 
     ### Source conda
@@ -406,71 +470,6 @@ If your working on your home computers or another cluster you can add the follow
     # activate your favorite conda env (e.g. obds-rnaseq)
     conda activate obds-rnaseq
     
-### D) Nuances of the CCB cluster! IMPORTANT!! 
-
-So Above is how conda/mamba set up should work on a perfect system - unfortunately the CCB Cluster has a unusual global version on conda installed that means your conda installation can sometimes have some unexpected behavior and won't change environments properly or picks up the wrong software PATH - we need to add a couple of extra lines to correct this. 
-
-This is really annoying and specific to the CCB cluster or other clusters where you have a 'global' version of conda installed. 
-We are trying to get it resolved and removed... but in the mean time we can do this fix to remove the global version of conda from our PATH (i.e. the place our terminal searches for software) 
-
-We have to add 3 things: 
-  1) A line to remove the `usr/condabin` from our PATH so we no longer look in this location for conda 
-     
-    PATH=$(echo "$PATH" | sed -e 's/\/usr\/condabin://')
-     
-  2) A line to stop conda using the CCB cluster version of python - it has its own and this other version will confuse it 
-    
-    unset PYTHONPATH
-    
-  3) After activating our base environment we need to deactivate it and then activate it again before activating our obds-rnaseq environment in our alias (As suggested by this troubleshooting page https://github.com/conda/conda/issues/9392 - again its due to conda picking up the wrong version of python which is used by many bioinformatics tools underneath) 
-
-    conda activate base && conda deactivate 
-    
-The first two lines (1 & 2) are added before we source conda in our .bashrc, whilst the final line (3) is added to our `alias` step where we activate our obds-rnaseq environment
-
-    # Source global definitions from system bashrc file
-    if [ -f /etc/bashrc ]; then
-     . /etc/bashrc
-    fi
-
-    # Non-interactive shells inherit the path and other variables
-    # from the calling shell, so this setup is not needed.
-    if [[ $PS1 ]]; then
-
-        # Set umask for default file permissions
-        umask 002
-
-        ### Load environment modules
-        # Load the latest version of Git (system version is old)
-        module load git/2.31.1
-
-        ### Remove CCB global conda install from PATH and the cluster python libraries 
-        # remove usr/condabin from path
-        PATH=$(echo "$PATH" | sed -e 's/\/usr\/condabin://')
-        # unset python path
-        unset PYTHONPATH
-
-        ### source your conda
-        #source  /t1-data/user/cgeorge/2_conda/centos7/etc/profile.d/conda.sh
-        source ~/conda/obds_conda/etc/profile.d/conda.sh
-        
-        conda activate base
-        # deactivate as picking up wrong python path https://github.com/conda/conda/issues/9392
-        conda deactivate 
-        conda activate base
-
-        ### Set environment variables
-
-        # Set DRMAA path for Ruffus / cgatcore pipelines to talk to slurm
-        export DRMAA_LIBRARY_PATH=/usr/lib64/libdrmaa.so
-
-        # Set temporary folders for Ruffus / cgatcore pipelines
-        export TMPDIR=/tmp
-        export SHARED_TMPDIR=/t1-data/user/${USER}/tmp
-
-        alias obdsenv='conda activate base && conda deactivate && conda activate base && conda activate obds-rnaseq'
-    fi # if PS1
-
 
 #### YAY! You now have a fully set up software environment that you can modify!! 
 
