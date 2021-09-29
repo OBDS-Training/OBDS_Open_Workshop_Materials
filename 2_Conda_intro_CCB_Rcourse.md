@@ -167,7 +167,7 @@ We have to add 3 things:
     
   3) After activating our base environment we need to deactivate it and then activate it again before activating our obds-rnaseq environment in our alias (As suggested by this troubleshooting page https://github.com/conda/conda/issues/9392 - again its due to conda picking up the wrong version of python which is used by many bioinformatics tools underneath) 
 
-    conda activate base && conda deactivate 
+    conda activate base && conda deactivate && conda activate base
     
 The first two lines (1 & 2) are added before we source conda in our .bashrc, whilst the final line (3) is added to our `alias` step where we activate our obds-rnaseq environment
 
