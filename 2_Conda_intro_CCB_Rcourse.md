@@ -108,7 +108,7 @@ then at the end we will add an alias shortcut for 'conda activate base' command 
         module load git/2.31.1
         
         ### Conda setup
-        source /YOUR/PATH/TO/INSTALL/LOCATION/conda/obds_conda/etc/profile.d/conda.sh
+        source ~/conda/obds_conda/etc/profile.d/conda.sh
 
         ### Set environment variables
 
@@ -180,9 +180,6 @@ The first two lines (1 & 2) are added before we source conda in our .bashrc, whi
     # from the calling shell, so this setup is not needed.
     if [[ $PS1 ]]; then
 
-        # Set umask for default file permissions
-        umask 002
-
         ### Load environment modules
         # Load the latest version of Git (system version is old)
         module load git/2.31.1
@@ -194,7 +191,6 @@ The first two lines (1 & 2) are added before we source conda in our .bashrc, whi
         unset PYTHONPATH
 
         ### source your conda
-        #source  /t1-data/user/cgeorge/2_conda/centos7/etc/profile.d/conda.sh
         source ~/conda/obds_conda/etc/profile.d/conda.sh
 
         ### Set environment variables
