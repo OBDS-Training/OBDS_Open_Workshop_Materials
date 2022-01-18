@@ -1,7 +1,7 @@
 Introduction to Conda 
 =========================
 
-This workshop material was created by *Sebastian Luna Valero* with modifications by *Charlie George*
+This workshop material was origionally created by *Sebastian Luna Valero* and has been updated and modified by *Charlie George*
 
 For more help using conda, please see: [https://conda.io/docs/]
 
