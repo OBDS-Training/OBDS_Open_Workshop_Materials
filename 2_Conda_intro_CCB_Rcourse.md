@@ -405,7 +405,7 @@ If you are setting up a new software environment for a project it is advisable t
 - picard (QC of alignment files)
 - subread (counting of reads in features)
 
-**1) In the /t1-data/project/obds/shared/resources/1_linux/4_conda directory there is a file called `obds-rnaseq.yml`. Copy this file to your /t1-data/project/obds/{user}/conda directory, we will use this file to create a new conda environment**
+**1) In the /t1-data/project/obds/shared/resources/1_linux/4_conda directory there is a file called `obds-rnaseq.yml`. Copy this file to your `~/conda` directory, we will use this file to create a new conda environment**
 
 **2) Have a look inside the obds-rnaseq.yml file**
 
@@ -444,14 +444,14 @@ If you want, you can give your environment a name of your choice (e.g. obds_env)
 
     $ conda env export -n obds-rnaseq > my_obds_rnaseq_environment.yml
     
-### C) Final steps - update your .bashrc to activate your obds environment automatically when you load a terminal
+### C) Final steps - update your .bashrc to update an alias to activate your obds environment automatically when you load a terminal
 
     # open your .bashrc
     $ nano ~/.bashrc
     
 
 Then on the line where we added `alias obdsenv='conda activate base && conda deactivate && conda activate base'` at the beginning of this tutorial (step 7) add a second command to activate your obds environment (replace obds-rnaseq with whatever you called your obds env in step 3 above) 
-*Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later on in pipelines*
+*Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful espeically if you later on write pipelines*
 
     alias obdsenv='conda activate base && conda deactivate && conda activate base && conda activate obds-rnaseq'
 
@@ -471,4 +471,4 @@ If your working on your home computers or another cluster you can add the follow
 
 If you come across extra software in the course that wasn't installed via the YAML file you can use the `mamba install` command to add the software to your existing environment - or if you would like to test some new software out you can create a new minimal environment to test it in.
 
-**Congratulations! You have now sucessfully installed conda on the cluster and on your local machine - this will make installing bioinformatics and datascience packages a million times easier and make sure that you can easilly check and reproduce your software environment which is vital for reproducible research** 
+**Congratulations! You have now sucessfully installed conda on the cluster - this will make installing bioinformatics and datascience packages a million times easier and make sure that you can easilly check and reproduce your software environment which is vital for reproducible research** 
