@@ -1,0 +1,44 @@
+---
+title: "Non-Parameterised Rmarkdown"
+author: "CG"
+date: "22/03/2019"
+output: html_document
+---
+
+Parameterisation of an RMarkdown file is easy but before we get into that lets just have a look at a standard rmarkdown that has not been paramterised -look up in the yaml header above: you should just see standard headings like title, author, date & output.
+
+Here we are creating a very simple text document with three lines in it:
+- Line 1 specifies a input file path
+- Line 2 specifies a name
+- Line 3 specifies a number
+
+we want to change the input file path, name and number and also write the file to an output file. We will 'hard code' these paramters in the script which is fine for the first time you are doing something but it means that if you want to change the values to something else you change the script. This can lead to errors and also having multiple versions of the same script - which is bad becuase if you detect a bug in one you then have to make sure you change it for all your copied files, not just your one master script. This quickly leads to errors and code getting out of hand. 
+
+```{r setup, include=FALSE}
+#load tidyverse library 
+library(tidyverse)
+
+# set values of paramters
+file_path <- './test_rmarkdown_noparam_input.txt'
+name      <- 'Charlie'
+number    <- '100'
+outfile   <- './test_rmarkdown_noparam_output.txt'
+
+# make 3 strings (one for each line)
+new_line1 = sprintf(' This document is pointing to: %s ', file_path) 
+new_line2 = sprintf(' the name I have provided is: %s ', name)
+new_line3 = sprintf(' the number parameter is: %s', number)
+
+# write lines to file 
+write_lines(c(new_line1, new_line2, new_line3), outfile, sep ="\n", append = FALSE)
+```
+
+To knit the Rmd click on the downwards pointing arrow besides the 'knit button' 
+
+
+# to run on the command line: 
+
+R -e "rmarkdown::render(input='/path/to/this/Rmarkdown/file/test_params_rmd.Rmd', output_file = './output_of_rmarkdown_not_paramterised.html')" 
+
+- here input is the Rmarkdown file you want to render 
+- output file is the name of the rendered Rmarkdown filet hat you want to save ..e. in  this script it will be an html file

@@ -1,0 +1,49 @@
+---
+title: "Parameterised Rmarkdown"
+author: "CG"
+date: "22/03/2019"
+output: html_document
+params:
+ file_path: './test_rmarkdown_param_input.txt'
+ name: 'Charlie'
+ number: '100'
+ outfile: './test_rmarkdown_param_output.txt'
+---
+
+
+
+Parameterisation of an RMarkdown file is easy - look up in the yaml header above: you should see a heading labelled with 'params:' and below that indented are different paramters that have been set e.g. 'file_path' or 'action' 
+
+Here we are creating a very simple text document with three lines in it:
+- Line 1 specifies a input file path
+- Line 2 specifies a name
+- Line 3 specifies a number
+
+we want to change the input file path, name and number and also write the file to an output file so we set these as parameters up[ in the yaml header (instead of in the code)
+
+We can then acess these parameters in the code using params$VALUE
+
+The values you enter at the top of the Rmarkdown document will be the default values - you can overide these on the command line - this is handy as it enables you to run rmarkdown scripts in pipelines or submit them to the cluster 
+
+```{r setup, include=FALSE}
+library(tidyverse)
+
+
+new_line1 = sprintf(' This document is pointing to: %s ', params$file_path) 
+new_line2 = sprintf(' the name I have provided is: %s ', params$name)
+new_line3 = sprintf(' the number parameter is: %s', params$number)
+
+write_lines(c(new_line1, new_line2, new_line3), params$outfile, sep ="\n", append = FALSE)
+```
+
+To knit the Rmd click on the downwards pointing arrow besides the 'knit button' 
+
+
+# to run on the command line: 
+
+R -e "rmarkdown::render(input='/ifs/home/charlotteg/test_params_rmd.Rmd', output_file = '~/output.Rmd', params=list( file_path = '~/test234.txt', name = 'George', number = '50', outfile = '~/output_test_params2_rmd.txt'))" 
+
+- here input is the Rmarkdown file you want to render 
+- output file is the name of the rendered Rmarkdown filet hat you want to save ..e. in  this script it will be an html file
+- to give paramters on the command line we use the params flag and give it a list of our paramter values 
+
