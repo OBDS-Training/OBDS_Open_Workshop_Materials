@@ -1,19 +1,16 @@
 Introduction to Conda 
 =========================
 
-This workshop material was origionally created by *Sebastian Luna Valero* and has been updated and modified by *Charlie George*
+This workshop material was origionally created by *Sebastian Luna Valero* and has been updated and modified by *Charlie George* and *David Sims*.
 
 For more help using conda, please see: [https://conda.io/docs/]
 
 ## Section 1: Install conda
 
 We want to set up our software environment for all the programs we will be using on the course on the cluster. 
-To do this we will first install conda, then use conda (and mamba) to install all the bioinformatics software we will need. 
-Lets sign into the cluster. You can use ssh if your internet and vpn connection is stable, 
-however if its not we will sign in using microsoft remote desktop as this will keep your session running 
-(and conda downloading/installing programs) even if your internet connection breaks. 
+To do this we will first install Conda, then use Conda (and Mamba) to install all the bioinformatics software we will need.  
 
-**1) Log into the cluster using `ssh` OR Microsoft Remote Desktop**
+**1) Log into the cluster using `ssh`**
 
 Make sure you are connected to the VPN then: 
 
@@ -22,13 +19,6 @@ To ssh:
     $ ssh <username>@cbrglogin2.molbiol.ox.ac.uk
     
     (replace <username> with your username)
-    
-    
-Or for microsoft remote desktop:
-  
-    - open microsoft remote desktop
-    - click on your session
-    - Open a terminal (click on terminal symbol on bar at the very top of the screen) 
 
 
 **2) Now go to your home directory and lets set up a directory for your conda installation**
@@ -49,7 +39,6 @@ Please note if you ever need a specific versions of the conda installer (e.g. yo
     $ curl -o Miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-4.3.31-Linux-x86_64.sh 
     
 We always recommend downloading the latest version of the conda install script unless there are known issues with it.
-If you are installing software on Windows or Mac machines your will need to download the correct installation script for these systems (see later). 
 
 **4) Now lets run the install script to install conda**
 
@@ -77,11 +66,9 @@ If you are installing software on Windows or Mac machines your will need to down
 
 We will see what conda environments are in a moment. 
 The important bit to grasp here is that 'base' is the name of the the default conda environment every time you install conda. 
-It contains the very latest version of python and a few basic python packages.
+It contains the latest version of Python and a few basic Python packages.
 
-**7) Lets add the 'source' and  'conda activate commands to our .bashrc so that conda is automatically activated every time we open a terminal on the cluster**
-    
- copy your 'source' commands from step 5 above somewhere so that we can use them again in a minute
+**7) Lets add the 'source' and 'conda activate' commands to our .bashrc so that Conda is automatically activated every time we open a terminal on the cluster**
     
     # open your .bashrc in nano 
     $ nano ~/.bashrc 
@@ -148,72 +135,10 @@ Close and save your .bashrc
     fi
     unset __conda_setup
     # <<< conda initialize <<<
-    
-### Annoying Nuances of the CCB cluster! IMPORTANT!! 
 
-So Above is how conda/mamba set up should work on a perfect system - unfortunately the CCB Cluster has a unusual global version on conda installed that means your conda installation can sometimes have some unexpected behavior and won't change environments properly or picks up the wrong software PATH - we need to add a couple of extra lines to correct this. 
+## Section 2: Using Conda
 
-This is really annoying and specific to the CCB cluster or other clusters where you have a 'global' version of conda installed or several versions of conda installed in different places. 
-We are trying to get it resolved... but in the mean time we can do this fix to remove the global version of conda from our PATH (i.e. the place our terminal searches for software) 
-
-We have to add 3 things: 
-  1) A line to remove the `usr/condabin` from our PATH so we no longer look in this location for conda 
-     
-    PATH=$(echo "$PATH" | sed -e 's/\/usr\/condabin://')
-     
-  2) A line to stop conda using the CCB cluster version of python - it has its own and this other version will confuse it 
-    
-    unset PYTHONPATH
-    
-  3) After activating our base environment we need to deactivate it and then activate it again before activating our obds-rnaseq environment in our alias (As suggested by this troubleshooting page https://github.com/conda/conda/issues/9392 - again its due to conda picking up the wrong version of python which is used by many bioinformatics tools underneath) 
-
-    conda activate base && conda deactivate && conda activate base
-    
-The first two lines (1 & 2) are added before we source conda in our .bashrc, whilst the final line (3) is added to our `alias` step where we activate our obds-rnaseq environment
-
-    # Source global definitions from system bashrc file
-    if [ -f /etc/bashrc ]; then
-     . /etc/bashrc
-    fi
-
-    # Non-interactive shells inherit the path and other variables
-    # from the calling shell, so this setup is not needed.
-    if [[ $PS1 ]]; then
-
-        ### Load environment modules
-        # Load the latest version of Git (system version is old)
-        module load git/2.31.1
-
-        ### Remove CCB global conda install from PATH and the cluster python libraries 
-        # remove usr/condabin from path
-        PATH=$(echo "$PATH" | sed -e 's/\/usr\/condabin://')
-        # unset python path
-        unset PYTHONPATH
-
-        ### source your conda
-        source ~/conda/obds_conda/etc/profile.d/conda.sh
-
-        ### Set environment variables
-
-        # Set DRMAA path for Ruffus / cgatcore pipelines to talk to slurm
-        export DRMAA_LIBRARY_PATH=/usr/lib64/libdrmaa.so
-
-        # Set temporary folders for Ruffus / cgatcore pipelines
-        export TMPDIR=/tmp
-        export SHARED_TMPDIR=/t1-data/user/${USER}/tmp
-        
-        # change to OBDS course folder
-        alias obds='cd /t1-data/project/obds/shared && pwd && ls'
-       
-        # activate conda environment
-        alias obdsenv='conda activate base && conda deactivate && conda activate base'
-        
-    fi # if PS1
-    
-
-## Section 2: Using conda
-
-**1) To get help for conda, type:**
+**1) To get help for Conda, type:**
 
     $ conda --help
 
@@ -221,7 +146,7 @@ The first two lines (1 & 2) are added before we source conda in our .bashrc, whi
 
     $ conda info
 
-**3) We can use conda to search for software packages to install, however in order to find the packages, conda needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate conda channels to get all the software we need (and trust). The order that these channels are specified is important!**
+**3) We can use Conda to search for software packages to install, however in order to find the packages, Conda needs the address of certain sites on the internet to look at - these are called 'channels'. Let's add appropriate Conda channels to get all the software we need (and trust). The order that these channels are specified is important!**
 
     conda config --add channels defaults
     conda config --add channels conda-forge
@@ -231,7 +156,7 @@ The first two lines (1 & 2) are added before we source conda in our .bashrc, whi
 
 We have added 3 channels here:  
 - defaults channel: this contains major common software that has been packaged for conda by people at conda and anaconda themselves  
-- conda-forge: this contains lots of general programming packages that have been packaged for conda by people in the programming/computational community  
+- conda-forge: this contains lots of general programming packages that have been packaged for conda by people in the programming/computational community
 - bioconda: this contains biology-specific programmes that have been packaged for conda by people in the computational biology community  
   
 **4) Check that these channels have been added to your conda installation with:**
@@ -248,7 +173,7 @@ We have added 3 channels here:
 
 As you have added new channels it is likely that several packages will be upgraded or downgraded at this stage, and some new packages may be added. Please accept the changes by typing `y` at the prompt.
 
-**7) Now let us search and install a package. As more and more packages have been added to conda it's ability to find the packages that match your enviroment has become slower - to speed this process up we will use conda to install a package called ['mamba'](https://github.com/mamba-org/mamba) that speeds up the enviroment solving when you are installing packages. This will allow us to to install our packages more quickly in the rest of the tutorial. First lets check what versions are available** 
+**7) Now let us search and install a package. As more and more packages have been added to Conda it's ability to find the packages that match your enviroment has become slower - to speed this process up we will use conda to install a package called ['Mamba'](https://github.com/mamba-org/mamba) that speeds up the enviroment solving when you are installing packages. This will allow us to to install our packages more quickly in the rest of the tutorial. First lets check what versions are available** 
 
     $ conda search mamba 
 
@@ -279,9 +204,9 @@ If you don't specify a version, the latest available one will be installed. Howe
     # or use your software:
     $ mamba --help
     
-**11) Have a look at the `--help` menu for both `conda` and `mamba` - you'll see they are both very similar!**
+**11) Have a look at the `--help` menu for both `Conda` and `Mamba` - you'll see they are both very similar!**
 
-This is because `mamba` is a special speeded up version of conda and you can use the `mamba` command interchangably with the `conda` command to do the same operations. `mamba` can find packages and dependencies much more quickly then `conda` but the documentation of how to use the commands is all detailed on the conda site - hence we want to make you aware of both and that all the commands below can be either `mamba` or `conda` and although we refer to `conda` throughout the course in practise we are going to use the `mamba` command for searching, installing and creating environments because its much quicker. 
+This is because `Mamba` is a special speeded up version of Conda and you can use the `Mamba` command interchangably with the `Conda` command to do the same operations. `Mamba` can find packages and dependencies much more quickly than `Conda` but the documentation of how to use the commands is all detailed on the Conda site - hence we want to make you aware that all the commands below can be either `mamba` or `conda` and although we refer to `conda` throughout the course in practise we are going to use the `mamba` command for searching, installing and creating environments because its much quicker. 
 
 **12) lets have a quick demo of using `mamba` inplace of `conda` to install `samtools` a program that lets you manipulate alignment files:**
     
@@ -297,7 +222,7 @@ This is because `mamba` is a special speeded up version of conda and you can use
 - https://anaconda.org/bioconda/repo/
 - https://conda-forge.org/feedstocks/
 
-**15) Conda also makes it easy to remove packages and thier dependencies - lets remove the samtools package**
+**15) Conda also makes it easy to remove packages and their dependencies - lets remove the samtools package**
 
     $ mamba remove samtools 
     
@@ -308,7 +233,7 @@ This is because `mamba` is a special speeded up version of conda and you can use
     
 ## Section 3: Conda environments
 
-So far we have been working with the (default) base environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with others (reproducible science). 
+So far we have been working with the (default) base environment. However, Conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with others (reproducible science). 
 
 An example of where this is usefule is if you want to start a new project and install new tools, but don't want to risk changing any of your existing software. 
 In this example we will create a environment specifically for some pieces of bioinformatic software for ChIP/ATAC-seq analysis. 
@@ -400,12 +325,11 @@ If you are setting up a new software environment for a project it is advisable t
 - multiqc (collects summary statistics from other bioinformatic programs)
 - hisat2 (quick read aligner (mapper) for spliced sequencing reads)
 - kallisto (alignment-free RNA quantification tool)
-- salmon (alignment-free RNA quantification tool)
 - samtools (manipulate BAM/SAM alignment files)
 - picard (QC of alignment files)
 - subread (counting of reads in features)
 
-**1) In the /t1-data/project/obds/shared/resources/1_linux/4_conda directory there is a file called `obds-rnaseq.yml`. Copy this file to your `~/conda` directory, we will use this file to create a new conda environment**
+**1) In the /t1-data/project/obds/shared/resources/1_linux/3_conda directory there is a file called `obds-rnaseq.yml`. Copy this file to your `~/conda` directory, we will use this file to create a new conda environment**
 
 **2) Have a look inside the obds-rnaseq.yml file**
 
@@ -450,22 +374,12 @@ If you want, you can give your environment a name of your choice (e.g. obds_env)
     $ nano ~/.bashrc
     
 
-Then on the line where we added `alias obdsenv='conda activate base && conda deactivate && conda activate base'` at the beginning of this tutorial (step 7) add a second command to activate your obds environment (replace obds-rnaseq with whatever you called your obds env in step 3 above) 
-*Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful espeically if you later on write pipelines*
+Then on the line where we added `alias obdsenv='conda activate base'` at the beginning of this tutorial (step 7) add a second command to activate your obds environment (replace obds-rnaseq with whatever you called your obds env in step 3 above) 
+*Note we always want to conda activate base and then activate your environment of interest as this then allows you to use the `which` command to get the conda path*
 
-    alias obdsenv='conda activate base && conda deactivate && conda activate base && conda activate obds-rnaseq'
+    alias obdsenv='conda activate base && conda activate obds-rnaseq'
 
-*Note: If you are on a different cluster or your own laptop you can set your .bashrc to automatically activate the base (and any other environment) without having to type your alias shortcut. 
-The CCB cluster terminal and Microsoft remote desktop sometimes have issues because the environments can take a little while to activate sometimes, so to avoid wierd error messages and behavoir we activate our conda enviromentments after we open a terminal and log onto the system. 
-If your working on your home computers or another cluster you can add the following commands after your `source` command.*
-
-    ### Source conda
-    source /YOUR/PATH/TO/CONDAINSTALL/conda/obds_conda/etc/profile.d/conda.sh
-    # activate base
-    conda activate base
-    # activate your favorite conda env (e.g. obds-rnaseq)
-    conda activate obds-rnaseq
-    
+*Note: Loading Conda environments can take a little while, so to avoid long waits or unusual behavoir on login we activate our conda environments after we open a terminal and log onto the system.
 
 #### YAY! You now have a fully set up software environment that you can modify!! 
 
