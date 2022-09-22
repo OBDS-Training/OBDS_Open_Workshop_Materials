@@ -23,7 +23,7 @@ During or after this workshop, we recommend the following resources for more hel
 ssh <username>@cbrglogin1.molbiol.ox.ac.uk
 ```
 
-NOTE: Replace <username> with your username.
+NOTE: Replace `<username>` with your username.
 
 ## Install Conda
 
