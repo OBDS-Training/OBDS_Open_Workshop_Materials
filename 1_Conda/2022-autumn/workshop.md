@@ -125,7 +125,7 @@ Anywhere in the file, add the following lines:
 
 ```bash
 # Define alias to activate Conda base environment
-alias conda_activate_base='source ~/obds_conda/etc/profile.d/conda.sh && conda activate base'
+alias load_conda='source ~/obds_conda/etc/profile.d/conda.sh && conda activate base'
 ```
 
 NOTE: It is good practise to add in some comments (lines starting with the symbol `#`)
@@ -151,7 +151,7 @@ NOTES:
 Run the command below to execute the command associated with the alias, thereby activating the Conda installation and the base environment.
 
 ```bash
-conda_activate_base
+load_conda
 ```
 
 ## Use Conda
@@ -343,10 +343,15 @@ add the following lines:
 
 ```bash
 # Define alias to activate Conda base environment using Mamba
-alias mamba_activate_base='source ~/obds_conda/etc/profile.d/conda.sh && source ~/obds_conda/etc/profile.d/mamba.sh && mamba activate base'
+alias load_mamba='source ~/obds_conda/etc/profile.d/conda.sh && source ~/obds_conda/etc/profile.d/mamba.sh && mamba activate base'
 ```
 
 ### Install a Conda package using Mamba
+
+Activate your mamba installation 
+```bash
+load_mamba
+```
 
 Run the command below to install the package named `samtools` using the `mamba` command.
 
@@ -625,7 +630,7 @@ To redirect the exported information to a file,
 add the option `-f` to specify the path to the file, e.g.
 
 ```bash
-mamba env export -n obds-rnaseq -f obds-rnaseq.yml
+mamba env export -n obds-rnaseq -f my_obds_rnaseq.yml
 ```
 
 ### Deactivate Conda
