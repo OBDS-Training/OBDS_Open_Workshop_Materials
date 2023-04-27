@@ -338,7 +338,7 @@ Conda packages and their dependencies, relative to the `conda` command itself.
 ### Add an alias in your ~/.bashrc file for Mamba
 
 For clarity,
-preferably next to the line that defines the alias `conda_activate_base`,
+preferably under the line that defines the alias `laod_conda`,
 add the following lines:
 
 ```bash
