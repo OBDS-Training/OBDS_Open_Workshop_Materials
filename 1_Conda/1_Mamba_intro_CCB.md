@@ -207,11 +207,11 @@ Close and save your .bashrc
 
     $ mamba info
 
-**3) We can use mamba to search for software packages to install, however in order to find the packages, mamba needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate mamba channels to get all the software we need (and trust). The order that these channels are specified is important!** As we used mamba forge to install mamba these should already be configured in the right order just incase but we will go through these steps just in case. 
+**3) We can use mamba to search for software packages to install, however in order to find the packages, mamba needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate channels to get all the software we need (and trust). The order that these channels are specified is important!** As we used mamba forge to install mamba these should already be configured in the right order just incase but we will go through these steps just in case. NOTE that this is one of the only times we use the `conda` command instead of `mamba`
 
-    mamba config --add channels defaults
-    mamba config --add channels conda-forge
-    mamba config --add channels bioconda
+    conda config --add channels defaults
+    conda config --add channels conda-forge
+    conda config --add channels bioconda
 
 *Note: Mac users may have problems copying and pasting the config commands above, with strange error messages. If that's the case, please enter these commands manually and try again.*
 
