@@ -293,17 +293,17 @@ Check it your environment list again:
 
 If you don't specify a version, the latest available one will be installed. However, you can also ask for a specific version of a by specifying the version number e.g.:
 
-    $ conda install mamba=0.7.8 
+    $ mamba install deeptools=2.1.3 
 
-You can also install multiple packages at the same time e.g. `samtools` & `macs3`**
+You can also install multiple packages at the same time e.g. `samtools` & `bedtools`**
 
 ```
     # you can install things individually (don't run this its just an example)
     $ mamba install samtools
-    $ mamba install macs3
+    $ mamba install bedtools
     
     # or in a single command (run this instead)
-    $ mamba install samtools macs3
+    $ mamba install samtools bedtools
 ```
 
 
@@ -313,7 +313,7 @@ You can also install multiple packages at the same time e.g. `samtools` & `macs3
 
 **8) It is also possible to see what would happen when you install a package without actually installing it (also known as a dry run)**
 
-    $ mamba install bedtools --dry-run
+    $ mamba install multiqc --dry-run
 
 **9) In addition to the `mamba search <name>` command, you can also visit the following websites to check for available conda/mamba packages - this is a much easier way of finding packages if you are unsure how they might be named in conda/mamba - remember just replace `conda` with `mamba` in the command and leave out the `-c channel` bit! :**
 
@@ -325,9 +325,9 @@ You can also install multiple packages at the same time e.g. `samtools` & `macs3
     $ mamba remove samtools 
     
        
-**11) Check these tools work by accessing thier --help functions**
+**11) A good way of checking tools work is by accessing thier `--help` functions**
 
-    $ macs2 --help
+    $ bedtools --help
     
     $ deeptools --help 
     
