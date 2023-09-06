@@ -43,10 +43,11 @@ Lets sign into the CCB cluster using ssh (you might need to sign into the VPN if
 
 #### 1) Log into the cluster using `ssh`: 
 
+    $ ssh -J <SSO>@bastion.imm.ox.ac.uk <SSO>@obds
 
-    $ ssh <username>@login1.molbiol.ox.ac.uk
+<!---    $ ssh <username>@login1.molbiol.ox.ac.uk --->
     
-(replace <username> with your username e.g. bknowles@login1.molbiol.ox.ac.uk)
+(replace <SSO> with your university SSO e.g. abcd1234@lbastion.imm.ox.ac.uk)
     
 
 #### 2) Check for previous conda/mamba installs 
@@ -95,10 +96,10 @@ If you have these lines - you already have a conda installation - its useful to 
 
 #### 3) Installing conda & microMamba
 
-Lets make a directory for conda/mamba installation - best to install it in your project directory. Edit <projectname> to your project and <username> to your user name e.g. /project/mylab/bknowles
+Lets make a directory for conda/mamba installation - as in the rest of the course, you will be using the directory `/var/scratch/$USER/`. You can also replace $USER with your SSO, e.g. `/var/scratch/abcd1324/`
 
 ```
-    $ cd /project/<projectname>/<username>
+    $ cd /var/scratch/$USER/
     $ mkdir mamba_installation
     $ cd mamba_installation
  ```   
