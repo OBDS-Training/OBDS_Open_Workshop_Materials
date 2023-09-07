@@ -133,10 +133,10 @@ The Mamba forge script will download conda & mamba and preconfigure it to use th
     
     # Activate conda installation - by sourcing the conda.sh script 
     # we will need the full path to be correct - tabbing will help avoid errors
-    $ source /project/<project>/<username>/mamba_installation/conda/etc/profile.d/conda.sh
+    $ source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/conda.sh
 
     # Activate mamba installation - by sourcing the mamba.sh script 
-    $ source project/<project>/<username>/mamba_installation/conda/etc/profile.d/mamba.sh
+    $ source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/mamba.sh
 
     # Activate base environment to move into the default conda/mamba software environment
     $ mamba activate base
