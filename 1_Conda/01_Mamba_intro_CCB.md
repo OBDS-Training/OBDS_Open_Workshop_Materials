@@ -142,7 +142,7 @@ The Mamba forge script will download conda & mamba and preconfigure it to use th
     $ mamba activate base
 
 
-You should see `(base)` has appeared at the beginning of your prompt - e.g `(base) bknowles@login1:$`
+You should see `(base)` has appeared at the beginning of your prompt - e.g `(base) abcd1234@obds:$`
 
 We will see what conda environments are in a moment. 
 The important bit to grasp here is that 'base' is the name of the the default conda environment every time you install conda. 
