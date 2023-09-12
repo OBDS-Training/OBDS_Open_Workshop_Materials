@@ -39,7 +39,7 @@ For more help using Mamba please see:
 
 We want to set up our software environment for all the programs we will be using on the course on the cluster. To do this we will first install mamba to install all the bioinformatics software we will need. 
 
-Lets sign into the CCB cluster using ssh (you might need to sign into the VPN if not on the WIMM network)   
+Let's sign into the CCB cluster using ssh (you might need to sign into the VPN if not on the WIMM network)   
 
 #### 1) Log into the cluster using `ssh`: 
 
@@ -96,7 +96,7 @@ If you have these lines - you already have a conda installation - its useful to 
 
 #### 3) Installing conda & microMamba
 
-Lets make a directory for conda/mamba installation - as in the rest of the course, you will be using the directory `/var/scratch/$USER/`. You can also replace $USER with your SSO, e.g. `/var/scratch/abcd1324/`
+Let's make a directory for conda/mamba installation - as in the rest of the course, you will be using the directory `/var/scratch/$USER/`. You can also replace $USER with your SSO, e.g. `/var/scratch/abcd1324/`
 
 ```
     $ cd /var/scratch/$USER/
@@ -104,7 +104,7 @@ Lets make a directory for conda/mamba installation - as in the rest of the cours
     $ cd mamba_installation
  ```   
 
-Now we have made a directory for it, lets get a copy of the mamba install script**
+Now we have made a directory for it, let's get a copy of the mamba install script**
 
 For Linux (the cluster) use:
 
@@ -118,7 +118,7 @@ If you are installing software on Windows or Mac machines your will need to down
 
 The Mamba forge script will download conda & mamba and preconfigure it to use the conda-forge channel (we will adjust this later)
 
-**4) Now lets run the install script to install conda**
+**4) Now let's run the install script to install conda**
 
     $ bash Mambaforge-$(uname)-$(uname -m).sh -b -p conda
     
@@ -128,7 +128,7 @@ The Mamba forge script will download conda & mamba and preconfigure it to use th
     
 **5) So that our terminal knows where to find the conda software, we need to add this location to our $PATH variable so that we can use it**
 
-    # lets check where we have installed it to help us with the next command
+    # let's check where we have installed it to help us with the next command
     $ pwd 
     
     # Activate conda installation - by sourcing the conda.sh script 
@@ -158,7 +158,7 @@ It contains python, conda, mamba and a few basic python packages.
 You should be able to see the conda and mamba help menus are the same! 
 
 
-**7) Lets add the 'source' and  'mamba activate` commands to our .bashrc so that we can activate conda easilly when we log onto the cluster**
+**7) Let's add the 'source' and  'mamba activate` commands to our .bashrc so that we can activate conda easilly when we log onto the cluster**
     
  copy your 'source' commands from step 5 above somewhere so that we can use them again in a minute
 
@@ -256,11 +256,11 @@ We will first create a environment specifically for some pieces of bioinformatic
 
 **4) We are going to create an environment we will call `peaktools` for some chipseq & atacseq tools including the peakcaller `macs2` and the package `deeptools` this is a set of bioinformatic tools that come in handy for creating genome browser tracks and also looking at peak data from ChIP-seq and ATAC-seq files**
 
-First lets check what environments we have: 
+First let's check what environments we have: 
 
     $ mamba env list
 
-Now lets create a our new enviroment: 
+Now let's create a our new enviroment: 
 
     $ mamba create -n peaktools_env
     
@@ -321,7 +321,7 @@ You can also install multiple packages at the same time e.g. `samtools` & `bedto
 - https://anaconda.org/bioconda/repo/
 - https://conda-forge.org/feedstocks/
 
-**10) Conda/mamba also makes it easy to remove packages and thier dependencies - lets remove the samtools package**
+**10) Conda/mamba also makes it easy to remove packages and thier dependencies - let's remove the samtools package**
 
     $ mamba remove samtools 
     
@@ -344,7 +344,7 @@ You can also install multiple packages at the same time e.g. `samtools` & `bedto
     # check the software works
     $ samtools --help
     
-**10) Lets pretend we've tested our tools in our `test_tools_env` and we have decided not to use them in our analysis. Conda makes it really easy to delete environments cleanly**
+**10) Let's pretend we've tested our tools in our `test_tools_env` and we have decided not to use them in our analysis. Conda makes it really easy to delete environments cleanly**
 
     # First move out of the environment by `deactiviating it` 
     $ mamba deactivate
