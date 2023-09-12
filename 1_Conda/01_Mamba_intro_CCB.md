@@ -174,7 +174,7 @@ You should be able to see the conda and mamba help menus are the same!
     alias load_mamba='source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base' 
 ```
 
-It's good practise to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
+It's good practice to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
 
 Close and save your `.bash_aliases`.
 
@@ -376,7 +376,7 @@ If you are setting up a new software environment for a project it is advisable t
 - picard (QC of alignment files)
 - subread (counting of reads in features)
 
-**1) In the `/project/obds/shared/resources/1_linux/3_conda directory` there is a file called `obds-rnaseq.yml`. Copy this file to your /project/obds/{user}/mamba_installation directory, we will use this file to create a new conda environment**
+**1) In the `/storage/shared/resources/1_linux/3_conda/` directory there is a file called `obds-rnaseq.yml`. Copy this file to your /var/scratch/$USER/mamba_installation directory, we will use this file to create a new conda environment**
 
 **2) Have a look inside the obds-rnaseq.yml file**
 
@@ -415,15 +415,15 @@ If you want, you can give your environment a name of your choice (e.g. obds_env)
 
     $ mamba env export -n obds-rnaseq > my_obds_environment.yml
     
-### C) Final steps - update your .bashrc to activate your obds enviroment automatically when you load a terminal
+### C) Final steps - update your .bash_aliases to activate your obds enviroment automatically when you load a terminal
 
-    # open your .bashrc
-    $ nano ~/.bashrc
+    # open your .bash_aliases
+    $ nano ~/.bash_aliases
     
 Then on the line where we added `alias load_mamba` at the beginning of this tutorial add `&& mamba activate obds-rnaseq` at the end to activate your obds environment. *Note we always want to conda activate base first and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later in pipelines*
 
 ```
-alias load_mamba='source /project/<project>/<username>/mamba_installation/conda/etc/profile.d/conda.sh && source /project/<project>/<username>/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base && mamba activate obds-rnaseq' 
+alias load_mamba='source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base && mamba activate obds-rnaseq' 
 ```
 
 #### YAY! You now have a fully set up software environment that you can modify!! 
