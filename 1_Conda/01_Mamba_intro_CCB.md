@@ -167,16 +167,16 @@ You should be able to see the conda and mamba help menus are the same!
     $ nano ~/.bash_aliases 
 ```
 
-(your `.bash_aliases` is in your home directory - the shortcut for this path is '~' hence we can open our `.bash_aliases` from anywhere using `~/.bash_aliases`)
+(your `.bash_aliases` is in your home directory - the shortcut for this path is `~` hence we can open our `.bash_aliases` from anywhere using `~/.bash_aliases`)
 
 ```
     # Create an alias to load conda/mamba
-    alias load_mamba='source /project/<project>/<username>/mamba_installation/conda/etc/profile.d/conda.sh && source /project/<project>/<username>/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base' 
+    alias load_mamba='source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base' 
 ```
 
 It's good practise to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
 
-Close and save your .bashrc
+Close and save your `.bash_aliases`.
 
 
 *Note - sourcing conda is not necessary if you have the following in your .bashrc. This may be added automatically during the Miniconda install. If you didn't use -b*
