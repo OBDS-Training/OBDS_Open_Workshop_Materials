@@ -1,7 +1,7 @@
 Software Management with Mamba and Conda 
 =========================================
 
-This workshop material was created by *Sebastian Luna Valero* & *Charlie George*
+This workshop material was created by *Sebastian Luna Valero*, *Charlie George* and *Lena Morrill Gavarró*
 
 
 For more help using Mamba please see: 
@@ -158,7 +158,7 @@ It contains python, conda, mamba and a few basic python packages.
 You should be able to see the conda and mamba help menus are the same! 
 
 
-**7) Let's add the 'source' and  'mamba activate` commands to our `.bash_aliases` so that we can activate conda easilly when we log onto the cluster**
+**7) Let's add the 'source' and  'mamba activate' commands to our `.bash_aliases` so that we can activate conda easilly when we log onto the cluster**
     
  copy your 'source' commands from step 5 above somewhere so that we can use them again in a minute
 
