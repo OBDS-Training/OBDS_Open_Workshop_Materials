@@ -158,23 +158,23 @@ It contains python, conda, mamba and a few basic python packages.
 You should be able to see the conda and mamba help menus are the same! 
 
 
-**7) Let's add the 'source' and  'mamba activate` commands to our .bashrc so that we can activate conda easilly when we log onto the cluster**
+**7) Let's add the 'source' and  'mamba activate` commands to our `.bash_aliases` so that we can activate conda easilly when we log onto the cluster**
     
  copy your 'source' commands from step 5 above somewhere so that we can use them again in a minute
 
 ```
-    # open your .bashrc in nano 
-    $ nano ~/.bashrc 
+    # open your .bash_aliases in nano 
+    $ nano ~/.bash_aliases 
 ```
 
-    (your .bashrc is in your home directory - the shortcut for this path is '~' hence we can open our .bashrc from anywhere using ~/.bashrc)
-    
+(your `.bash_aliases` is in your home directory - the shortcut for this path is '~' hence we can open our `.bash_aliases` from anywhere using `~/.bash_aliases`)
+
 ```
     # Create an alias to load conda/mamba
     alias load_mamba='source /project/<project>/<username>/mamba_installation/conda/etc/profile.d/conda.sh && source /project/<project>/<username>/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base' 
 ```
 
-Its good practise to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
+It's good practise to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
 
 Close and save your .bashrc
 
