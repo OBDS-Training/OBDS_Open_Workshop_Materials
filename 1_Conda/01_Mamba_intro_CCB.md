@@ -376,7 +376,7 @@ If you are setting up a new software environment for a project it is advisable t
 - picard (QC of alignment files)
 - subread (counting of reads in features)
 
-**1) In the `/storage/shared/resources/1_linux/3_conda/` directory there is a file called `obds-rnaseq.yml`. Copy this file to your /var/scratch/$USER/mamba_installation directory, we will use this file to create a new conda environment**
+**1) In the `/storage/shared/resources/1_linux/3_conda/` directory there is a file called `obds-rnaseq.yml`. Copy this file to your `/var/scratch/$USER/mamba_installation` directory, we will use this file to create a new conda environment**
 
 **2) Have a look inside the obds-rnaseq.yml file**
 
