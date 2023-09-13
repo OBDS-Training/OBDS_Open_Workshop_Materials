@@ -370,17 +370,17 @@ If you are setting up a new software environment for a project it is advisable t
 ### Environment #3 (environment for the course)
 
 #### Bioinformatics software
-
+  
 - fastqc (QC of FASTQ raw sequence files)
 - multiqc (collects summary statistics from other bioinformatic programs)
-- trimmomatic (read trimming tool)
+<!--- - trimmomatic (read trimming tool) -- not used here --->
 - hisat2 (quick read aligner (mapper) for spliced sequencing reads)
-- bowtie2 (slower read aligner for unspliced sequencing reads)
-- kallisto (alignment-free RNA quantification tool)
+<!--- - - bowtie2 (slower read aligner for unspliced sequencing reads) -- not used here --->
 - samtools (manipulate BAM/SAM alignment files)
-- bedtools (comparison, manipulation and annotation of genomic features)
-- picard (QC of alignment files)
+- kallisto (alignment-free RNA quantification tool)
+- picard (QC of alignment files) -- not used here
 - subread (counting of reads in features)
+- bedtools (comparison, manipulation and annotation of genomic features)
 
 **1) In the `/storage/shared/resources/1_linux/3_conda/` directory there is a file called `obds-rnaseq.yml`. Copy this file to your `/var/scratch/$USER/mamba_installation` directory, we will use this file to create a new conda environment**
 
@@ -396,10 +396,10 @@ If you are setting up a new software environment for a project it is advisable t
     
     $ mamba env create -f obds-rnaseq.yml 
     
-If you want, you can give your environment a name of your choice (e.g. obds_env) using the -n option (by default it will use the name specified at the top of the yml file which is obds-py3):
+If you want, you can give your environment a name of your choice (e.g. `alternative_name_env`) using the -n option (by default it will use the name specified at the top of the yml file, which is `obds_env`). You do not have to run the line below, but you can use it for reference (although it is clearer to specify the env name in the yaml file).
 
-    $ mamba env create -n obds_env -f obds-rnaseq.yml
-    
+    $ mamba env create -n alternative_name_env -f obds-rnaseq.yml
+
 **4) Activate your new conda environment**
     
     $ mamba activate obds-rnaseq
@@ -421,7 +421,7 @@ If you want, you can give your environment a name of your choice (e.g. obds_env)
 
     $ mamba env export -n obds-rnaseq > my_obds_environment.yml
     
-**9) Final steps - update your .bash_aliases to activate your obds enviroment automatically when you load a terminal**
+**9) Final steps - update your `.bash_aliases` to activate your obds enviroment automatically when you load a terminal**
 
     # open your .bash_aliases
     $ nano ~/.bash_aliases
