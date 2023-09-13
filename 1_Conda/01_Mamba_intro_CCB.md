@@ -8,38 +8,37 @@ For more help using Mamba please see:
 - [Mamba documentation](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)
 - [Conda documentation](https://conda.io/docs/) 
 
-## Mamba vs conda? 
+## Mamba vs conda
 
 #### What is conda or anaconda? 
 
-- Conda/anaconda is a package management system. That allows you to easily search for spftware and install it without having to worry about having to install all the correct dependencies and the pain of having to match up correct versions etc. Whilst lots of package management systems are language or system specific (e.g. Apple App Store, pip for python packages, CRAN/Bioconductor for R packages), conda/anaconda can be used to install a huge number of software packages across multiple systems (Linux, Mac, Windows etc). They make it easy to install software onto any system and it's often used in introductory courses to set up your software environments so you might have previously installed it without really realising.
-  
+- Conda/anaconda is a package management system. That allows you to easily search for software and install it without having to worry about having to install all the correct dependencies, the pain of having to match up correct versions, etc. Whilst lots of package management systems are language or system specific (e.g. Apple App Store, pip for python packages, CRAN/Bioconductor for R packages), conda/anaconda can be used to install a huge number of software packages across multiple systems (Linux, Mac, Windows etc). They make it easy to install software onto any system and it's often used in introductory courses to set up your software environments so you might have previously installed it without really realising.
+
 - Conda is the small lightweight command line tool that allows you to install packages easily, when you install it, it creates a `base` environment which contains itself and the minimal number of packages that enables it to run.
-  
-- Anaconda is a much larger istallation that installs the conda command line tool itself and a load of other datascience software as well as a graphical interface so you can install stuff by clicking on things. It is much larger and takes up much more space, installing many packages that you will never actually use. It is for this reason we recommend installing the minimal conda/mamba packages instead. 
+
+- Anaconda is a much larger installation that installs the conda command line tool itself and a load of other data science software, as well as a graphical interface so you can install stuff by clicking on things. It is much larger and takes up much more space, installing many packages that you will never actually use. It is for this reason we recommend installing the minimal conda/mamba packages instead. 
 
 #### What is Mamba?
 
-- As conda became more and more popular, more and more packages were added to its repositories and it became slower and slower to search through them and solve environments, Mamba was written in C++ asa reimplementation of conda to improve the performance and solve enviroments much faster then Conda can. You used to jsut install it as a seperate package into your conda base environment but more recently its been realsed as a package on its own without the need to install conda first. 
+- As conda became more and more popular, more and more packages were added to its repositories and it became slower and slower to search through them and solve environments. Mamba was written in C++ as a reimplementation of conda to improve the performance and solve enviroments much faster than Conda can. You used to just install it as a separate package into your conda base environment (i.e.,paradoxically, conda installed mamba) but more recently it has been released as a package on its own, without the need to install conda first. 
 
 #### What is microMamba?
 
-- it is "a tiny version of the  mamba package manager". It has its own command line interface and does not come with a default Python version or need a base environment. It supports a subset of the mamba/conda commands but it's documentation is a bit patchy so for our purposes at this time we'll stick with the Conda/Mamba install approach below. 
+- it is "a tiny version of the  mamba package manager". It has its own command line interface and does not come with a default Python version or need of a base environment. It supports a subset of the mamba/conda commands, but its documentation is a bit patchy so for our purposes at this time we'll stick with the Conda/Mamba install approach below (mambaForge).
 
 #### Which are we using and why? 
 
-- We are going to install conda and mamba together in a sigle step using the `mambaForge` script, it should give us the functionality of both Mamba and Conda but we will interface with it mainly by using `mamba` commands. 
+- We are going to install conda and mamba together in a single step using the `mambaForge` script, which gives us the functionality of both Mamba and Conda. We will interface with it mainly by using `mamba` commands.
 
 #### Why do you still refer to conda if we are not using it? 
 
-- Mamba was based on conda and actually at this point the conda documentation and online help/troubleshooting is much better then the mamba documentation. It's useful to sometime google your issues with conda in the title rather then mamba and if you find a conda command as a solution just replace `conda` with `mamba` at the beginning. Mamba also uses the conda channels and anaconda repository to find all its packages so you still need to know they are related. 
-
+- Mamba was based on conda and actually at this point the conda documentation and online help/troubleshooting is much better then the mamba documentation. It's useful to sometimes google your issues with "conda" in the title rather than "mamba" and, if you find a conda command as a solution, just replace `conda` with `mamba` at the beginning. Mamba also uses the conda channels and anaconda repository to find all its packages so you still need to know they are related.
 
 ## Section 1: Check for conda/mamba installs and install if needed
 
 We want to set up our software environment for all the programs we will be using on the course on the cluster. To do this we will first install mamba to install all the bioinformatics software we will need. 
 
-Let's sign into the CCB cluster using ssh (you might need to sign into the VPN if not on the WIMM network)   
+Let's sign into the `obds` cluster using `ssh` (you might need to sign into the VPN if not on the WIMM network using an ethernet cable)
 
 #### 1) Log into the cluster using `ssh`: 
 
@@ -47,13 +46,13 @@ Let's sign into the CCB cluster using ssh (you might need to sign into the VPN i
 
 <!---    $ ssh <username>@login1.molbiol.ox.ac.uk --->
     
-(replace <SSO> with your university SSO e.g. abcd1234@lbastion.imm.ox.ac.uk)
-    
+(replace <SSO> with your university SSO e.g. `abcd1234@lbastion.imm.ox.ac.uk`)
+  
 
 #### 2) Check for previous conda/mamba installs 
 
-Conda/Mamba/Anaconda like to secretly modify your bashrc when you install them, the easiest way of 
-checking if you have a preexisting installation of any of these packages is looking at your ~/.bashrc` and checking for any lines of code activating conda 
+Conda/Mamba/Anaconda like to secretly modify your `~/.bashrc` when you install them, the easiest way of 
+checking if you have a preexisting installation of any of these packages is looking at your `~/.bashrc` and checking for any lines of code activating conda 
 
 ```
 $ less ~/.bashrc 
@@ -86,12 +85,12 @@ source ~/conda/etc/profile.d/conda.sh
 If you have these lines - you already have a conda installation - its useful to stop and think here about if you really want to reinstall conda/mamba or continue with your previous versions. 
 
 - **Reasons for reinstalling:**
-    - Changing the location of installation - your home directory has a limited amount of space, as your projects progress and you install more packages a large amount of space will be taken up. It is now recommended to install Mamba in your project folder which can be easily increased in size. 
+    - Changing the location of installation - your home directory has a limited amount of space, as your projects progress and you install more packages a large amount of space will be taken up. For those at WIMM using the JADE cluster, it is now recommended to install Mamba in your `/project` folder, which can be easily increased in size. In the case of the course, you will be working in the folder `/var/scratch/$USER`, as you have already been.
 
 - **Reasons to continue with your previous version:**
-    - you already have a load of environments set up and its working perfectly fine 
+    - you already have a load of environments set up and it is working perfectly fine 
 
-**Important**: Conda & mamba can exhibit strange behavoirs with thier `$PATH` variable and switching between environments if you have multiple versions of Conda/Anaconda in your `$PATH`. Depending on your situation it might be best to comment out (put a `#` in from of them) any lines from previous conda installations - if you comment them out you can always remove the `#` to add them back in later if you need them. 
+**Important**: Conda & mamba can exhibit strange behavoirs with their `$PATH` variable and switching between environments if you have multiple versions of Conda/Anaconda in your `$PATH`. Depending on your situation it might be best to comment out (put a `#` in from of them) any lines from previous conda installations - if you comment them out you can always remove the `#` to add them back in later if you need them. 
 
 
 #### 3) Installing conda & microMamba
