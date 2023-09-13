@@ -85,7 +85,7 @@ source ~/conda/etc/profile.d/conda.sh
 If you have these lines - you already have a conda installation - its useful to stop and think here about if you really want to reinstall conda/mamba or continue with your previous versions. 
 
 - **Reasons for reinstalling:**
-    - Changing the location of installation - your home directory has a limited amount of space, as your projects progress and you install more packages a large amount of space will be taken up. For those at WIMM using the JADE cluster, it is now recommended to install Mamba in your `/project` folder, which can be easily increased in size. In the case of the course, you will be working in the folder `/var/scratch/$USER`, as you have already been.
+    - Changing the location of installation - your home directory has a limited amount of space, as your projects progress and you install more packages a large amount of space will be taken up. For those at WIMM using the JADE cluster, it is now recommended to install Mamba in your `/project` folder, which can be easily increased in size. In the case of the OBDS Training course, you will be working in the folder `/var/scratch/$USER`, as you have already been.
 
 - **Reasons to continue with your previous version:**
     - you already have a load of environments set up and it is working perfectly fine 
@@ -93,9 +93,9 @@ If you have these lines - you already have a conda installation - its useful to 
 **Important**: Conda & mamba can exhibit strange behavoirs with their `$PATH` variable and switching between environments if you have multiple versions of Conda/Anaconda in your `$PATH`. Depending on your situation it might be best to comment out (put a `#` in from of them) any lines from previous conda installations - if you comment them out you can always remove the `#` to add them back in later if you need them. 
 
 
-#### 3) Installing conda & microMamba
+#### 3) Installing Miniforge=Mambaforge
 
-Let's make a directory for conda/mamba installation - as in the rest of the course, you will be using the directory `/var/scratch/$USER/`. You can also replace $USER with your SSO, e.g. `/var/scratch/abcd1324/`
+Let's make a directory for the conda/mamba installation - as in the rest of the course, you will be using the directory `/var/scratch/$USER/`. You can also replace $USER with your SSO, e.g. `/var/scratch/abcd1324/`
 
 ```
     $ cd /var/scratch/$USER/
@@ -103,9 +103,7 @@ Let's make a directory for conda/mamba installation - as in the rest of the cour
     $ cd mamba_installation
  ```   
 
-Now we have made a directory for it, let's get a copy of the mamba install script**
-
-For Linux (the cluster) use:
+Now we have made a directory for it, let's get a copy of the mamba install script**:
 
 ```
     $ curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
@@ -143,9 +141,7 @@ The Mamba forge script will download conda & mamba and preconfigure it to use th
 
 You should see `(base)` has appeared at the beginning of your prompt - e.g `(base) abcd1234@obds:$`
 
-We will see what conda environments are in a moment. 
-The important bit to grasp here is that 'base' is the name of the the default conda environment every time you install conda. 
-It contains python, conda, mamba and a few basic python packages.
+We will see what conda environments are in a moment. The important bit to grasp here is that 'base' is the name of the the default conda environment every time you install conda. It contains python, conda, mamba and a few basic python packages.
 
 **6) Test your source command has worked by trying:**
 
@@ -157,16 +153,16 @@ It contains python, conda, mamba and a few basic python packages.
 You should be able to see the conda and mamba help menus are the same! 
 
 
-**7) Let's add the 'source' and  'mamba activate' commands to our `.bash_aliases` so that we can activate conda easilly when we log onto the cluster**
+**7) Let's add the 'source' and  'mamba activate' commands to our `.bash_aliases` so that we can activate conda easily when we log onto the server**
     
  copy your 'source' commands from step 5 above somewhere so that we can use them again in a minute
 
 ```
-    # open your .bash_aliases in nano 
+    # open your ~/.bash_aliases in nano 
     $ nano ~/.bash_aliases 
 ```
 
-(your `.bash_aliases` is in your home directory - the shortcut for this path is `~` hence we can open our `.bash_aliases` from anywhere using `~/.bash_aliases`)
+(reminder: your `.bash_aliases` is in your home directory - the shortcut for this path is `~` hence we can open our `.bash_aliases` from anywhere using `~/.bash_aliases`)
 
 ```
     # Create an alias to load conda/mamba
@@ -177,7 +173,7 @@ It's good practice to add in some comment lines (lines starting with a #) above 
 
 Close and save your `.bash_aliases`.
 
-
+<!---
 *Note - sourcing conda is not necessary if you have the following in your .bashrc. This may be added automatically during the Miniconda install. If you didn't use -b*
 
     # >>> conda initialize >>>
@@ -194,7 +190,8 @@ Close and save your `.bash_aliases`.
     fi
     unset __conda_setup
     # <<< conda initialize <<<
-    
+--->
+
     
 
 ## Section 2: Using mamba
