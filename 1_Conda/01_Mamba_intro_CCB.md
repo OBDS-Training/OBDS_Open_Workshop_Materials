@@ -145,10 +145,12 @@ We will see what conda environments are in a moment. The important bit to grasp 
 
 **6) Test your source command has worked by trying:**
 
+```
     $ which conda
     $ which mamba 
     $ conda --help 
     $ mamba --help 
+```
 
 You should be able to see the conda and mamba help menus are the same! 
 
@@ -204,7 +206,7 @@ Close and save your `.bash_aliases`.
 
     $ mamba info
 
-**3) We can use mamba to search for software packages to install, however in order to find the packages, mamba needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate channels to get all the software we need (and trust). The order that these channels are specified is important!** As we used mamba forge to install mamba these should already be configured in the right order just incase but we will go through these steps just in case. NOTE that this is one of the only times we use the `conda` command instead of `mamba`
+**3) We can use mamba to search for software packages to install, however in order to find the packages, mamba needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate channels to get all the software we need (and trust). The order that these channels are specified is important!** As we used mamba forge to install mamba these should already be configured in the right order just in case but we will go through these steps just in case. NOTE that this is one of the only times we use the `conda` command instead of `mamba`
 
     conda config --add channels defaults
     conda config --add channels conda-forge
@@ -234,7 +236,9 @@ As you have added new channels it is likely that several packages will be upgrad
 
 ## Section 3: Conda environments
 
-So far we have been working with the (default) base environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with others (reproducible science). 
+### Environment #1
+
+So far we have been working with the default (base) environment. However, conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) production environments with others (reproducible science). 
 
 We will first create a environment specifically for some pieces of bioinformatic software that we want to test later in the course, we install them in their own enviroment so that we can test them out without the risk of disrupting our other packages/tools in our main software environment by forcing them to change version or use different versions of python. 
 
@@ -250,7 +254,7 @@ We will first create a environment specifically for some pieces of bioinformatic
     
     $ mamba env list -h
 
-**4) We are going to create an environment we will call `peaktools` for some chipseq & atacseq tools including the peakcaller `macs2` and the package `deeptools` this is a set of bioinformatic tools that come in handy for creating genome browser tracks and also looking at peak data from ChIP-seq and ATAC-seq files**
+**4) We are going to create an environment we will call `peaktools` for some ChIP-Seq & ATAC-Seq tools including the peakcaller `MACS2` and the package `deepTools`: this is a set of bioinformatic tools that come in handy for creating genome browser tracks and also looking at peak data from ChIP-Seq and ATAC-Seq files**
 
 First let's check what environments we have: 
 
@@ -317,18 +321,24 @@ You can also install multiple packages at the same time e.g. `samtools` & `bedto
 - https://anaconda.org/bioconda/repo/
 - https://conda-forge.org/feedstocks/
 
-**10) Conda/mamba also makes it easy to remove packages and thier dependencies - let's remove the samtools package**
+**10) Conda/mamba also makes it easy to remove packages and their dependencies - let's remove the samtools package**
 
     $ mamba remove samtools 
     
        
-**11) A good way of checking tools work is by accessing thier `--help` functions**
+**11) A good way of checking that tools work is by accessing their `--help` functions**
 
     $ bedtools --help
     
     $ deeptools --help 
-    
+
+### Environment #2
+
 **12) Instead of creating an environment and installing the packages in separate steps you can combine these steps by specifying the packages in your `create` command. We will do this to create a `test_tools_env` were we will install two programs used to manipulate genomic files `samtools` and `bedtools` as an example**
+
+    # First move out of the environment by `deactivating it` 
+    $ mamba deactivate
+    # you should now be in (base)
     
     $ mamba create -n test_tools_env samtools bedtools
     
@@ -342,7 +352,7 @@ You can also install multiple packages at the same time e.g. `samtools` & `bedto
     
 **10) Let's pretend we've tested our tools in our `test_tools_env` and we have decided not to use them in our analysis. Conda makes it really easy to delete environments cleanly**
 
-    # First move out of the environment by `deactiviating it` 
+    # First move out of the environment by `deactivating it` 
     $ mamba deactivate
     
     # remove the environment 
@@ -351,13 +361,13 @@ You can also install multiple packages at the same time e.g. `samtools` & `bedto
     # Check your environments list    
     $ mamba env list
     
-Now that we have had some practice setting up mamba environments, we want to create aenvironment for the OBDS Training Programme that will contain the software that we will use in the taught lectures/workshops over the next couple of days.
+Now that we have had some practice setting up mamba environments, we want to create an environment for the OBDS Training Programme that will contain the software that we will use in the taught lectures/workshops over the next couple of days.
 
 Whilst it is possible and really handy to add conda/mamba packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda/mamba) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
 
 If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an `environment.yml` file, as this makes it easier for mamba to workout what dependencies will be best for most of the software right from the start. 
 
-### A) Setting up your environment for the course
+### Environment #3 (environment for the course)
 
 #### Bioinformatics software
 
@@ -411,7 +421,7 @@ If you want, you can give your environment a name of your choice (e.g. obds_env)
 
     $ mamba env export -n obds-rnaseq > my_obds_environment.yml
     
-### C) Final steps - update your .bash_aliases to activate your obds enviroment automatically when you load a terminal
+**9) Final steps - update your .bash_aliases to activate your obds enviroment automatically when you load a terminal**
 
     # open your .bash_aliases
     $ nano ~/.bash_aliases
