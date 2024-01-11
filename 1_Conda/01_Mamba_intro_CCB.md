@@ -85,7 +85,7 @@ source ~/conda/etc/profile.d/conda.sh
 If you have these lines - you already have a conda installation - its useful to stop and think here about if you really want to reinstall conda/mamba or continue with your previous versions. 
 
 - **Reasons for reinstalling:**
-    - Changing the location of installation - your home directory has a limited amount of space, as your projects progress and you install more packages a large amount of space will be taken up. For those at WIMM using the JADE cluster, it is now recommended to install Mamba in your `/project` folder, which can be easily increased in size. In the case of the OBDS Training course, you will be working in the folder `/var/scratch/$USER`, as you have already been.
+    - Changing the location of installation - your home directory has a limited amount of space, as your projects progress and you install more packages a large amount of space will be taken up. For those at WIMM using the JADE cluster, it is now recommended to install Mamba in your `/project` folder, which can be easily increased in size. In the case of the OBDS Training course, you will be working in the folder `/project/$USER`, as you have already been.
 
 - **Reasons to continue with your previous version:**
     - you already have a load of environments set up and it is working perfectly fine 
@@ -95,10 +95,10 @@ If you have these lines - you already have a conda installation - its useful to 
 
 #### 3) Installing Miniforge=Mambaforge
 
-Let's make a directory for the conda/mamba installation - as in the rest of the course, you will be using the directory `/var/scratch/$USER/`. You can also replace $USER with your SSO, e.g. `/var/scratch/abcd1324/`
+Let's make a directory for the conda/mamba installation - as in the rest of the course, you will be using the directory `/project/$USER/`. You can also replace $USER with your SSO, e.g. `/project/abcd1324/`
 
 ```
-    $ cd /var/scratch/$USER/
+    $ cd /project/$USER/
     $ mkdir mamba_installation
     $ cd mamba_installation
  ```   
@@ -130,10 +130,10 @@ The Mamba forge script will download conda & mamba and preconfigure it to use th
     
     # Activate conda installation - by sourcing the conda.sh script 
     # we will need the full path to be correct - tabbing will help avoid errors
-    $ source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/conda.sh
+    $ source /project/$USER/mamba_installation/conda/etc/profile.d/conda.sh
 
     # Activate mamba installation - by sourcing the mamba.sh script 
-    $ source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/mamba.sh
+    $ source /project/$USER/mamba_installation/conda/etc/profile.d/mamba.sh
 
     # Activate base environment to move into the default conda/mamba software environment
     $ mamba activate base
@@ -168,7 +168,7 @@ You should be able to see the conda and mamba help menus are the same!
 
 ```
     # Create an alias to load conda/mamba
-    alias load_mamba='source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base' 
+    alias load_mamba='source /project/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /project/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base' 
 ```
 
 It's good practice to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
@@ -198,7 +198,7 @@ Close and save your `.bash_aliases`.
 
 ## Section 2: Using mamba
 
-**1) To get help for mama, type:**
+**1) To get help for mamba, type:**
 
     $ mamba --help
 
@@ -382,7 +382,7 @@ If you are setting up a new software environment for a project it is advisable t
 - subread (counting of reads in features)
 - bedtools (comparison, manipulation and annotation of genomic features)
 
-**1) In the `/storage/shared/resources/1_linux/3_conda/` directory there is a file called `obds-rnaseq.yml`. Copy this file to your `/var/scratch/$USER/mamba_installation` directory, we will use this file to create a new conda environment**
+**1) In the `/project/shared/resources/1_linux/3_conda/` directory there is a file called `obds-rnaseq.yml`. Copy this file to your `/project/$USER/mamba_installation` directory, we will use this file to create a new conda environment**
 
 **2) Have a look inside the obds-rnaseq.yml file**
 
@@ -429,7 +429,7 @@ If you want, you can give your environment a name of your choice (e.g. `alternat
 Then on the line where we added `alias load_mamba` at the beginning of this tutorial add `&& mamba activate obds-rnaseq` at the end to activate your obds environment. *Note we always want to conda activate base first and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later in pipelines*
 
 ```
-alias load_mamba='source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /var/scratch/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base && mamba activate obds-rnaseq' 
+alias load_mamba='source /project/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /project/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base && mamba activate obds-rnaseq' 
 ```
 
 #### YAY! You now have a fully set up software environment that you can modify!! 
