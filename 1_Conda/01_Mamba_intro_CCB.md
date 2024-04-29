@@ -42,8 +42,9 @@ Let's sign into the `obds` cluster using `ssh` (you might need to sign into the 
 
 #### 1) Log into the cluster using `ssh`: 
 
-    $ ssh -J <SSO>@bastion.imm.ox.ac.uk <SSO>@obds
+    $ ssh <SSO>@obds
 
+<!---    $ ssh -J <SSO>@bastion.imm.ox.ac.uk <SSO>@obds --->
 <!---    $ ssh <username>@login1.molbiol.ox.ac.uk --->
     
 (replace <SSO> with your university SSO e.g. `abcd1234@lbastion.imm.ox.ac.uk`)
@@ -111,7 +112,7 @@ Now we have made a directory for it, let's get a copy of the mamba install scrip
 ```
     
 We always recommend downloading the latest version of the install script unless there are known issues with it.
-If you are installing software on Windows or Mac machines your will need to download the correct installation script for these your system - see https://github.com/conda-forge/miniforge#mambaforge
+**NOTE: If you are installing software on Windows or Mac machines your will need to download the correct installation script for these your system - see https://github.com/conda-forge/miniforge#mambaforge for the correct download url to use. The command above that automatically detects the right system/chip for our linux system (i.e using the uname, and uname -m commands) but might not work for M1/2 apple chips etc**
 
 The Mamba forge script will download conda & mamba and preconfigure it to use the conda-forge channel (we will adjust this later)
 
@@ -122,6 +123,8 @@ The Mamba forge script will download conda & mamba and preconfigure it to use th
 `-b` tells the installation script to run without prompts and not to modify your `.bashrc` or `.bash_profile` file 
 
 `-p` sets where you want conda to be installed
+
+**NOTE: again if you are installing on your own mac/windows machine the above command might not work. Might need to correct the Mambaforge .sh filename to the correct OS/architecture.**
     
 **5) So that our terminal knows where to find the conda software, we need to add this location to our $PATH variable so that we can use it**
 
@@ -316,7 +319,7 @@ You can also install multiple packages at the same time e.g. `samtools` & `bedto
 
     $ mamba install multiqc --dry-run
 
-**9) In addition to the `mamba search <name>` command, you can also visit the following websites to check for available conda/mamba packages - this is a much easier way of finding packages if you are unsure how they might be named in conda/mamba - remember just replace `conda` with `mamba` in the command and leave out the `-c channel` bit! :**
+**9) In addition to the `mamba search <name>` command, you can also visit the following websites to check for available conda/mamba packages - this is a much easier way of finding packages if you are unsure how they might be named in conda/mamba - remember just replace `conda` with `mamba` in the command and leave out the channel e.g instead of `conda install bioconda::fastqc` type `mamba install fastqc`  :**
 
 - https://anaconda.org/bioconda/repo/
 - https://conda-forge.org/feedstocks/
