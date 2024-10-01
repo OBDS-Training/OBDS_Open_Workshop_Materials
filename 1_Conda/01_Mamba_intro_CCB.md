@@ -4,9 +4,9 @@ Software Management with Mamba and Conda
 This workshop material was created by *Sebastian Luna Valero*, *Charlie George* and *Lena Morrill Gavarró*
 
 
-For more help using Mamba please see: 
-- [Mamba documentation](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)
-- [Conda documentation](https://conda.io/docs/) 
+For more help using Conda/Mamba please see: 
+- [Mamba documentation](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html) - this is pretty brief!
+- [Conda documentation](https://conda.io/docs/) - this is more comprehensive and more detailed tutorials
 
 ## Mamba vs conda
 
@@ -47,7 +47,7 @@ Let's sign into the `obds` cluster using `ssh` (you might need to sign into the 
 <!---    $ ssh -J <SSO>@bastion.imm.ox.ac.uk <SSO>@obds --->
 <!---    $ ssh <username>@login1.molbiol.ox.ac.uk --->
     
-(replace <SSO> with your university SSO e.g. `abcd1234@lbastion.imm.ox.ac.uk`)
+(replace <SSO> with your university SSO e.g. abcd1234)
   
 
 #### 2) Check for previous conda/mamba installs 
