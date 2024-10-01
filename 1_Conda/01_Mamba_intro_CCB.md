@@ -6,7 +6,7 @@ This workshop material was created by *Sebastian Luna Valero*, *Charlie George* 
 
 For more help using Conda/Mamba please see: 
 - [Mamba documentation](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html) - this is pretty brief!
-- [Conda documentation](https://conda.io/docs/) - this is more comprehensive and more detailed tutorials
+- [Conda documentation](https://docs.conda.io/projects/conda/en/stable/) - this is more comprehensive and more detailed tutorials
 
 ## Mamba vs conda
 
@@ -24,11 +24,11 @@ For more help using Conda/Mamba please see:
 
 #### What is microMamba?
 
-- it is "a tiny version of the  mamba package manager". It has its own command line interface and does not come with a default Python version or need of a base environment. It supports a subset of the mamba/conda commands, but its documentation is a bit patchy so for our purposes at this time we'll stick with the Conda/Mamba install approach below (mambaForge).
+- it is "a tiny version of the  mamba package manager". It has its own command line interface and does not come with a default Python version or need of a base environment. It supports a subset of the mamba/conda commands, but its documentation is a bit patchy so for our purposes at this time we'll stick with the Conda/Mamba install approach below (miniForge).
 
 #### Which are we using and why? 
 
-- We are going to install conda and mamba together in a single step using the `mambaForge` script, which gives us the functionality of both Mamba and Conda. We will interface with it mainly by using `mamba` commands.
+- We are going to install conda and mamba together in a single step using the `miniForge` script, which gives us the functionality of both Mamba and Conda in one easy installation step. We will interface with it mainly by using `mamba` commands.
 
 #### Why do you still refer to conda if we are not using it? 
 
@@ -94,7 +94,7 @@ If you have these lines - you already have a conda installation - its useful to 
 **Important**: Conda & mamba can exhibit strange behavoirs with their `$PATH` variable and switching between environments if you have multiple versions of Conda/Anaconda in your `$PATH`. Depending on your situation it might be best to comment out (put a `#` in from of them) any lines from previous conda installations - if you comment them out you can always remove the `#` to add them back in later if you need them. 
 
 
-#### 3) Installing Miniforge=Mambaforge
+#### 3) Installing Miniforge=Conda and Mamba in one easy step
 
 Let's make a directory for the conda/mamba installation - as in the rest of the course, you will be using the directory `/project/$USER/`. You can also replace $USER with your SSO, e.g. `/project/abcd1324/`
 
@@ -104,10 +104,10 @@ Let's make a directory for the conda/mamba installation - as in the rest of the 
     $ cd mamba_installation
  ```   
 
-Now we have made a directory for it, let's get a copy of the mamba install script**:
+Now we have made a directory for it, let's get a copy of the miniForge install script**:
 
 ```
-    $ curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+    $ curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
     
 ```
     
@@ -118,13 +118,13 @@ The Mamba forge script will download conda & mamba and preconfigure it to use th
 
 **4) Now let's run the install script to install conda**
 
-    $ bash Mambaforge-$(uname)-$(uname -m).sh -b -p conda
+    $ bash Miniforge3-$(uname)-$(uname -m).sh -b -p conda
     
 `-b` tells the installation script to run without prompts and not to modify your `.bashrc` or `.bash_profile` file 
 
-`-p` sets where you want conda to be installed
+`-p` sets where you want conda to be installed - this will create a conda directory and install everything within it
 
-**NOTE: again if you are installing on your own mac/windows machine the above command might not work. Might need to correct the Mambaforge .sh filename to the correct OS/architecture.**
+**NOTE: again if you are installing on your own mac/windows machine the above command might not work. Might need to correct the Mambaforge.sh filename to the correct OS/architecture i.e. replace the $(uname) and $(uname -m).**
     
 **5) So that our terminal knows where to find the conda software, we need to add this location to our $PATH variable so that we can use it**
 
