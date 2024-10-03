@@ -383,7 +383,8 @@ If you are setting up a new software environment for a project it is advisable t
 - kallisto (alignment-free RNA quantification tool)
 - picard (QC of alignment files) -- not used here
 - subread (counting of reads in features)
-- bedtools (comparison, manipulation and annotation of genomic features)
+- salmon (a pseudoalignment tools to quantify transcripts in samples)
+<!- bedtools (comparison, manipulation and annotation of genomic features) -- not used here--->
 
 **1) In the `/project/shared/resources/1_linux/3_conda/` directory there is a file called `obds-rnaseq.yml`. Copy this file to your `/project/$USER/mamba_installation` directory, we will use this file to create a new conda environment**
 
