@@ -41,7 +41,9 @@ Let's sign into the `obds` server using `ssh` (you need to sign into OpenVPN)
 
 #### 1) Log into the cluster using `ssh`: 
 
-    $ ssh obds
+```bash
+ssh obds
+```
 
 #### 2) Installing Miniforge - Conda and Mamba in one easy step
 
