@@ -1,43 +1,58 @@
 Software Management with Mamba and Conda 
 =========================================
 
-This workshop material was created by *Sebastian Luna Valero*, *Charlie George*, *Lena Morrill Gavarró* and *David Sims*
+This workshop material was created by *Sebastian Luna Valero*, *Charlie George*, *Lena Morrill Gavarró*, *David Sims*, and *Kevin Rue-Albrecht*.
 
-For more help using Conda/Mamba please see: 
+For more help using Conda/Mamba please see:
+
 - [Mamba documentation](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html) - this is pretty brief!
-- [Conda documentation](https://docs.conda.io/projects/conda/en/stable/) - this is more comprehensive and more detailed tutorials
+- [Conda documentation](https://docs.conda.io/projects/conda/en/stable/) -  more comprehensive and more detailed tutorials.
 
 ## Mamba vs Conda
 
 #### What is Conda or Anaconda? 
 
-- Conda/Anaconda is a package management system. It allows you to easily search for software and install it without having to worry about having to install all the correct dependencies, the pain of having to match up correct versions, etc. Whilst lots of package management systems are language or system specific (e.g. Apple App Store, pip for python packages, CRAN/Bioconductor for R packages), Conda/Anaconda can be used to install a huge number of software packages across multiple systems (Linux, Mac, Windows etc). They make it easy to install software onto any system and it's often used in introductory courses to set up your software environments so you might have previously installed it without really realising.
+_Conda_ and _Anaconda_ are package management systems.
+It allows you to easily search for software and install it without having to worry about having to install all the correct dependencies, the pain of having to match up correct versions, etc.
+Whilst lots of package management systems are language or system specific (e.g., Apple App Store, pip for python packages, CRAN and Bioconductor for R packages), _Conda_ and _Anaconda_ can be used to install a huge number of software packages across multiple operating systems (e.g., Linux, Mac, Windows).
+They make it easy to install software onto any system and it's often used in introductory courses to set up your software environments so you might have previously installed it without realising.
 
-- Conda is the small lightweight command line tool that allows you to install packages easily, when you install it, it creates a `base` environment which contains itself and the minimal number of packages that enables it to run.
+_Conda_ is the small lightweight command line tool that allows you to install packages easily, when you install it, it creates a `base` environment which contains `conda` itself and the minimal number of packages that enables it to run.
 
-- Anaconda is a much larger installation that installs the conda command line tool and many other Python data science packages. Anaconda comes with a graphical user interface so you can install packages and environments interactively. We recommend installing the minimal conda/mamba packages on remote servers, but you may wich to install Anaconda on your own laptop. 
+_Anaconda_ is a much larger installation that installs the `conda` command line tool and many other Python data science packages.
+_Anaconda_ comes with a graphical user interface so you can install packages and environments interactively.
+We recommend minimally installing the key packages `conda` and `mamba` on remote servers, but you may wich to install _Anaconda_ on your own laptop.
 
 #### What is Mamba?
 
-- As Conda became more and more popular, more and more packages were added to its repositories and it became slower and slower to search through them and solve environments. Mamba was written in C++ as a reimplementation of Conda to improve the performance. It contains all of the functionality of Conda, but with much faster installation of software environments so it is now the preferred option. 
+As _Conda_ became increasingly popular, more packages were added to its repositories and Conda became slower to search through them and their many versions to solve environments.
+_Mamba_ was written in C++ as a reimplementation of Conda to improve the performance.
+It contains all of the same functionality as _Conda_, but resolves and install environments much faster, making it now the preferred option.
 
-#### What is microMamba?
+#### What is MicroMamba?
 
-- MicroMamba is "a tiny version of the Mamba package manager". It has its own command line interface and does not come with a default Python version or need of a base environment. It supports a subset of the Mamba/Conda commands, but its documentation is still being developed so at this time we'll stick with the Conda/Mamba install approach below (miniForge).
+_MicroMamba_ is "a tiny version of the Mamba package manager".
+It has its own command line interface and does not come with a default Python version or need of a `base` environment.
+It supports a subset of the commands found in _Mamba_ and _Conda_, and its documentation is still being developed.
+This makes it a bit more challenging to learn, so at this time we'll stick with the Conda/Mamba installation process below, using _miniForge_.
 
 #### Which are we using and why? 
 
-- We are going to install Conda and Mamba together in a single step using the `miniForge` script, which gives us the functionality of both Mamba and Conda in one easy installation step. We will interface with it mainly by using `mamba` commands.
+We are going to install Conda and Mamba together in a single step using the `miniForge` script.
+We will use it mainly via the `mamba` commands.
 
 #### Why do you still refer to Conda if we are not using it? 
 
-- Mamba was based on Conda and actually at this point the Conda documentation and online help/troubleshooting is much better than the Mamba documentation. It's useful to sometimes google your issues with "conda" in the title rather than "mamba" and, if you find a Conda command as a solution, just replace `conda` with `mamba` at the beginning. Mamba also uses the Conda channels and Anaconda repository to find all its packages so you still need to know they are related.
+_Mamba_ is based on _Conda_ and actually at this point the _Conda_ documentation and online help and troubleshooting is much more comprehensive than the _Mamba_ documentation.
+It is often more efficient to Google your issues using the "conda" keyword even if you actually use "mamba" and -- if you find a Conda command as a online suggestion -- you can generally replace `conda` with `mamba` in that command (do critically read and analyse any command you find online before runnning it yourself!).
+_Mamba_ also uses the same _Conda_ channels and _Anaconda_ repository to find all its packages, so that is another reason to remember that they are related in this way.
 
 ## Section 1: Installing Conda/Mamba
 
-We want to set up our software environment for all the programs we will be using on the course. To do this we will first install mamba to install all the bioinformatics software we will need. 
+Now, we want to set up a software environment for all the programs we will be using on the course.
+To do this, we must first install _Mamba_ before moving on to install all the bioinformatics software we will need. 
 
-Let's sign into the `obds` server using `ssh` (you need to sign into OpenVPN)
+Let's log into the `obds` server using `ssh` (remember to turn on OpenVPN).
 
 #### 1) Log into the cluster using `ssh`: 
 
@@ -47,7 +62,9 @@ ssh obds
 
 #### 2) Installing Miniforge - Conda and Mamba in one easy step
 
-Let's make a directory for the conda/mamba installation - as in the rest of the course, you will be using the directory `/project/$USER/`. You can also replace $USER with your SSO, e.g. `/project/abcd1324/`
+Let's create a new directory for the Conda/Mamba installation.
+As in the rest of the course, you will be working under the directory `/project/$USER/`.
+Remember that `$USER` is an environment variable that automatically resolves to your own username which is your SSO, but you can also explicitly replace `$USER` by your SSO in any of the commands, e.g. `cd /project/abcd1324/`.
 
 ```bash
 cd /project/$USER/
@@ -55,29 +72,35 @@ mkdir mamba_installation
 cd mamba_installation
 ```   
 
-Now we have made a directory for it, let's get a copy of the miniForge install script**:
+Now we have made a directory for it, let's get a copy of the miniForge installation script:
 
 ```bash
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 ```
-    
+
+**NOTE:** If you are installing software on Windows or Mac computers, your will need to download the appropriate installation script for your specific operating system (see <https://github.com/conda-forge/miniforge#mambaforge> for the correct download url to use).
+The command above automatically detects the right system and type of CPU architecture on our Linux system using the `uname` and `uname -m` commands, but might not work for certain operating systems or CPUs.
+
 We recommend downloading the latest version of the install script unless there are known issues with it.
-**NOTE: If you are installing software on Windows or Mac machines your will need to download the correct installation script for these your system - see https://github.com/conda-forge/miniforge#mambaforge for the correct download url to use. The command above that automatically detects the right system/chip for our linux system (i.e using the uname, and uname -m commands) but might not work for Apple Silicon processors etc.**
 
-The Mamba forge script will download Conda & Mamba and preconfigure it to use the conda-forge channel (we will adjust this later)
+The downloaded script will download Conda and Mamba and preconfigure it to use the `conda-forge` channel (we will adjust this configuration later).
 
-**3) Now let's run the install script to install Conda**
+#### 3) Now let's run the install script to install Conda**
 
 ```bash
 bash Miniforge3-$(uname)-$(uname -m).sh -b -p conda
 ```
-`-b` tells the installation script to run without prompts and not to modify your `.bashrc` or `.bash_profile` file 
 
-`-p` sets where you want conda to be installed - this will create a conda directory and install everything within it
+`-b` tells the installation script to run without prompts and not to modify your `.bashrc` or `.bash_profile` file (b stands for "batch mode").
 
-**NOTE: again if you are installing on your own mac/windows machine the above command might not work. Might need to correct the Mambaforge.sh filename to the correct OS/architecture i.e. replace the $(uname) and $(uname -m).**
+`-p` sets the path where you want conda to be installed.
+This can be an absolute or relative path.
+In this example, the command will create a `conda` directory in the working directory, and install everything within it.
+
+**NOTE:** Again, if you are installing on your own MacOS or Windows computer, the above command might not work.
+You might need to adjust the filename of the Miniforge script for the correct operating system and/or CPU architecture (i.e., replace the `$(uname)` and/or `$(uname -m)`).
     
-**4) Let's tell terminal where to find the Conda software, by adding its location to our $PATH variable**
+#### 4) Let's tell terminal where to find the Conda software, by adding its location to our $PATH variable**
 
 ```
 # let's check where we have installed it to help us with the next command
@@ -94,11 +117,12 @@ source /project/$USER/mamba_installation/conda/etc/profile.d/mamba.sh
 mamba activate base
 ```
 
-You should see `(base)` has appeared at the beginning of your prompt - e.g `(base) abcd1234@obds:$`
+After the last command above, you should see `(base)` has appeared at the beginning of your prompt - e.g `(base) olin0164@obds:/project/abcd1234/mamba_installation`
 
-The 'base' environment is the name of the the default Conda environment created when you install Conda. It contains Conda, Mamba Python and several core Python packages.
+The 'base' environment is the name of the the default Conda environment created when you install Conda.
+It contains Conda, Mamba, Python, and several essential Python packages.
 
-**5) Test your source command has worked by trying:**
+#### 5) Test your source command has worked by trying:**
 
 ```bash
 which conda
@@ -107,48 +131,30 @@ conda --help
 mamba --help 
 ```
 
-You should be able to see the conda and mamba help menus are the same! 
+You should be able to see the conda and mamba help menus are the same!
 
 
-**6) Let's add the 'source' and  'mamba activate' commands to our `.bash_aliases` so that we can activate Conda easily when we log onto the server**
+#### 6) Add aliases to activate Conda more easily in new Bash sessions
+
+Let's add the `source` and `mamba activate` commands from the previous section to our `~/.bash_aliases` files, so that we can activate Conda easily when we log onto the server
     
-Copy your 'source' commands from step 4 above paste into the .bash_aliases file in your home directory.
+Copy your `source` commands from step 4 above paste into the `.bash_aliases` file in your home directory.
 
 ```bash
 # open your ~/.bash_aliases in nano 
 nano ~/.bash_aliases 
 ```
 
-(reminder: your `.bash_aliases` is in your home directory - the shortcut for this path is `~` hence we can open our `.bash_aliases` from anywhere using `~/.bash_aliases`)
+Then, paste the following lines in the file, in the editor.
 
 ```bash
 # Create an alias to load conda/mamba
-alias load_mamba='source /project/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /project/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base' 
+alias load_mamba='source /project/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /project/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base'
 ```
 
-It's good practice to add in some comment lines (lines starting with a #) above the commands to remind us what they do.
+**Note:** It's good practice to add some comment lines (lines starting with a `#`) above the commands to remind us what they do, for future reference.
 
-Close and save your `.bash_aliases`.
-
-<!---
-*Note - sourcing conda is not necessary if you have the following in your `~/.bashrc` file. 
-This may be added automatically during the Miniconda install. If you didn't use -b*
-
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/full/path/to/obds_conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "/full/path/to/obds_conda/etc/profile.d/conda.sh" ]; then
-            . "/full/path/to/obds_conda/etc/profile.d/conda.sh"
-        else
-            export PATH="/full/path/to/obds_conda/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-    # <<< conda initialize <<<
---->
+Close and save your `.bash_aliases` (`Control-X`, `Y`, `Return`).
 
 ## Section 2: Using Mamba
 
