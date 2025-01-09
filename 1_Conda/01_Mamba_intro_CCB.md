@@ -425,13 +425,17 @@ mamba env list
 
 Now that we have had some practice managing environments, let us create an environment that will contain the software that we will use for the lessons delivered over the next couple of days.
 
-While it is possible and really handy to add conda/mamba packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda/mamba) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
+While it is possible and really handy to add Conda packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with R packages if you choose to install R and R packages as Conda packages).
+Specifically, dependencies in the environment grow in complexity as new packages are added, and you might be forced to upgrade or downgraded previously installed packages when you install new packages, to meet their requirements.
 
-If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an `environment.yml` file, as this makes it easier for Mamba to workout what dependencies will be best for all of the software right from the start. 
+If you are setting up a new software environment for a project, it is advisable to think about the main software packages you plan to use in your analysis at the beginning of the project, and list those package names (and versions, ideally) in a suitably formatted YAML file (more on that later when we come to talk about 'exporting' environments).
+This YAML file makes it easier for you and colleagues to review that list of packages at a glance, and can also be passed to `mamba` commands that can recreate the environment reproducibly.
 
 ### Environment #3 (environment for the course)
 
 #### Bioinformatics software
+
+We are about to create a new environment that contains the following bioinformatics tools:
   
 - fastqc (QC of FASTQ raw sequence files)
 - multiqc (collects summary statistics from other bioinformatic programs)
@@ -440,74 +444,113 @@ If you are setting up a new software environment for a project it is advisable t
 - subread (counting of reads in features)
 - kallisto (alignment-free RNA quantification tool)
 
-**1) In the `/project/shared/1_linux/3_conda/` directory there is a file called `obds-rnaseq.yml`. Copy this file to your `/project/$USER/mamba_installation` directory, we will use this file to create a new conda environment**
+#### 1) Get a copy of the environment YAML file
 
-**2) Have a look inside the obds-rnaseq.yml file**
+Copy this file `/project/shared/1_linux/3_conda/obds-rnaseq.yml` to your `/project/$USER/mamba_installation` directory.
+This file contains all the details necessary to create the next environment.
+
+#### 2) Inspect the YAML file
+
+Have a look inside the `obds-rnaseq.yml` file using the `less` command:
 
 ```bash
 less obds-rnaseq.yml
 ```
 
-*Have a look at the formating of the packages and the channels. Note that you do not have to specify the versions of all the software packages - if you leave them blank, conda will work this out for you*
+Pay particular attention to the organisation and formatting of the file.
+You will find a section listing channels, and another section (called 'dependencies') listing package names.
+Notice that you do not need to specify a version for all (or any) of the packages; Mamba will work out the versions of packages compatible with each other and fetch the latest version of each package that resolves to a working environment.
 
-*Note that if there were additional packages you wanted to install you would just add these to the yml file using `nano`, making sure the formatting is the same as the other packages.*
+The beauty of this YAML file is that you can edit it (using `nano`, for instance) to add or remove packages at any time.
+Editing the file will not update any environment that you created from it, but will affect any environment that you create from it in the future.
     
-**3) Create a new environment using the obds-rnaseq.yml file**
+#### 3) Create the environment
+
+Create a new environment using the `obds-rnaseq.yml` file as follows:
 
 ```bash
-mamba env create -f obds-rnaseq.yml 
+mamba env create -f obds-rnaseq.yml
 ```
 
-If you want, you can give your environment a name of your choice (e.g. `alternative_name_env`) using the -n option (by default it will use the name specified at the top of the yml file, which is `obds_env`). You do not have to run the line below, but you can use it for reference (although it is clearer to specify the env name in the yaml file).
+If you wanted, you could give your environment a name of your choice (e.g. `alternative_name_env`) using the option `-n`.
+By default, the command looks for the keyword `name:` in the file, and uses the value in that field.
+Please do not run the line below, but keep it for future reference.
 
 ```bash
 mamba env create -n alternative_name_env -f obds-rnaseq.yml
 ```
 
-**4) Activate your new conda environment**
+#### 4) Activate the environment
 
 ```bash
 mamba activate obds-rnaseq
-# (or replace obds-rnaseq with the name of your python environment)
 ```
 
-**5) Check which version of python you have in this environment**
+#### 5) Check the version of Python
+
+You can check which version of Python that was installed in the environment as follows:
 
 ```bash
 python --version
 ```
 
-**6) List all the packages in this environment**
+This is an important piece of information to keep in mind, as some bioinformatics tools still require Python 2.
+
+#### 6) List installed packages
+
+List all the packages in this environment as follows:
 
 ```bash
 mamba list
 ```
 
-**7) If you wanted a record of your software environment or wanted to share it so others could replicate it, it is possible to export conda environments:**
+#### 7) Export the environment to the terminal
+
+It is possible to export a thorough description of a Conda environment, either for the record or for recreating reproducibly at a later date or on another computer.
 
 ```bash
 mamba env export -n obds-rnaseq
 ```
 
-**8) You can redirect the output to a file that you can share and recreate your environment from**
+Note that the command prints the information in the YAML format, and that the information includes every package in the environment, including dependencies that were not explicitly listed in the YAML file that you used to create the environment.
+
+#### 8) Export the environment to a YAML file
+
+You can redirect the output of the previous command to a file, to keep that file and potentially share it with others, for recreating the environment elsewhere.
+
+Given that the information is returned in YAML format, we traditionally name the file with the extensions `.yml` or `.yaml`.
 
 ```bash
 mamba env export -n obds-rnaseq > my_obds_environment.yml
 ```
 
-**9) Final steps - update your `.bash_aliases` to activate your obds enviroment automatically when you load a terminal**
+Note that when you export the active environment, you do not need to specify its name via the `-n` option:
 
 ```bash
-# open your .bash_aliases
+mamba env export > my_obds_environment.yml
+```
+
+#### 9) Automatically activate the environment
+
+For the purpose of the course, it is convenient -- but not mandatory -- to configure your OBDS account to automatically activate this last environment as soon as you log into your account; it just saves you a couple of commands each time you log in.
+
+Open your `~/.bash_aliases` file as follows:
+
+```bash
 nano ~/.bash_aliases
 ```
 
-Then on the line where we added `alias load_mamba` at the beginning of this tutorial add `&& mamba activate obds-rnaseq` at the end to activate your obds environment. *Note we always want to conda activate base first and then activate your environment of interest as this then allows you to use the `which` command to get the conda path - this is useful later in pipelines*
+Then, at the end of the line where we previously added `alias load_mamba` earlier in this tutorial,
+add `&& mamba activate obds-rnaseq` at the end.
+This will activate the environment when you execute the alias.
+
+Note that we always want to activate the `base` environment first and then activate the environment of interest, as this then allows you to use the `which` command to get the conda path.
+It may seem overkill at this point, but this is useful later when writing pipelines.
+
+The line in your `~/.bash_aliases` should now look like this:
 
 ```bash
 alias load_mamba='source /project/$USER/mamba_installation/conda/etc/profile.d/conda.sh && source /project/$USER/mamba_installation/conda/etc/profile.d/mamba.sh && mamba activate base && mamba activate obds-rnaseq' 
 ```
 
-#### YAY! You now have a fully set up software environment that you can modify!
-
-If you come across extra software in the course that wasn't installed via the YAML file you can use the `mamba install` command to add the software to your existing environment - or if you would like to test some new software out you can create a new minimal environment to test it in.
+#### Congratulations! You now have a fully set up software environment for the following lessons!
