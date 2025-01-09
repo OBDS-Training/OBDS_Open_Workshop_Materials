@@ -85,7 +85,9 @@ We recommend downloading the latest version of the install script unless there a
 
 The downloaded script will download Conda and Mamba and preconfigure it to use the `conda-forge` channel (we will adjust this configuration later).
 
-#### 3) Now let's run the install script to install Conda**
+#### 3) Run the installation script
+
+Now let's run the install script to install Conda.
 
 ```bash
 bash Miniforge3-$(uname)-$(uname -m).sh -b -p conda
@@ -100,7 +102,9 @@ In this example, the command will create a `conda` directory in the working dire
 **NOTE:** Again, if you are installing on your own MacOS or Windows computer, the above command might not work.
 You might need to adjust the filename of the Miniforge script for the correct operating system and/or CPU architecture (i.e., replace the `$(uname)` and/or `$(uname -m)`).
     
-#### 4) Let's tell terminal where to find the Conda software, by adding its location to our $PATH variable**
+#### 4) Activate Conda and Mamba (for this session)
+
+Let's tell terminal where to find the Conda software, by adding its location to our $PATH variable.
 
 ```
 # let's check where we have installed it to help us with the next command
@@ -122,7 +126,7 @@ After the last command above, you should see `(base)` has appeared at the beginn
 The 'base' environment is the name of the the default Conda environment created when you install Conda.
 It contains Conda, Mamba, Python, and several essential Python packages.
 
-#### 5) Test your source command has worked by trying:**
+#### 5) Test your source command has worked by trying:
 
 ```bash
 which conda
