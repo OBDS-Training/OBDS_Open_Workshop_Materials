@@ -158,79 +158,116 @@ Close and save your `.bash_aliases` (`Control-X`, `Y`, `Return`).
 
 ## Section 2: Using Mamba
 
-**1) To get help for mamba, type:**
+#### 1) Help pages
+
+To view the Mamba help pages in a terminal, type:
 
 ```bash
 mamba --help
 ```
 
-**2) To get information about your current install, type:**
+#### 2) Installation details
+
+To get information about your current installation, type:
 
 ```bash
 mamba info
 ```
 
-**3) We can use mamba to search for software packages to install, however in order to find the packages, mamba needs the address of certain sites on the internet to look at - these are called 'channels'. Let us add appropriate channels to get all the software we need (and trust). The order that these channels are specified is important!** As we used mamba forge to install mamba these should already be configured in the right order just in case but we will go through these steps just in case. NOTE that this is one of the only times we use the `conda` command instead of `mamba`
+#### 3) Channels configuration
+
+We can use _Mamba_ to search for software packages to install.
+However in order to find packages, _Mamba_ needs to know which online websites it can search for them -- those are called 'channels'.
+
+Now, let us add appropriate channels from where we know we can get all the software we need (and trust).
+
+The order that these channels are specified is important!
+When suitable packages are available from multiple channels, channels earlier in the list will be prioritised.
+As we used _Miniforge_ to install _Mamba_, these channels should already be configured in the right order for us, but we will go through these steps just in case.
+Note that this is one of the few times we use the `conda` command instead of `mamba` today.
 
 ```bash
 conda config --add channels defaults
 conda config --add channels conda-forge
 conda config --add channels bioconda
 ```
-*Note: Mac users may have problems copying and pasting the config commands above, with strange error messages. If that's the case, please enter these commands manually and try again.*
+
+*Note: MacOS users may have problems copying and pasting the config commands above, with strange error messages.
+If that's the case, please enter these commands manually and try again.*
 
 We have added 3 channels here:  
-- defaults channel: this contains major common software that has been packaged for conda/mamba by people at conda and anaconda themselves  
-- conda-forge: this contains lots of general programming packages that have been packaged for conda/mamba by people in the programming/computational community  
-- bioconda: this contains biology-specific programmes that have been packaged for conda/mamba by people in the computational biology community  
+
+- `defaults`: this channel contains widely used software that has been packaged by the Conda and Anaconda teams themselves.
+- `conda-forge`: this channel contains a wide variety of packages that have been packaged by diverse people in the programming/computational community.
+- `bioconda`: this contains biology-oriented programs that have been packaged by diverse people in the computational biology community.
   
-**4) Check that these channels have been added to your conda installation with:**
+#### 4) Updated installation details
+
+Check that these channels have been added to your conda installation with:
 
 ```bash
 mamba info
 ```
 
-**5) List currently installed packages**
+In the list of channels, you should see first `bioconda`, then `conda-forge`, then `main` and finally `r` (the last two are the default channels pointing to the Anaconda repository).
+
+#### 5) Installed packages
+
+List currently installed packages with:
 
 ```bash
 mamba list
 ```
 
-**6) Check whether your packages are up-to-date**
+#### 6) Check for updates
+
+Check whether a new version is available for any of the installed packages:
 
 ```bash
 mamba update --all
 ```
 
-As you have added new channels it is likely that several packages will be upgraded or downgraded at this stage, and some new packages may be added. Please accept the changes by typing `y` at the prompt.
+As you have just adjusted the list of channels, it is likely that several packages will be upgraded or downgraded at this stage, and some new packages may be added.
+Please accept the changes by typing `y` at the prompt.
 
 ## Section 3: Conda environments
 
-### Environment #1
+### Environment 'peaktools_env'
 
-So far we have been working with the default (base) environment. However, Conda environments are great to have isolated development environments to test new software or install conflicting dependencies. They are also useful to share (export) environments with others (reproducible science). 
+So far we have been working with the default environment (base).
+However, _Conda_ environments provide a great way to isolate and manage environments to develop and test new software, or install different pieces of software with conflicting dependencies.
+Environments are also useful to export and share reproducible environments with others. 
 
 We will first create a environment specifically for some pieces of bioinformatic software that we want to test later in the course, we install them in their own enviroment so that we can test them out without the risk of disrupting our other packages/tools in our main software environment by forcing them to change version or use different versions of python. 
 
-**1) In order to get help about conda environments, do:**
+#### 1) Help pages
+
+In order to get help related to Conda environments, type:
 
 ```bash
-mamba env -h 
+mamba env -h
 ```
 
-**2) To get a list of existing environments, type:**
+#### 2) List existing environments
+
+To get a list of existing environments, type:
 
 ```bash
 mamba env list
 ```
 
-**3) It is also possible to get specific help and examples of a subcommand:**
+#### 3) Sub-commands for environments
+
+It is also possible to get specific help and examples of a subcommand with:
 
 ```bash
 mamba env list -h
 ```
 
-**4) We are going to create an environment we will call `peaktools` for some ChIP-Seq & ATAC-Seq tools including the peakcaller `MACS2` and the package `deepTools`: this is a set of bioinformatic tools that come in handy for creating genome browser tracks and also looking at peak data from ChIP-Seq and ATAC-Seq files**
+#### 4) Create a new environment
+
+We are going to create a new environment that we will call `peaktools` and in which we will install some command line tools for the analysis of ChIP-seq & ATAC-seq data, including the peakcaller _MACS2_ and the package _deepTools_.
+This is a set of bioinformatic tools that comes in handy for creating genome browser tracks and also looking at peaks identified in ChIP-seq and ATAC-seq files data.
 
 First let's check what environments we have: 
 
@@ -243,120 +280,152 @@ Now let's create a our new enviroment:
 ```bash
 mamba create -n peaktools_env
 ```
-
-*Note that you could also type `conda create -n peaktools_env` here to do exactly the same thing - but we are going to use mamba to do 'search', 'install' and 'create' commands as it is much quicker* 
     
-Check it your environment list again:
+Check your list of environments again, to confirm that the new environment was indeed created:
 
 ```bash
 mamba env list
 ```
 
-**5) To move into the `peaktools_env` environment and use the tools, you need to 'activate' it**
+#### 5) Activate an environment
+
+To use software installed in an environment, you need to first 'activate' the environment with `mamba activate` followed by the name of the environment.
 
 ```bash
 mamba activate peaktools_env
 ```
 
-**6) Now you are in the peaktools_env you can search and install packages**
+#### 6) Install packages in the active environment
+
+Now that you are in the `peaktools_env` environment, you can search channels and install packages with the following commands:
 
 ```bash
-# check if you already have deeptools installed 
+# check if a package is already installed
 mamba list deeptools
 
-# search versions available to install
-mamba search deeptools 
+# search available versions of a package
+mamba search deeptools
 
-# install deeptools
-mamba install deeptools 
+# install a package
+mamba install deeptools
+# type 'Y' at the prompt to confirm the installation
 
-# check you have installed it
-which deeptools 
+# check that the installed package is available on the PATH
+which deeptools
 ```
 
-If you don't specify a version, the latest available one will be installed. However, you can also ask for a specific version of a by specifying the version number e.g.:
+Note that if you don't specify a specific version for the package, the latest one available will be installed.
+However, you can also ask for a specific version of a by specifying the version number e.g.:
 
 ```bash
-mamba install deeptools=2.1.3 
+mamba install deeptools==2.3.1
+# feel free to run the command but please do not install that version
 ```
 
 You can also install multiple packages at the same time e.g. `samtools` & `bedtools`**
 
 ```bash
-# you can install packages individually (don't run this its just an example)
+# to install packages individually (don't run this)
 mamba install samtools
 mamba install bedtools
 
-# or in a single command (run this instead)
+# or to install both in a single command (run this instead)
 mamba install samtools bedtools
+# type 'Y' at the prompt to confirm the installation
 ```
 
-**7) Now double-check that the packages have been installed**
+#### 7) Updated list of installed packages
+
+Now double-check that the packages have been installed with:
 
 ```bash
 mamba list
 ```
 
-**8) It is also possible to see what would happen when you install a package without actually installing it (also known as a dry run)**
+#### 8) Dry-run commands
+
+
+It is also possible to see what would happen if you installed a package without actually installing it (also known as a dry run) with the option `--dry-run`, for instance:
 
 ```bash
 mamba install multiqc --dry-run
 ```
 
-**9) In addition to the `mamba search <name>` command, you can also visit the following websites to check for available conda/mamba packages - this is a much easier way of finding packages if you are unsure how they might be named in conda/mamba - remember just replace `conda` with `mamba` in the command and leave out the channel e.g instead of `conda install bioconda::fastqc` type `mamba install fastqc`  :**
+#### 9) Searching packages online
 
-- https://anaconda.org/bioconda/repo/
-- https://conda-forge.org/feedstocks/
+In addition to the `mamba search <package>` command, you can also visit the following websites to check for available conda/mamba packages:
 
-**10) Conda/mamba also makes it easy to remove packages and their dependencies - let's remove the samtools package**
+- <https://anaconda.org/bioconda/repo/>
+- <https://conda-forge.org/feedstocks/>
+
+This is often a more comfortable way of searching for packages if you are unsure of the exact spelling of their name.
+
+#### 10) Remove a package and its dependencies
+
+Mamba also makes it easy to remove packages and their dependencies.
+For instance, let's remove the `samtools` package:
 
 ```bash
-mamba remove samtools 
+mamba remove samtools
 ```
 
-**11) A good way of checking that tools work is by accessing their `--help` functions**
+Note that dependencies are only removed if no other package in the environment needs them too.
+
+11) Test installed packages
+
+A good way of checking that tools work is by accessing their help pages, e.g.:
 
 ```bash
 bedtools --help
 deeptools --help 
 ```
 
-### Environment #2
+### Environment 'test_tools_env'
 
-**1) Instead of creating an environment and installing the packages in separate steps you can combine these steps by specifying the packages in your `create` command. We will do this to create a `genomics_tools_env` were we will install two programs used to manipulate genomic files `samtools` and `bedtools` as an example**
+#### 1) Simultaneously create an environment and install packages
+
+Instead of creating an environment and installing the packages in separate steps you can combine these steps by specifying the packages in the `create` command.
+We will do this to create a `genomics_tools_env` environment in which we will install two programs used to manipulate genomic files: `samtools` and `bedtools`.
 
 ```bash
-# First move out of the environment by `deactivating it` 
+# First deactivate the peaktools_env environment
 mamba deactivate
-# you should now be in (base)
-mamba create -n test_tools_env samtools bedtools
+# you should now be in the base environment
+# the following command simultaneously creates an environment and installs packages
+mamba create -n genomics_tools_env samtools bedtools
+# type 'Y' to approve the installation
 ```
 
-**2) Again to use the tools in this environment you need to go into it by 'activating' it**
+#### 2) Activate the environment and test the software
+
+Again, to use the tools in this environment, you must first activate the environment:
 
 ```bash
 # activate environment
 mamba activate genomics_tools_env
-# check the software works
+# check that the desired software works
 samtools --help
 ```
 
-**10) Let's pretend we've tested our tools in our `genomics_tools_env` and we have decided not to use them in our analysis. Conda makes it really easy to delete environments cleanly**
+#### 10) Remove the environment
+
+Let's pretend we've tested the tools in the `genomics_tools_env` and we have decided not to use the environment at all for our analysis.
+Mamba makes it really easy to delete environments cleanly.
 
 ```bash
-# First move out of the environment by `deactivating it`
+# First deactivate the environment
 mamba deactivate
 
-# remove the environment 
+# remove the environment
 mamba remove --name genomics_tools_env --all
 
-# Check your environments list
+# Check your list of environments
 mamba env list
 ```
 
-Now that we have had some practice setting up mamba environments, we want to create an environment for the Linux course that will contain the software that we will use in the taught lectures/workshops over the next couple of days.
+Now that we have had some practice managing environments, let us create an environment that will contain the software that we will use for the lessons delivered over the next couple of days.
 
-Whilst it is possible and really handy to add conda/mamba packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda/mamba) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
+While it is possible and really handy to add conda/mamba packages one by one to build up a software environment, in practice this can take a lot of time and can also lead to conflicts later on (especially with r-packages if you choose to install r and its associated packages via conda/mamba) as the environment gets more and more complicated and you might need to upgrade/downgrade various versions of software along the way.
 
 If you are setting up a new software environment for a project it is advisable to have a think about the main software packages you might use in your analysis at the beginning and put these in an `environment.yml` file, as this makes it easier for Mamba to workout what dependencies will be best for all of the software right from the start. 
 
