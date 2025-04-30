@@ -450,7 +450,7 @@ We are about to create a new environment that contains the following bioinformat
 
 #### 1) Get a copy of the environment YAML file
 
-Copy this file `/project/shared/1_linux/3_conda/obds-rnaseq.yml` to your `/project/$USER/mamba_installation` directory.
+Copy this file `/project/shared/linux/3_conda/obds-rnaseq.yml` to your `/project/$USER/mamba_installation` directory.
 This file contains all the details necessary to create the next environment.
 
 #### 2) Inspect the YAML file
