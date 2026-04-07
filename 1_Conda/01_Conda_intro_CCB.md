@@ -166,11 +166,12 @@ Let's look at what channels are currently configured with our _Conda_ installati
 conda config --show channels
 ```
 
-We see that conda-forge is already in the list of channels. That's because we used _Miniforge_ to install _Conda_. Run the commands below to add both the conda-forge and bioconda channels. Run the commands in the order as shown, which will put the conda-forge channel at higher priority than the bioconda channel, which is the current recommended practice (see [Bioconda documentation](https://bioconda.github.io/)).
+We see that conda-forge is already in the list of channels. That's because we used _Miniforge_ to install _Conda_. Run the commands below to add both the conda-forge and bioconda channels. Run the commands in the order as shown, which will put the conda-forge channel at higher priority than the bioconda channel, which is the current recommended practice (see [Bioconda documentation](https://bioconda.github.io/)). We will also set the channel priority to strict, which is recommended to avoid compatibility issues.
 
 ```bash
-conda config --add channels conda-forge
 conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
 ```
 
 *Note: MacOS users may have problems copying and pasting the config commands above, with strange error messages.
